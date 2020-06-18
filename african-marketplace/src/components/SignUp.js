@@ -5,39 +5,42 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import marketLogin from "../assets/market-login.jpg";
+import signupPhoto from "../assets/signup.jpg";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { postUserData } from "../actions/index";
 
-const Login = (props) => {
+const initialUser = {
+  firstname: "",
+  lastname: "",
+  email: "",
+  username: "",
+  password: "",
+};
+const SignUp = (props) => {
   const classes = useStyles();
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [newCredentials, setNewCredentials] = useState(initialUser);
 
   const handleChange = (e) => {
     //console.log("e.target.value", e.target.value);
-    setCredentials({
-      ...credentials,
+    setNewCredentials({
+      ...newCredentials,
       [e.target.name]: e.target.value,
     });
   };
-  const login = (e) => {
+  const sign = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-      .post("/login", credentials)
-      .then((res) => {
-        localStorage.setItem("token", res.data.payload);
-        props.history.push("/dashboard");
-      })
-      .catch((err) => {
-        console.log("error returned from login post request", err);
-      });
+    console.log("newCredentials", newCredentials);
+    dispatch(postUserData(newCredentials));
+    setNewCredentials(initialUser);
+    props.history.push("/");
   };
 
   return (
@@ -47,19 +50,55 @@ const Login = (props) => {
 
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className="login-menu">
-          <Link to="/dashboard">
-            <button>Dashboard</button>
+          <Link to="/">
+            <button>Login</button>
           </Link>
         </div>
         <div className={classes.paper}>
-          <h1>Welcome to our African Marketplace!</h1>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
-            Log In
+            Sign Up
           </Typography>
-          <form className={classes.form} noValidate onSubmit={login}>
+          <form className={classes.form} noValidate onSubmit={sign}>
+            {/*-------------------First Name----------------------- */}
+            <TextField
+              autoFocus
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="firstname"
+              label="First Name"
+              name="firstname"
+              autoComplete="firstname"
+              value={newCredentials.firstname}
+              onChange={handleChange}
+            />
+            {/*-------------------Last Name----------------------- */}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="lastname"
+              label="Last Name"
+              name="lastname"
+              autoComplete="lastname"
+              value={newCredentials.lastname}
+              onChange={handleChange}
+            />
+            {/*-------------------Email----------------------- */}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              value={newCredentials.email}
+              onChange={handleChange}
+            />
             {/*-------------------User Name----------------------- */}
             <TextField
               variant="outlined"
@@ -70,8 +109,7 @@ const Login = (props) => {
               label="Username"
               name="username"
               autoComplete="username"
-              autoFocus
-              value={credentials.username}
+              value={newCredentials.username}
               onChange={handleChange}
             />
 
@@ -86,7 +124,7 @@ const Login = (props) => {
               type="password"
               id="password"
               autoComplete="password"
-              value={credentials.password}
+              value={newCredentials.password}
               onChange={handleChange}
             />
 
@@ -99,7 +137,7 @@ const Login = (props) => {
             >
               Submit
             </Button>
-            <ToSignup />
+            <ToLogin />
             <Box mt={5}>
               <Copyright />
             </Box>
@@ -110,7 +148,7 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default SignUp;
 
 function Copyright() {
   return (
@@ -125,10 +163,10 @@ function Copyright() {
   );
 }
 
-function ToSignup() {
+function ToLogin() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      <Link to="/signup">Don't have an account? Go to SignUp.</Link>
+      <Link to="/">Have an account? Go to Login.</Link>
     </Typography>
   );
 }
@@ -138,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: `url(${marketLogin})`,
+    backgroundImage: `url(${signupPhoto})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"

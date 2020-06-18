@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
 import { marketReducer as reducer } from "./reducers/marketReducer";
 import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 import ProductList from "./components/ProductList";
 import Dashboard from "./components/Dashboard";
 import thunk from "redux-thunk";
@@ -19,9 +20,10 @@ function App() {
         <div className="App">Welcome to our African Marketplace!</div>
 
         <Switch>
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/" component={Login} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <Route path="/" component={Login} />
-          <PrivateRoute path="/product-list" component={ProductList} />
+          <PrivateRoute exact path="/product-list" component={ProductList} />
         </Switch>
       </Router>
     </Provider>
@@ -29,5 +31,3 @@ function App() {
 }
 
 export default App;
-
-//<Route path="/" component={Home} />
