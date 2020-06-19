@@ -43,7 +43,7 @@ export const getProductsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/products")
     .then((res) => {
-      // console.log("get data", res);
+      console.log("get data", res);
       dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -57,7 +57,7 @@ export const getLocationsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/locations")
     .then((res) => {
-      // console.log("get data", res);
+      console.log("get data", res);
       dispatch({ type: DATA_LOCATIONS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -72,16 +72,16 @@ export const postUserData = (user) => (dispatch) => {
   axiosWithAuth()
     .post("/register", user)
     .then((res) => {
-      console.log("post data", res.config.data);
-      console.log(
-        "JSON.parse('res.config.data')",
-        JSON.parse(`${res.config.data}`)
-      );
+      console.log("post data", res);
+      // console.log(
+      //   "JSON.parse('res.config.data')",
+      //   JSON.parse(`${res.config.data}`)
+      // );
       //JSON.parse('res.config.data');
-      dispatch({
-        type: DATA_USERS_SUCCESS,
-        payload: JSON.parse(`${res.config.data}`),
-      });
+      // dispatch({
+      //   type: DATA_USERS_SUCCESS,
+      //   payload: JSON.parse(`${res.config.data}`),
+      // });
     })
     .catch((err) => {
       console.error("post data error: ", err);
