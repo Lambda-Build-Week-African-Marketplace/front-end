@@ -65,9 +65,11 @@ const MenuBar = (props) => {
           </Link>
 
           <div className={classes.search}>
+            {/*
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
+            
             <InputBase
               placeholder="Search…"
               classes={{
@@ -76,6 +78,7 @@ const MenuBar = (props) => {
               }}
               inputProps={{ "aria-label": "search" }}
             />
+        */}
           </div>
         </Toolbar>
       </AppBar>
