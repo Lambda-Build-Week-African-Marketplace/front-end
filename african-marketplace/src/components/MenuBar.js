@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,7 +14,16 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 const MenuBar = (props) => {
+  const [logOn, setLogOn] = useState("");
   const classes = useStyles();
+  useEffect(() => {
+    setLogOn(window.localStorage.removeItem("userID"));
+  }, [window.localStorage.removeItem("userID")]);
+
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userID");
+  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -53,16 +62,43 @@ const MenuBar = (props) => {
           >
             <h2>Products</h2>
           </Link>
-          <Link
-            style={{
-              color: "white",
-              textDecoration: "none",
-              marginRight: "2rem",
-            }}
-            to={"/login"}
-          >
-            <h2>Login</h2>
-          </Link>
+
+          {logOn ? (
+            <div>
+              <Link
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  marginRight: "2rem",
+                }}
+                to={"/dashboard"}
+              >
+                <h2>Dashboard</h2>
+              </Link>
+              <Link
+                onClick={logout}
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  marginRight: "2rem",
+                }}
+                to={"/"}
+              >
+                <h2>Logout</h2>
+              </Link>
+            </div>
+          ) : (
+            <Link
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "2rem",
+              }}
+              to={"/login"}
+            >
+              <h2>Login</h2>
+            </Link>
+          )}
 
           <div className={classes.search}>
             <div className={classes.searchIcon}>
