@@ -21,9 +21,7 @@ const ProductList = (props) => {
     <div>
       <h2>Locations:</h2>
       {state.locations.map((location) => (
-        <p key={location.id}>
-          id: {location.id} Location:{location.location}
-        </p>
+        <p key={location.id}> Location:{location.location}</p>
       ))}
     </div>
   );
