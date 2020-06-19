@@ -77,7 +77,7 @@ export const postUserData = (user) => (dispatch) => {
         "JSON.parse('res.config.data')",
         JSON.parse(`${res.config.data}`)
       );
-      //JSON.parse('res.config.data');
+
       dispatch({
         type: DATA_USERS_SUCCESS,
         payload: JSON.parse(`${res.config.data}`),
