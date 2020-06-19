@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getData } from "../actions/index";
 import {
   getProductsData,
   getCategoriesData,
@@ -8,7 +9,21 @@ import {
 const ProductList = (props) => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocationsData());
+  }, [dispatch]);
 
-  return <div>ProductList page</div>;
+  useEffect(() => {
+    dispatch(getProductsData());
+  }, [dispatch]);
+  console.log("state", state.locations);
+  return (
+    <div>
+      <h2>Locations:</h2>
+      {state.locations.map((location) => (
+        <p key={location.id}> Location:{location.location}</p>
+      ))}
+    </div>
+  );
 };
 export default ProductList;
