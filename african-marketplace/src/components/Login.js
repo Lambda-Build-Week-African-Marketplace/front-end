@@ -53,9 +53,11 @@ const Login = (props) => {
         </div>
         <div className={classes.paper}>
           <h1>Welcome to our African Marketplace!</h1>
+
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
+
           <Typography component="h1" variant="h5">
             Log In
           </Typography>

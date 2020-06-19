@@ -68,12 +68,20 @@ export const getLocationsData = () => (dispatch) => {
 //---------------POST DATA----------------------------
 export const postUserData = (user) => (dispatch) => {
   dispatch({ type: DATA_START });
-
+  //{"firstname":"user1fn","lastname":"user1fn","email":"user1fn","username":"user1fn","password":"user1fn"}
   axiosWithAuth()
-    .post("/users", user)
+    .post("/register", user)
     .then((res) => {
-      console.log("post data", res);
-      dispatch({ type: DATA_USERS_SUCCESS, payload: res.data });
+      console.log("post data", res.config.data);
+      console.log(
+        "JSON.parse('res.config.data')",
+        JSON.parse(`${res.config.data}`)
+      );
+      //JSON.parse('res.config.data');
+      dispatch({
+        type: DATA_USERS_SUCCESS,
+        payload: JSON.parse(`${res.config.data}`),
+      });
     })
     .catch((err) => {
       console.error("post data error: ", err);
