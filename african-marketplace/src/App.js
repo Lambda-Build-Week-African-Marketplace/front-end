@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProductList from "./components/ProductList";
 import Dashboard from "./components/Dashboard";
+import MenuBar from "./components/MenuBar";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import "./App.css";
@@ -17,13 +18,13 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">Welcome to our African Marketplace!</div>
+        <MenuBar />
 
         <Switch>
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/product-list" component={ProductList} />
+          <PrivateRoute exact path="/" component={ProductList} />
         </Switch>
       </Router>
     </Provider>

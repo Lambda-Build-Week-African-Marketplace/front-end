@@ -40,7 +40,7 @@ const SignUp = (props) => {
     console.log("newCredentials", newCredentials);
     dispatch(postUserData(newCredentials));
     setNewCredentials(initialUser);
-    props.history.push("/");
+    props.history.push("/login");
   };
 
   return (
@@ -50,7 +50,7 @@ const SignUp = (props) => {
 
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className="login-menu">
-          <Link to="/">
+          <Link to="/login">
             <button>Login</button>
           </Link>
         </div>
@@ -166,7 +166,7 @@ function Copyright() {
 function ToLogin() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      <Link to="/">Have an account? Go to Login.</Link>
+      <Link to="/login">Have an account? Go to Login.</Link>
     </Typography>
   );
 }
