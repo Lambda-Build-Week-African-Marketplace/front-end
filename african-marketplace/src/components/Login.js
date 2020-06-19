@@ -33,6 +33,7 @@ const Login = (props) => {
       .post("/login", credentials)
       .then((res) => {
         localStorage.setItem("token", res.data.payload);
+        localStorage.setItem("userID", res.data.id);
         props.history.push("/dashboard");
       })
       .catch((err) => {
