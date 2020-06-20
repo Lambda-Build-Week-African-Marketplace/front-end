@@ -6,7 +6,7 @@ import {
   DATA_LOCATIONS_SUCCESS,
   DATA_FAILURE,
   EDITING_STATE,
-  TOGGLE_STATE,
+  AUTH_STATE,
 } from "../actions";
 
 const initialState = {
@@ -16,7 +16,7 @@ const initialState = {
   products: [],
   locations: [],
   error: "",
-  toggle: false,
+  auth: false,
   editing: false,
   user: {
     user_id: 0,
@@ -90,10 +90,10 @@ export const marketReducer = (state = initialState, action) => {
         ...state,
         editing: !state.editing,
       };
-    case TOGGLE_STATE:
+    case AUTH_STATE:
       return {
         ...state,
-        toggle: action.payload,
+        auth: action.payload,
       };
 
     default:

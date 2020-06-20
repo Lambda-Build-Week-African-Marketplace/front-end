@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getData } from "../actions/index";
+//import { getData } from "../actions/index";
 import {
   getProductsData,
   getCategoriesData,

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMenuBar } from "../actions/index";
+import { authMenuBar } from "../actions/index";
 import {
   createStyles,
   fade,
@@ -18,16 +19,21 @@ import SearchIcon from "@material-ui/icons/Search";
 const MenuBar = (props) => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  // const [logOn, setLogOn] = useState(false);
+  const { push } = useHistory();
   const classes = useStyles();
 
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
-    dispatch(toggleMenuBar(false));
-    //setLogOn(false);
+    dispatch(authMenuBar(false));
   };
-  //console.log("logOn", logOn);
+
+  const toUserAccount = () => {
+    const userId = window.localStorage.getItem("userID").toString();
+    console.log("userId in menubar", userId);
+    push(`/users/${userId}`);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -67,7 +73,7 @@ const MenuBar = (props) => {
             <h2>Products</h2>
           </Link>
 
-          {state.toggle && (
+          {state.auth && (
             <Link
               style={{
                 color: "white",
@@ -79,7 +85,7 @@ const MenuBar = (props) => {
               <h2>Dashboard</h2>
             </Link>
           )}
-          {state.toggle && (
+          {state.auth && (
             <Link
               onClick={logout}
               style={{
@@ -93,7 +99,7 @@ const MenuBar = (props) => {
             </Link>
           )}
 
-          {!state.toggle && (
+          {!state.auth && (
             <Link
               style={{
                 color: "white",
@@ -104,6 +110,18 @@ const MenuBar = (props) => {
             >
               <h2>Login</h2>
             </Link>
+          )}
+
+          {state.auth && (
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={toUserAccount}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           )}
 
           <div className={classes.search}>

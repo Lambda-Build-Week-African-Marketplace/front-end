@@ -7,7 +7,7 @@ export const DATA_PRODUCTS_SUCCESS = "DATA_PRODUCTS_SUCCESS";
 export const DATA_LOCATIONS_SUCCESS = "DATA_LOCATIONS_SUCCESS";
 export const DATA_FAILURE = "DATA_FAILURE";
 export const EDITING_STATE = "EDITING_STATE";
-export const TOGGLE_STATE = "TOGGLE_STATE";
+export const AUTH_STATE = "TOGGLE_STATE";
 
 //---------------GET DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -16,7 +16,7 @@ export const getUsersData = () => (dispatch) => {
   axiosWithAuth()
     .get("/users")
     .then((res) => {
-      // console.log("get data", res);
+      console.log("get user data", res);
       dispatch({ type: DATA_USERS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -58,7 +58,7 @@ export const getLocationsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/locations")
     .then((res) => {
-      console.log("get data", res);
+      // console.log("get data", res);
       dispatch({ type: DATA_LOCATIONS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -336,6 +336,6 @@ export const updateLocationData = (location, locations) => (dispatch) => {
     });
 };
 
-export const toggleMenuBar = (togg) => (dispatch) => {
-  dispatch({ type: TOGGLE_STATE, payload: togg });
+export const authMenuBar = (togg) => (dispatch) => {
+  dispatch({ type: AUTH_STATE, payload: togg });
 };

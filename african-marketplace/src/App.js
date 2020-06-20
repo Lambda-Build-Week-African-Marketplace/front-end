@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProductList from "./components/ProductList";
 import Dashboard from "./components/Dashboard";
+import UserAccount from "./components/UserAccount";
 import MenuBar from "./components/MenuBar";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/users/:id" component={UserAccount} />
           <Route exact path="/" component={ProductList} />
         </Switch>
       </Router>

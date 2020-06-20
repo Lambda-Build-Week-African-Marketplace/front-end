@@ -20,8 +20,12 @@ const ProductList = (props) => {
   useEffect(() => {
     dispatch(getCategoriesData());
   }, [dispatch]);
-  console.log("state products", state.products);
-  console.log("state categories", state.categories);
+
+  useEffect(() => {
+    dispatch(getUsersData());
+  }, [dispatch]);
+  //console.log("state products", state.products);
+  //console.log("state categories", state.categories);
   return (
     <div>
       <h2> Our Locations Africa:</h2>
