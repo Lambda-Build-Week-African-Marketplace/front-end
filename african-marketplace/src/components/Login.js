@@ -12,9 +12,12 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleMenuBar } from "../actions/index";
 
 const Login = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -36,6 +39,7 @@ const Login = (props) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userID", res.data.user_id);
         props.history.push("/dashboard");
+        dispatch(toggleMenuBar(true));
       })
       .catch((err) => {
         console.log("error returned from login post request", err);
@@ -61,7 +65,7 @@ const Login = (props) => {
           </Avatar>
 
           <Typography component="h1" variant="h5">
-            Log In 111
+            Log In
           </Typography>
           <form className={classes.form} noValidate onSubmit={login}>
             {/*-------------------User Name----------------------- */}

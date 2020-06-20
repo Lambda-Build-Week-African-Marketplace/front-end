@@ -20,10 +20,7 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      <h2> Our Locations:</h2>
-      {state.locations.map((location) => (
-        <p key={location.id}> Location:{location.location}</p>
-      ))}
+      <h2> Dushboard:</h2>
     </div>
   );
 };
