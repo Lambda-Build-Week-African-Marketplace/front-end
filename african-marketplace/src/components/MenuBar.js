@@ -17,8 +17,8 @@ const MenuBar = (props) => {
   const [logOn, setLogOn] = useState("");
   const classes = useStyles();
   useEffect(() => {
-    setLogOn(window.localStorage.removeItem("userID"));
-  }, [window.localStorage.removeItem("userID")]);
+    setLogOn(window.localStorage.getItem("userID"));
+  }, [window.localStorage.getItem("userID")]);
 
   const logout = () => {
     window.localStorage.removeItem("token");

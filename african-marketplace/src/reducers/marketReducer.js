@@ -17,7 +17,7 @@ const initialState = {
   error: "",
   editing: false,
   user: {
-    user_id: "",
+    user_id: 0,
     firstName: "",
     lastName: "",
     email: "",
@@ -26,17 +26,18 @@ const initialState = {
   },
 
   category: {
-    product_id: "",
+    category_id: 0,
     categoryName: "",
   },
 
   product: {
-    product_id: "",
+    product_id: 0,
+    category_id: 0,
     productName: "",
-    price: 0,
+    price: 0.0,
     description: "",
     location: "",
-    user_id: "",
+    user_id: 0,
   },
 };
 

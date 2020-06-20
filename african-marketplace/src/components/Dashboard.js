@@ -16,7 +16,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     dispatch(getProductsData());
   }, [dispatch]);
-  console.log("state", state.locations);
+  // console.log("state", state.locations);
 
   return (
     <div>

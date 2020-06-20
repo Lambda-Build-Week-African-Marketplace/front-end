@@ -32,8 +32,9 @@ const Login = (props) => {
     axiosWithAuth()
       .post("/login", credentials)
       .then((res) => {
-        localStorage.setItem("token", res.data.payload);
-        localStorage.setItem("userID", res.data.id);
+        // console.log("login res", res);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userID", res.data.user_id);
         props.history.push("/dashboard");
       })
       .catch((err) => {
