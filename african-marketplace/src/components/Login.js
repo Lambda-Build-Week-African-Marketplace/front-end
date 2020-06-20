@@ -13,7 +13,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { authMenuBar } from "../actions/index";
 
 const Login = (props) => {
   const classes = useStyles();
@@ -35,11 +34,9 @@ const Login = (props) => {
     axiosWithAuth()
       .post("/login", credentials)
       .then((res) => {
-        // console.log("login res", res);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userID", res.data.user_id);
         props.history.push("/dashboard");
-        dispatch(authMenuBar(true));
       })
       .catch((err) => {
         console.log("error returned from login post request", err);
@@ -52,14 +49,10 @@ const Login = (props) => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
 
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className="login-menu">
-          <Link to="/dashboard">
-            <button>Dashboard</button>
-          </Link>
-        </div>
         <div className={classes.paper}>
-          <h1>Welcome to our African Marketplace!</h1>
-
+          <h1 style={{ textAlign: "center" }}>
+            Welcome to our African Marketplace!
+          </h1>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>

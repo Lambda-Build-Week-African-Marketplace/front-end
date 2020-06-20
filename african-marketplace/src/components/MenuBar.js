@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
-import { authMenuBar } from "../actions/index";
+
 import {
   createStyles,
   fade,
@@ -25,12 +25,13 @@ const MenuBar = (props) => {
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
-    dispatch(authMenuBar(false));
+    // dispatch(authMenuBar(false));
+    // localStorage.setItem("authUser", false);
   };
 
   const toUserAccount = () => {
     const userId = window.localStorage.getItem("userID").toString();
-    console.log("userId in menubar", userId);
+    //console.log("userId in menubar", userId);
     push(`/users/${userId}`);
   };
 
@@ -62,18 +63,33 @@ const MenuBar = (props) => {
             African MarketPlace
           </Typography>
 
+          <div className={classes.search} style={{ marginRight: "3rem" }}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
+          </div>
+
           <Link
             style={{
               color: "white",
               textDecoration: "none",
               marginRight: "2rem",
+              marginRight: "3rem",
             }}
             to={"/"}
           >
             <h2>Products</h2>
           </Link>
 
-          {state.auth && (
+          {window.localStorage.getItem("userID") && (
             <Link
               style={{
                 color: "white",
@@ -85,13 +101,26 @@ const MenuBar = (props) => {
               <h2>Dashboard</h2>
             </Link>
           )}
-          {state.auth && (
+          {window.localStorage.getItem("userID") && (
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={toUserAccount}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          )}
+
+          {window.localStorage.getItem("userID") && (
             <Link
               onClick={logout}
               style={{
                 color: "white",
                 textDecoration: "none",
                 marginRight: "2rem",
+                marginLeft: "2rem",
               }}
               to={"/"}
             >
@@ -99,7 +128,7 @@ const MenuBar = (props) => {
             </Link>
           )}
 
-          {!state.auth && (
+          {!window.localStorage.getItem("userID") && (
             <Link
               style={{
                 color: "white",
@@ -112,18 +141,7 @@ const MenuBar = (props) => {
             </Link>
           )}
 
-          {state.auth && (
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={toUserAccount}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          )}
-
+          {/*
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -137,6 +155,7 @@ const MenuBar = (props) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
+            */}
         </Toolbar>
       </AppBar>
     </div>
