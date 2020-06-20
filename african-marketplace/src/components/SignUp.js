@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { postUserData } from "../actions/index";
 
 const initialUser = {
-  user_id: "0",
+  //user_id: "0",
   firstname: "",
   lastname: "",
   email: "",

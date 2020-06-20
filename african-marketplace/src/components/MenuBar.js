@@ -5,6 +5,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleMenuBar } from "../actions/index";
 import {
   createStyles,
   fade,
@@ -14,16 +16,18 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 const MenuBar = (props) => {
-  const [logOn, setLogOn] = useState("");
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  // const [logOn, setLogOn] = useState(false);
   const classes = useStyles();
-  useEffect(() => {
-    setLogOn(window.localStorage.removeItem("userID"));
-  }, [window.localStorage.removeItem("userID")]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
+    dispatch(toggleMenuBar(false));
+    //setLogOn(false);
   };
+  //console.log("logOn", logOn);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -63,31 +67,33 @@ const MenuBar = (props) => {
             <h2>Products</h2>
           </Link>
 
-          {logOn ? (
-            <div>
-              <Link
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  marginRight: "2rem",
-                }}
-                to={"/dashboard"}
-              >
-                <h2>Dashboard</h2>
-              </Link>
-              <Link
-                onClick={logout}
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  marginRight: "2rem",
-                }}
-                to={"/"}
-              >
-                <h2>Logout</h2>
-              </Link>
-            </div>
-          ) : (
+          {state.toggle && (
+            <Link
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "2rem",
+              }}
+              to={"/dashboard"}
+            >
+              <h2>Dashboard</h2>
+            </Link>
+          )}
+          {state.toggle && (
+            <Link
+              onClick={logout}
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "2rem",
+              }}
+              to={"/"}
+            >
+              <h2>Logout</h2>
+            </Link>
+          )}
+
+          {!state.toggle && (
             <Link
               style={{
                 color: "white",

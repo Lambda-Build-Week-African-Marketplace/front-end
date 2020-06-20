@@ -7,6 +7,7 @@ export const DATA_PRODUCTS_SUCCESS = "DATA_PRODUCTS_SUCCESS";
 export const DATA_LOCATIONS_SUCCESS = "DATA_LOCATIONS_SUCCESS";
 export const DATA_FAILURE = "DATA_FAILURE";
 export const EDITING_STATE = "EDITING_STATE";
+export const TOGGLE_STATE = "TOGGLE_STATE";
 
 //---------------GET DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -27,9 +28,9 @@ export const getCategoriesData = () => (dispatch) => {
   dispatch({ type: DATA_START });
 
   axiosWithAuth()
-    .get("/categories")
+    .get("/category")
     .then((res) => {
-      // console.log("get data", res);
+      console.log("get categories", res);
       dispatch({ type: DATA_CATEGORIES_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -43,7 +44,7 @@ export const getProductsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/products")
     .then((res) => {
-      console.log("get data", res);
+      console.log("get products", res);
       dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -78,10 +79,10 @@ export const postUserData = (user) => (dispatch) => {
       //   JSON.parse(`${res.config.data}`)
       // );
       //JSON.parse('res.config.data');
-      // dispatch({
-      //   type: DATA_USERS_SUCCESS,
-      //   payload: JSON.parse(`${res.config.data}`),
-      // });
+      dispatch({
+        type: DATA_USERS_SUCCESS,
+        payload: JSON.parse(`${res.config.data}`),
+      });
     })
     .catch((err) => {
       console.error("post data error: ", err);
@@ -333,4 +334,8 @@ export const updateLocationData = (location, locations) => (dispatch) => {
         payload: err.response,
       });
     });
+};
+
+export const toggleMenuBar = (togg) => (dispatch) => {
+  dispatch({ type: TOGGLE_STATE, payload: togg });
 };

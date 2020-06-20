@@ -6,6 +6,7 @@ import {
   DATA_LOCATIONS_SUCCESS,
   DATA_FAILURE,
   EDITING_STATE,
+  TOGGLE_STATE,
 } from "../actions";
 
 const initialState = {
@@ -15,9 +16,10 @@ const initialState = {
   products: [],
   locations: [],
   error: "",
+  toggle: false,
   editing: false,
   user: {
-    user_id: "",
+    user_id: 0,
     firstName: "",
     lastName: "",
     email: "",
@@ -26,17 +28,18 @@ const initialState = {
   },
 
   category: {
-    product_id: "",
+    category_id: 0,
     categoryName: "",
   },
 
   product: {
-    product_id: "",
+    product_id: 0,
+    category_id: 0,
     productName: "",
-    price: 0,
+    price: 0.0,
     description: "",
     location: "",
-    user_id: "",
+    user_id: 0,
   },
 };
 
@@ -86,6 +89,11 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         editing: !state.editing,
+      };
+    case TOGGLE_STATE:
+      return {
+        ...state,
+        toggle: action.payload,
       };
 
     default:
