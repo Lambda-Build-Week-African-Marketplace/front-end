@@ -18,21 +18,14 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 const MenuBar = (props) => {
   const state = useSelector((state) => state);
-  //const [auth, setAuth] = useState(false);
+
   const dispatch = useDispatch();
   const { push } = useHistory();
   const classes = useStyles();
-  //   useEffect(() => {
-  //     window.localStorage.getItem("userID");
-  //   }, [auth]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
-    location.reload();
-    // setAuth(!auth);
-    // dispatch(authMenuBar(false));
-    // localStorage.setItem("authUser", false);
   };
 
   const toUserAccount = () => {
