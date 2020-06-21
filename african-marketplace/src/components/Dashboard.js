@@ -12,7 +12,6 @@ const Dashboard = (props) => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const selectedUserId = Number(window.localStorage.getItem("userID"));
-  //console.log("selectedUserId", selectedUserId);
 
   useEffect(() => {
     dispatch(getProductsData());
@@ -23,7 +22,6 @@ const Dashboard = (props) => {
     dispatch(setUserProducts(user_products));
     dispatch(setUser(selectedUser));
   }, [dispatch, props.match.params.id]);
-  // console.log("props.match.params.id", props.match.params.id);
 
   return (
     <div>

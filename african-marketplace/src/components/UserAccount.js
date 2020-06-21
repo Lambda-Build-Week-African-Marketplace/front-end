@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-//import { getData } from "../actions/index";
-import {
-  updateUserData,
-  deleteUserData,
-  postUserData,
-  getUsersData,
-} from "../actions/index";
+
 const UserAccount = (props) => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   return (
     <div>

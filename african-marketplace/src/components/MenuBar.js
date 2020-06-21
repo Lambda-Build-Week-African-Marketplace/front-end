@@ -83,7 +83,6 @@ const MenuBar = (props) => {
               color: "white",
               textDecoration: "none",
               marginRight: "2rem",
-              marginRight: "3rem",
             }}
             to={"/"}
           >
@@ -143,22 +142,6 @@ const MenuBar = (props) => {
               <h2>Logout</h2>
             </Link>
           )}
-
-          {/*
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-            */}
         </Toolbar>
       </AppBar>
     </div>
