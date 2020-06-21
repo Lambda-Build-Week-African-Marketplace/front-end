@@ -37,7 +37,8 @@ const Login = (props) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userID", res.data.user_id);
         dispatch(authMenuBar(true));
-        props.history.push("/dashboard");
+        const userId = window.localStorage.getItem("userID").toString();
+        props.history.push(`/dashboard/${userId}`);
       })
       .catch((err) => {
         console.log("error returned from login post request", err);

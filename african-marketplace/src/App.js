@@ -24,8 +24,12 @@ function App() {
         <Switch>
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/users/:id" component={UserAccount} />
+          <PrivateRoute exact path="/dashboard/:id" component={Dashboard} />
+          <PrivateRoute
+            exact
+            path="/users/:id/account"
+            component={UserAccount}
+          />
           <Route exact path="/" component={ProductList} />
         </Switch>
       </Router>
