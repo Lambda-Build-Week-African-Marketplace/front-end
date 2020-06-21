@@ -6,6 +6,7 @@ import {
   DATA_LOCATIONS_SUCCESS,
   DATA_FAILURE,
   EDITING_STATE,
+  AUTH_STATE,
 } from "../actions";
 
 const initialState = {
@@ -88,6 +89,11 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         editing: !state.editing,
+      };
+    case AUTH_STATE:
+      return {
+        ...state,
+        auth: action.payload,
       };
 
     default:

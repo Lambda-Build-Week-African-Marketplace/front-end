@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-
+import { authMenuBar } from "../actions/index";
 const Login = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const Login = (props) => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userID", res.data.user_id);
+        dispatch(authMenuBar(true));
         props.history.push("/dashboard");
       })
       .catch((err) => {

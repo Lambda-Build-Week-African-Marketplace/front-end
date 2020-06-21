@@ -7,6 +7,7 @@ export const DATA_PRODUCTS_SUCCESS = "DATA_PRODUCTS_SUCCESS";
 export const DATA_LOCATIONS_SUCCESS = "DATA_LOCATIONS_SUCCESS";
 export const DATA_FAILURE = "DATA_FAILURE";
 export const EDITING_STATE = "EDITING_STATE";
+export const AUTH_STATE = "AUTH_STATE";
 
 //---------------GET DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -333,4 +334,8 @@ export const updateLocationData = (location, locations) => (dispatch) => {
         payload: err.response,
       });
     });
+};
+
+export const authMenuBar = (togg) => (dispatch) => {
+  dispatch({ type: AUTH_STATE, payload: togg });
 };
