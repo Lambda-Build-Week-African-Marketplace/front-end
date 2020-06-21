@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
-
+import { authMenuBar } from "../actions/index";
 import {
   createStyles,
   fade,
@@ -26,6 +26,7 @@ const MenuBar = (props) => {
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
+    dispatch(authMenuBar(false));
   };
 
   const toUserAccount = () => {
@@ -88,7 +89,20 @@ const MenuBar = (props) => {
             <h2>Products</h2>
           </Link>
 
-          {window.localStorage.getItem("userID") && (
+          {(!state.auth || !window.localStorage.getItem("userID")) && (
+            <Link
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "2rem",
+              }}
+              to={"/login"}
+            >
+              <h2>Login</h2>
+            </Link>
+          )}
+
+          {(state.auth || window.localStorage.getItem("userID")) && (
             <Link
               style={{
                 color: "white",
@@ -100,7 +114,7 @@ const MenuBar = (props) => {
               <h2>Dashboard</h2>
             </Link>
           )}
-          {window.localStorage.getItem("userID") && (
+          {(state.auth || window.localStorage.getItem("userID")) && (
             <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -112,7 +126,7 @@ const MenuBar = (props) => {
             </IconButton>
           )}
 
-          {window.localStorage.getItem("userID") && (
+          {(state.auth || window.localStorage.getItem("userID")) && (
             <Link
               onClick={logout}
               style={{
@@ -124,19 +138,6 @@ const MenuBar = (props) => {
               to={"/"}
             >
               <h2>Logout</h2>
-            </Link>
-          )}
-
-          {!window.localStorage.getItem("userID") && (
-            <Link
-              style={{
-                color: "white",
-                textDecoration: "none",
-                marginRight: "2rem",
-              }}
-              to={"/login"}
-            >
-              <h2>Login</h2>
             </Link>
           )}
 
