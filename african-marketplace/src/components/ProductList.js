@@ -10,24 +10,14 @@ import {
 const ProductList = (props) => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(getLocationsData());
-  //   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(getUsersData());
     dispatch(getProductsData());
     dispatch(getCategoriesData());
     dispatch(getLocationsData());
   }, [dispatch]);
-  //   useEffect(() => {
-  //     dispatch(getCategoriesData());
-  //   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getUsersData());
-  }, [dispatch]);
-  //console.log("state products", state.products);
-  //console.log("state categories", state.categories);
   return (
     <div>
       <div>

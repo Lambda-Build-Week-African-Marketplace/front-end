@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
-import { authMenuBar } from "../actions/index";
+import { authMenuBar, setUserProducts, setUser } from "../actions/index";
 import {
   createStyles,
   fade,
@@ -27,12 +27,13 @@ const MenuBar = (props) => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
     dispatch(authMenuBar(false));
+    dispatch(setUserProducts([]));
+    dispatch(setUser({}));
   };
 
   const toUserAccount = () => {
     const userId = window.localStorage.getItem("userID").toString();
-    //console.log("userId in menubar", userId);
-    push(`/users/${userId}`);
+    push(`/users/${userId}/account`);
   };
 
   return (
@@ -109,7 +110,9 @@ const MenuBar = (props) => {
                 textDecoration: "none",
                 marginRight: "2rem",
               }}
-              to={"/dashboard"}
+              to={`/dashboard/${window.localStorage
+                .getItem("userID")
+                .toString()}`}
             >
               <h2>Dashboard</h2>
             </Link>

@@ -8,6 +8,8 @@ export const DATA_LOCATIONS_SUCCESS = "DATA_LOCATIONS_SUCCESS";
 export const DATA_FAILURE = "DATA_FAILURE";
 export const EDITING_STATE = "EDITING_STATE";
 export const AUTH_STATE = "AUTH_STATE";
+export const USER_PRODUCTS_STATE = "USER_PRODUCTS_STATE";
+export const USER_STATE = "USER_STATE";
 
 //---------------GET DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -69,7 +71,7 @@ export const getLocationsData = () => (dispatch) => {
 //---------------POST DATA----------------------------
 export const postUserData = (user) => (dispatch) => {
   dispatch({ type: DATA_START });
-  //{"firstname":"user1fn","lastname":"user1fn","email":"user1fn","username":"user1fn","password":"user1fn"}
+
   axiosWithAuth()
     .post("/register", user)
     .then((res) => {
@@ -336,6 +338,17 @@ export const updateLocationData = (location, locations) => (dispatch) => {
     });
 };
 
+//--------------USER_PRODUCTS_STATE-------------------
+
+export const setUserProducts = (user_prod) => (dispatch) => {
+  dispatch({ type: USER_PRODUCTS_STATE, payload: user_prod });
+};
+//--------------AUTH_STATE-------------------
 export const authMenuBar = (togg) => (dispatch) => {
   dispatch({ type: AUTH_STATE, payload: togg });
+};
+
+//----------------USER_STATE------------------
+export const setUser = (user) => (dispatch) => {
+  dispatch({ type: USER_STATE, payload: user });
 };

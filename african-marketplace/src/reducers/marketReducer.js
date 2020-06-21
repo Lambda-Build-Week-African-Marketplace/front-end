@@ -7,6 +7,8 @@ import {
   DATA_FAILURE,
   EDITING_STATE,
   AUTH_STATE,
+  USER_PRODUCTS_STATE,
+  USER_STATE,
 } from "../actions";
 
 const initialState = {
@@ -20,27 +22,27 @@ const initialState = {
   editing: false,
   user: {
     user_id: 0,
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    userName: "",
-    password: "",
+    username: "",
   },
 
   category: {
     category_id: 0,
-    categoryName: "",
+    category_name: "",
   },
 
   product: {
     product_id: 0,
     category_id: 0,
-    productName: "",
+    product_name: "",
     price: 0.0,
     description: "",
     location: "",
     user_id: 0,
   },
+  userProducts: [],
 };
 
 export const marketReducer = (state = initialState, action) => {
@@ -94,6 +96,16 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         auth: action.payload,
+      };
+    case USER_PRODUCTS_STATE:
+      return {
+        ...state,
+        userProducts: action.payload,
+      };
+    case USER_STATE:
+      return {
+        ...state,
+        user: action.payload,
       };
 
     default:
