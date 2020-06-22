@@ -26,6 +26,8 @@ const MenuBar = (props) => {
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
+    window.localStorage.removeItem("locUser");
+    window.localStorage.removeItem("SignUp-form");
     dispatch(authMenuBar(false));
     dispatch(setUserProducts([]));
     dispatch(setUser({}));
