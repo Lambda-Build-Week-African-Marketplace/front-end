@@ -169,3 +169,14 @@ input:focus + .baseline:before {
 .form-button {
   margin: 24px 0;
 }
+.span-category {
+  cursor: pointer;
+  font-weight: bolder;
+  color: white;
+  background-color: #6190a3;
+  padding: 0.2rem;
+}
+.span-category:hover {
+  color: #6190a3;
+  background-color: white;
+}

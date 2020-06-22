@@ -98,9 +98,9 @@ export const postCategoryData = (category) => (dispatch) => {
   dispatch({ type: DATA_START });
 
   axiosWithAuth()
-    .post("/categories", category)
+    .post("/category", category)
     .then((res) => {
-      console.log("post data", res);
+      console.log("post category data", res);
       dispatch({ type: DATA_CATEGORIES_SUCCESS, payload: res.data });
     })
     .catch((err) => {
