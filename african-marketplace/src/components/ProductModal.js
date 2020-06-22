@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
+//import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-
+//import { useSelector, useDispatch } from "react-redux";
+//import { postCategoryData, getCategoriesData } from "../actions/index";
 const useStyles = makeStyles((theme) =>
   createStyles({
     modal: {
@@ -19,9 +20,34 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-
+//const initialCategory = "";
 const ProductModal = (props) => {
   const classes = useStyles();
+  //const [catToggle, setCatToggle] = useState(false);
+  //const [newCategory, setNewCategory] = useState(initialCategory);
+  // const dispatch = useDispatch();
+  //   const handleCategoryClose = (e) => {
+  //     e.preventDefault();
+  //     setCatToggle(false);
+  //     setNewCategory(initialCategory);
+  //   };
+
+  //   const changeCategoryHandler = (ev) => {
+  //     ev.persist();
+
+  //     setNewCategory({
+  //       ...newCategory,
+  //       [ev.target.name]: ev.target.value,
+  //     });
+  //   };
+  //   const handleCategorySubmit = (e) => {
+  //     console.log("newCategory", newCategory);
+
+  //     e.preventDefault();
+  //     dispatch(postCategoryData(newCategory));
+  //     setNewCategory(initialCategory);
+  //     setCatToggle(false);
+  //   };
 
   return (
     <div>
@@ -74,7 +100,7 @@ const ProductModal = (props) => {
                   name="location_id"
                   onChange={props.changeHandler}
                   style={{
-                    marginTop: "0.5rem",
+                    marginTop: "1rem",
                     width: "100%",
                     height: "2.4rem",
                     marginLeft: "0",
@@ -107,11 +133,50 @@ const ProductModal = (props) => {
                   <option value="0">Select category:</option>
 
                   {props.categories.map((category) => (
-                    <option value={category.id}>
+                    <option key={category.id} value={category.id}>
                       {category.category_name}
                     </option>
                   ))}
                 </select>
+                <p>
+                  Don't find a category?{" "}
+                  <span
+                    onClick={props.handleCatToggle}
+                    className="span-category"
+                  >
+                    Add a new one
+                  </span>{" "}
+                </p>
+                {props.catToggle ? (
+                  <div>
+                    <input
+                      type="text"
+                      name="category"
+                      onChange={props.changeCategoryHandler}
+                      placeholder="Category"
+                      defaultValue={props.newCategory}
+                    />
+                    <div className="baseline" />
+                    <button
+                      style={{ background: "#6190a3", fontSize: "0.7rem" }}
+                      onClick={props.handleCategorySubmit}
+                      className="md-button form-button"
+                    >
+                      Add New Category
+                    </button>
+                    <button
+                      style={{
+                        background: "#6190a3",
+                        fontSize: "0.7rem",
+                        marginLeft: "1rem",
+                      }}
+                      onClick={props.handleCatToggle}
+                      className="md-button form-button"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : null}
 
                 <button className="md-button form-button">Add New Item</button>
                 <button

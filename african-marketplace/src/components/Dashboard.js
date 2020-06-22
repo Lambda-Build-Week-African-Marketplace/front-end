@@ -8,6 +8,7 @@ import {
   setUserProducts,
   setUser,
   postProductData,
+  postCategoryData,
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
@@ -22,16 +23,18 @@ const initialItem = {
   description: "",
   location_id: 0,
 };
+const initialCategory = "";
 
 const Dashboard = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [catToggle, setCatToggle] = useState(false);
   const state = useSelector((state) => state);
   const [newProduct, setNewProduct] = useState(initialItem);
+  const [newCategory, setNewCategory] = useState(initialCategory);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //const selectedUserId = Number(window.localStorage.getItem("userID"));
     const selectedUserId = Number(props.match.params.id);
     dispatch(getProductsData());
     const user_products = state.products.filter(
@@ -58,6 +61,7 @@ const Dashboard = (props) => {
     setNewProduct(initialItem);
   };
 
+  //------------Product handlers-----------------
   const changeHandler = (ev) => {
     ev.persist();
     let value = ev.target.value;
@@ -76,6 +80,28 @@ const Dashboard = (props) => {
     dispatch(postProductData(newProduct));
     setNewProduct(initialItem);
     setOpen(false);
+  };
+  //------------Category handlers-----------------
+  const changeCategoryHandler = (ev) => {
+    ev.persist();
+
+    setNewCategory({
+      ...newCategory,
+      [ev.target.name]: ev.target.value,
+    });
+  };
+  const handleCategorySubmit = (e) => {
+    console.log("newCategory", newCategory);
+
+    e.preventDefault();
+    dispatch(postCategoryData(newCategory));
+    setNewCategory(initialCategory);
+    setCatToggle(false);
+  };
+  const handleCatToggle = (e) => {
+    e.preventDefault();
+    setCatToggle(!catToggle);
+    setNewCategory(initialCategory);
   };
 
   return (
@@ -103,6 +129,12 @@ const Dashboard = (props) => {
         newProduct={newProduct}
         setNewProduct={setNewProduct}
         categories={state.categories}
+        changeCategoryHandler={changeCategoryHandler}
+        handleCategorySubmit={handleCategorySubmit}
+        newCategory={newCategory}
+        //setCatToggle={setCatToggle}
+        catToggle={catToggle}
+        handleCatToggle={handleCatToggle}
       />
     </div>
   );

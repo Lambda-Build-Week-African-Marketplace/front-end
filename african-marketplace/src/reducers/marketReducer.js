@@ -21,7 +21,7 @@ const initialState = {
   auth: false,
   editing: false,
   user: {
-    user_id: 0,
+    id: 0,
     firstname: "",
     lastname: "",
     email: "",
@@ -29,12 +29,12 @@ const initialState = {
   },
 
   category: {
-    category_id: 0,
+    id: 0,
     category_name: "",
   },
 
   product: {
-    product_id: 0,
+    id: 0,
     category_id: 0,
     product_name: "",
     price: "",
@@ -43,6 +43,10 @@ const initialState = {
     user_id: 0,
   },
   userProducts: [],
+  location: {
+    id: 0,
+    location: "",
+  },
 };
 
 export const marketReducer = (state = initialState, action) => {
