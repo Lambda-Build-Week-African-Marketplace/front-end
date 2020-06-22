@@ -10,6 +10,7 @@ export const EDITING_STATE = "EDITING_STATE";
 export const AUTH_STATE = "AUTH_STATE";
 export const USER_PRODUCTS_STATE = "USER_PRODUCTS_STATE";
 export const USER_STATE = "USER_STATE";
+//export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS",
 
 //---------------GET DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -75,7 +76,7 @@ export const postUserData = (user) => (dispatch) => {
   axiosWithAuth()
     .post("/register", user)
     .then((res) => {
-      console.log("post data", res);
+      console.log("post data", res.data.user);
       // console.log(
       //   "JSON.parse('res.config.data')",
       //   JSON.parse(`${res.config.data}`)
@@ -83,7 +84,8 @@ export const postUserData = (user) => (dispatch) => {
       //JSON.parse('res.config.data');
       dispatch({
         type: DATA_USERS_SUCCESS,
-        payload: JSON.parse(`${res.config.data}`),
+        // payload: JSON.parse(`${res.config.data}`),
+        payload: res.data.user,
       });
     })
     .catch((err) => {
@@ -100,7 +102,8 @@ export const postCategoryData = (category) => (dispatch) => {
   axiosWithAuth()
     .post("/category", category)
     .then((res) => {
-      console.log("post category data", res);
+      // getCategoriesData();
+      console.log("post category data", res.data);
       dispatch({ type: DATA_CATEGORIES_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -117,8 +120,9 @@ export const postProductData = (product) => (dispatch) => {
   axiosWithAuth()
     .post("/products", product)
     .then((res) => {
-      console.log("post data", res);
-      dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
+      getProductsData();
+      // console.log("post data", res.data.id);
+      // dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
       console.error("post data error: ", err);

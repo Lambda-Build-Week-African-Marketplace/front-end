@@ -37,7 +37,8 @@ const Login = (props) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userID", res.data.user_id);
         dispatch(authMenuBar(true));
-        const userId = window.localStorage.getItem("userID").toString();
+        const userId = window.localStorage.getItem("userID");
+
         props.history.push(`/dashboard/${userId}`);
       })
       .catch((err) => {

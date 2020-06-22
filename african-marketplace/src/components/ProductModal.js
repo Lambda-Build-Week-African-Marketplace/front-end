@@ -151,10 +151,10 @@ const ProductModal = (props) => {
                   <div>
                     <input
                       type="text"
-                      name="category"
+                      name="category_name"
                       onChange={props.changeCategoryHandler}
                       placeholder="Category"
-                      defaultValue={props.newCategory}
+                      defaultValue={props.newCategory.category_name}
                     />
                     <div className="baseline" />
                     <button

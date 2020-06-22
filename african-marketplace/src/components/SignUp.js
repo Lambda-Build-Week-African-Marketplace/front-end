@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { postUserData } from "../actions/index";
-
+import { useForm } from "../hooks/useForm";
 const initialUser = {
   //user_id: "0",
   firstname: "",
@@ -27,21 +27,36 @@ const SignUp = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [newCredentials, setNewCredentials] = useState(initialUser);
+  //const [newCredentials, setNewCredentials] = useState(initialUser);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const handleChange = (e) => {
-    //console.log("e.target.value", e.target.value);
-    setNewCredentials({
-      ...newCredentials,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [
+    newCredentials,
+    handleChanges,
+    clearForm,
+    handleSubmit,
+    setValues,
+  ] = useForm("SignUp-form", initialUser);
+
+  // const handleChange = (e) => {
+  //   //console.log("e.target.value", e.target.value);
+  //   setNewCredentials({
+  //     ...newCredentials,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
   const sign = (e) => {
     e.preventDefault();
 
     dispatch(postUserData(newCredentials));
-    setNewCredentials(initialUser);
+    // setNewCredentials(initialUser);
+    //clearForm();
+    setShowSuccessMessage(true);
     props.history.push("/login");
+  };
+  const handleClearForm = (e) => {
+    e.preventDefault();
+    clearForm();
   };
 
   return (
@@ -72,7 +87,7 @@ const SignUp = (props) => {
               name="firstname"
               autoComplete="firstname"
               value={newCredentials.firstname}
-              onChange={handleChange}
+              onChange={handleChanges}
             />
             {/*-------------------Last Name----------------------- */}
             <TextField
@@ -85,7 +100,7 @@ const SignUp = (props) => {
               name="lastname"
               autoComplete="lastname"
               value={newCredentials.lastname}
-              onChange={handleChange}
+              onChange={handleChanges}
             />
             {/*-------------------Email----------------------- */}
             <TextField
@@ -98,7 +113,7 @@ const SignUp = (props) => {
               name="email"
               autoComplete="email"
               value={newCredentials.email}
-              onChange={handleChange}
+              onChange={handleChanges}
             />
             {/*-------------------User Name----------------------- */}
             <TextField
@@ -111,7 +126,7 @@ const SignUp = (props) => {
               name="username"
               autoComplete="username"
               value={newCredentials.username}
-              onChange={handleChange}
+              onChange={handleChanges}
             />
 
             {/*-------------------Password----------------------- */}
@@ -126,7 +141,7 @@ const SignUp = (props) => {
               id="password"
               autoComplete="password"
               value={newCredentials.password}
-              onChange={handleChange}
+              onChange={handleChanges}
             />
 
             <Button
