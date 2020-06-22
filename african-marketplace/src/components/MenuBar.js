@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -89,7 +89,7 @@ const MenuBar = (props) => {
             <h2>Products</h2>
           </Link>
 
-          {(!state.auth || !window.localStorage.getItem("userID")) && (
+          {!state.auth && !window.localStorage.getItem("userID") && (
             <Link
               style={{
                 color: "white",

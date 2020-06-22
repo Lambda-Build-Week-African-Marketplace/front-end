@@ -38,7 +38,7 @@ const SignUp = (props) => {
   };
   const sign = (e) => {
     e.preventDefault();
-    console.log("newCredentials", newCredentials);
+
     dispatch(postUserData(newCredentials));
     setNewCredentials(initialUser);
     props.history.push("/login");
