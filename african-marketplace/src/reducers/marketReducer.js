@@ -9,6 +9,7 @@ import {
   AUTH_STATE,
   USER_PRODUCTS_STATE,
   USER_STATE,
+  SET_INITIAL_USER,
   // POST_PRODUCTS_SUCCESS,
 } from "../actions";
 
@@ -118,6 +119,18 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+
+    case SET_INITIAL_USER:
+      return {
+        ...state,
+        user: {
+          id: 0,
+          firstname: "",
+          lastname: "",
+          email: "",
+          username: "",
+        },
       };
 
     default:

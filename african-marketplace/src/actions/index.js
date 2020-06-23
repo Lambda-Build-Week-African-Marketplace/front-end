@@ -10,6 +10,7 @@ export const EDITING_STATE = "EDITING_STATE";
 export const AUTH_STATE = "AUTH_STATE";
 export const USER_PRODUCTS_STATE = "USER_PRODUCTS_STATE";
 export const USER_STATE = "USER_STATE";
+export const SET_INITIAL_USER = "SET_INITIAL_USER";
 //export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS",
 
 //---------------GET DATA----------------------------
