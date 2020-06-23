@@ -51,6 +51,7 @@ const ProductList = (props) => {
                   description={el.description}
                   location_id={el.location_id}
                   user_id={el.user_id}
+                  dashboard_flag={false}
                 />
               );
             })}
