@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-//import { getData } from "../actions/index";
+import ProductCard from "./ProductCard";
+import { Container, Row } from "reactstrap";
 import {
   getUsersData,
   getProductsData,
@@ -20,35 +21,42 @@ const ProductList = (props) => {
 
   return (
     <div>
-      <div>
-        <h2> Our Locations:</h2>
-        {state.locations.map((location) => (
-          <p key={location.id}> Location:{location.location}</p>
-        ))}
-      </div>
+      <Container style={{ marginTop: "1rem" }}>
+        {/**
+        <div>
+          <h2> Our Locations:</h2>
+          {state.locations.map((location) => (
+            <p key={location.id}> Location:{location.location}</p>
+          ))}
+        </div>
 
-      <div>
-        <h2> Our Categories:</h2>
-        {state.categories.map((category) => (
-          <p key={category.id}> Categories:{category.category_name}</p>
-        ))}
-      </div>
+        <div>
+          <h2> Our Categories:</h2>
+          {state.categories.map((category) => (
+            <p key={category.id}> Categories:{category.category_name}</p>
+          ))}
+        </div>
 
-      {/** */}
-      <div>
-        <h2> Our Products:</h2>
-        {state.products.map((product) => {
-          return (
-            <div key={product.id}>
-              <p>
-                {" "}
-                Product Name:{product.product_name} Price:
-                {product.price}
-              </p>
-            </div>
-          );
-        })}
-      </div>
+         */}
+        <div>
+          <h2> Our Products:</h2>
+          <Row>
+            {state.products.map((el) => {
+              return (
+                <ProductCard
+                  key={el.id}
+                  category_id={el.category_id}
+                  product_name={el.product_name}
+                  price={el.price}
+                  description={el.description}
+                  location_id={el.location_id}
+                  user_id={el.user_id}
+                />
+              );
+            })}
+          </Row>
+        </div>
+      </Container>
     </div>
   );
 };
