@@ -5,11 +5,23 @@ import Button from "@material-ui/core/Button";
 import CardActions from "@material-ui/core/CardActions";
 import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProductData } from "../actions/index";
 
 const ProductCard = (props) => {
-  //   const handleSearchToggle = () => {
-  //     props.setSearchToggle(true);
-  //     props.setSearchTerm("");
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  // const deleteProduct = ((props.productId) =>
+  //     dispatch(deleteProductData(props.productId, state.products))
+  //   );
+
+  const deleteProduct = (e) => {
+    e.preventDefault();
+    dispatch(deleteProductData(props.product_id, state.products));
+  };
+
+  // const deleteProduct = (productId) => {
+  //     dispatch(deleteProductData(productId, state.products));
   //   };
   return (
     <Col xs="12" md="6" xl="4">
@@ -37,14 +49,16 @@ const ProductCard = (props) => {
           >{`Price: ${props.price}`}</CardSubtitle>
           <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
 
-          <CardActions style={{ marginLeft: "center" }}>
-            <Button size="small" color="primary">
-              Edit
-            </Button>
-            <Button size="small" color="primary">
-              Delete
-            </Button>
-          </CardActions>
+          {props.dashboard_flag ? (
+            <CardActions style={{ marginLeft: "center" }}>
+              <Button size="small" color="primary">
+                Edit
+              </Button>
+              <Button onClick={deleteProduct} size="small" color="primary">
+                Delete
+              </Button>
+            </CardActions>
+          ) : null}
         </CardBody>
       </Card>
     </Col>
