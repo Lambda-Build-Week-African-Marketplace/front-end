@@ -10,6 +10,7 @@ import {
   getUsersData,
   postProductData,
   postCategoryData,
+  deleteProductData,
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
@@ -74,8 +75,8 @@ const Dashboard = (props) => {
     console.log("localUser", localUser);
 
     //--------------------user's products--------------------------
-    dispatch(getProductsData());
-    dispatch(getCategoriesData());
+    //dispatch(getProductsData());
+    //dispatch(getCategoriesData());
     const user_products = state.products.filter(
       (product) => product.user_id === selectedUserId
     );
@@ -89,8 +90,6 @@ const Dashboard = (props) => {
     props.match.params.id,
     window.localStorage.getItem("userID"),
     localUser,
-    // newCategory,
-    // newProduct,
   ]);
 
   const handleOpen = () => {
@@ -104,6 +103,10 @@ const Dashboard = (props) => {
   };
 
   //------------Product handlers-----------------
+
+  useEffect(() => {
+    dispatch(getProductsData());
+  }, [newProduct]);
   const changeHandler = (ev) => {
     ev.persist();
     let value = ev.target.value;
@@ -124,7 +127,14 @@ const Dashboard = (props) => {
     setOpen(false);
     dispatch(getProductsData());
   };
+
+  const deleteProduct = (productId) => {
+    dispatch(deleteProductData(productId, state.products));
+  };
   //------------Category handlers-----------------
+  useEffect(() => {
+    dispatch(getCategoriesData());
+  }, [newCategory]);
   const changeCategoryHandler = (ev) => {
     ev.persist();
 
