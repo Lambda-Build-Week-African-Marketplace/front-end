@@ -15,6 +15,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { postUserData } from "../actions/index";
 import { useForm } from "../hooks/useForm";
+import { Spinner } from "reactstrap";
 const initialUser = {
   //user_id: "0",
   firstname: "",
@@ -58,11 +59,6 @@ const SignUp = (props) => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
 
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className="login-menu">
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        </div>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Sign Up
@@ -146,7 +142,24 @@ const SignUp = (props) => {
             >
               Submit
             </Button>
-            {!state.error && <Success />}
+            {state.isLoading ? (
+              <div style={{ margin: "0 auto" }}>
+                <Spinner
+                  color="primary"
+                  style={{
+                    width: "3rem",
+                    height: "3rem",
+                    position: "absolute",
+                    top: "67%",
+                    left: "80%",
+                    marginLeft: "-50px",
+                    marginTop: "-50px",
+                  }}
+                />{" "}
+              </div>
+            ) : null}
+
+            {!state.error && !state.isLoading && <Success />}
             {state.error && <Fail />}
             <ToLogin />
             <Box mt={5}>
@@ -184,7 +197,12 @@ function ToLogin() {
 
 function Success() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography
+      style={{ marginTop: "2rem", marginBottom: "1rem" }}
+      variant="body2"
+      color="textSecondary"
+      align="center"
+    >
       <Link style={{ color: "green" }} to="/login">
         You have registered successfully! Go to Login.
       </Link>
@@ -193,7 +211,12 @@ function Success() {
 }
 function Fail() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography
+      style={{ marginTop: "2rem", marginBottom: "1rem" }}
+      variant="body2"
+      color="textSecondary"
+      align="center"
+    >
       <Link style={{ color: "red" }} to="/signup">
         Something wrong, try it again.
       </Link>

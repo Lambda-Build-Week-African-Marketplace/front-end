@@ -14,12 +14,20 @@ import userAccountPhoto from "../assets/user-account.jpg";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { deleteUserData } from "../actions/index";
+import { deleteUserData, setUser, getUsersData } from "../actions/index";
 const useStyles = makeStyles({
   root: {
     maxWidth: 600,
   },
 });
+
+const initialUser = {
+  // id: 0,
+  firstname: "",
+  lastname: "",
+  email: "",
+  username: "",
+};
 
 const UserAccount = (props) => {
   const classes = useStyles();
@@ -27,6 +35,7 @@ const UserAccount = (props) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+  const [newUser, setNewUser] = useState(initialUser);
 
   useEffect(() => {
     const selectedUserId = Number(props.match.params.id);
@@ -35,8 +44,14 @@ const UserAccount = (props) => {
     const selectedUser = state.users.find(
       (el) => el.id === Number(selectedUserId)
     );
-    dispatch({ type: USER_STATE, payload: selectedUser });
+    // dispatch({ type: USER_STATE, payload: selectedUser });
+    dispatch(setUser(selectedUser));
+    setNewUser(selectedUser);
   }, [dispatch, props.match.params.id, window.localStorage.getItem("userID")]);
+
+  useEffect(() => {
+    dispatch(getUsersData());
+  }, [newUser]);
 
   const deleteAccount = () => {
     dispatch(deleteUserData(props.match.params.id));
@@ -44,46 +59,79 @@ const UserAccount = (props) => {
     dispatch({ type: SET_INITIAL_USER });
   };
 
+  {
+    state.users
+      .filter(
+        (user) =>
+          Number(user.id) === Number(window.localStorage.getItem("userID"))
+      )
+      .map((el) => {
+        return (
+          <div>
+            <p key={el.id}>
+              User First Name: {el.firstname} User Last Name: {el.lastname}
+            </p>
+            <p key={el.id}>
+              User First Name: {el.firstname} User Last Name: {el.lastname}
+            </p>
+          </div>
+        );
+      });
+  }
+
   return (
     <div>
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="sm" style={{ marginTop: "2rem" }}>
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="Contemplative Reptile"
-                height="300"
-                image={userAccountPhoto}
-                title="Contemplative Reptile"
-              />
-              <CardContent style={{ textAlign: "center" }}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  UserAccount
-                </Typography>
-                <Typography gutterBottom variant="h5" component="h3">
-                  First Name: {state.user.firstname}
-                </Typography>
-                <Typography gutterBottom variant="h5" component="h3">
-                  Last Name: {state.user.lastname}
-                </Typography>
-                <Typography gutterBottom variant="h5" component="h3">
-                  Email: {state.user.email}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions style={{ marginLeft: "center" }}>
-              <Button size="small" color="primary">
-                Edit Account
-              </Button>
-              <Button onClick={deleteAccount} size="small" color="primary">
-                Delete Account
-              </Button>
-            </CardActions>
-          </Card>
-        </Container>
-      </React.Fragment>
+      {state.users
+        .filter(
+          (user) =>
+            Number(user.id) === Number(window.localStorage.getItem("userID"))
+        )
+        .map((el) => {
+          return (
+            <React.Fragment>
+              <CssBaseline />
+              <Container maxWidth="sm" style={{ marginTop: "2rem" }}>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt="Contemplative Reptile"
+                      height="300"
+                      image={userAccountPhoto}
+                      title="Contemplative Reptile"
+                    />
+                    <CardContent style={{ textAlign: "center" }}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        UserAccount
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h3">
+                        First Name: {el.firstname}
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h3">
+                        Last Name: {el.lastname}
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h3">
+                        Email: {el.firstname}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions style={{ marginLeft: "center" }}>
+                    <Button size="small" color="primary">
+                      Edit Account
+                    </Button>
+                    <Button
+                      onClick={deleteAccount}
+                      size="small"
+                      color="primary"
+                    >
+                      Delete Account
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Container>
+            </React.Fragment>
+          );
+        })}
     </div>
   );
 };

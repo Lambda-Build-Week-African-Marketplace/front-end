@@ -28,6 +28,13 @@ const initialItem = {
 const initialCategory = {
   category_name: "",
 };
+const initialUser = {
+  // id: 0,
+  firstname: "",
+  lastname: "",
+  email: "",
+  username: "",
+};
 
 const Dashboard = (props) => {
   const classes = useStyles();
@@ -35,21 +42,22 @@ const Dashboard = (props) => {
   const [catToggle, setCatToggle] = useState(false);
   const state = useSelector((state) => state);
   const [newProduct, setNewProduct] = useState(initialItem);
+  const [newUser, setNewUser] = useState(initialUser);
   const [newCategory, setNewCategory] = useState(initialCategory);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const selectedUserId = Number(props.match.params.id);
-    //const selectedUserId = window.localStorage.getItem("userID");
 
     const selectedUser = state.users.find(
       (el) => el.id === Number(selectedUserId)
     );
-    dispatch({ type: USER_STATE, payload: selectedUser });
-    // setNewUser(selectedUser);
-    console.log("selectedUser", selectedUser);
+    //dispatch({ type: USER_STATE, payload: selectedUser });
 
+    dispatch(setUser(selectedUser));
+
+    setNewUser(selectedUser);
     const user_products = state.products.filter(
       (product) => product.user_id === selectedUserId
     );
@@ -58,7 +66,11 @@ const Dashboard = (props) => {
       ...newProduct,
       user_id: Number(window.localStorage.getItem("userID")),
     });
-  }, [dispatch, props.match.params.id, window.localStorage.getItem("userID")]);
+  }, [dispatch, window.localStorage.getItem("userID")]);
+  //props.match.params.id,
+  useEffect(() => {
+    dispatch(getUsersData());
+  }, [newUser]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -87,13 +99,10 @@ const Dashboard = (props) => {
     });
   };
   const handleSubmit = (e) => {
-    console.log("newProduct", newProduct);
-
     e.preventDefault();
     dispatch(postProductData(newProduct));
     setNewProduct(initialItem);
     setOpen(false);
-    dispatch(getProductsData());
   };
 
   const deleteProduct = (productId) => {
@@ -103,17 +112,15 @@ const Dashboard = (props) => {
   useEffect(() => {
     dispatch(getCategoriesData());
   }, [newCategory]);
+
   const changeCategoryHandler = (ev) => {
     ev.persist();
-
     setNewCategory({
       ...newCategory,
       [ev.target.name]: ev.target.value,
     });
   };
   const handleCategorySubmit = (e) => {
-    console.log("newCategory", newCategory);
-
     e.preventDefault();
     dispatch(postCategoryData(newCategory));
     setNewCategory(initialCategory);
@@ -149,10 +156,24 @@ const Dashboard = (props) => {
 
   return (
     <div>
+      {/** 
       <h2>
         {" "}
         User {state.user.firstname} {state.user.lastname} list of products:
       </h2>
+*/}
+      {/** */}
+
+      {state.users
+        .filter(
+          (user) =>
+            Number(user.id) === Number(window.localStorage.getItem("userID"))
+        )
+        .map((el) => (
+          <p key={el.id}>
+            User First Name: {el.firstname} User Last Name: {el.lastname}
+          </p>
+        ))}
 
       <button
         type="button"
@@ -169,7 +190,6 @@ const Dashboard = (props) => {
         changeHandler={changeHandler}
         newProduct={newProduct}
         setNewProduct={setNewProduct}
-        categories={state.categories}
         changeCategoryHandler={changeCategoryHandler}
         handleCategorySubmit={handleCategorySubmit}
         newCategory={newCategory}
@@ -186,7 +206,10 @@ const Dashboard = (props) => {
             Number(window.localStorage.getItem("userID"))
         )
         .map((el) => (
-          <p>{el.product_name}</p>
+          <p key={el.id}>
+            Product Name: {el.product_name} Product Description:{" "}
+            {el.description}
+          </p>
         ))}
     </div>
   );
