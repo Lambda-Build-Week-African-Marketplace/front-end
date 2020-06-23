@@ -63,6 +63,10 @@ const Dashboard = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(getUsersData());
+  }, [newUser]);
+
+  useEffect(() => {
     const selectedUserId = Number(props.match.params.id);
     //const selectedUserId = window.localStorage.getItem("userID");
 
@@ -72,11 +76,8 @@ const Dashboard = (props) => {
     setNewUser(selectedUser);
     console.log("selectedUser", selectedUser);
     handleSetObj(selectedUser);
-    console.log("localUser", localUser);
+    // console.log("localUser", localUser);
 
-    //--------------------user's products--------------------------
-    //dispatch(getProductsData());
-    //dispatch(getCategoriesData());
     const user_products = state.products.filter(
       (product) => product.user_id === selectedUserId
     );
@@ -89,7 +90,7 @@ const Dashboard = (props) => {
     dispatch,
     props.match.params.id,
     window.localStorage.getItem("userID"),
-    localUser,
+    newUser,
   ]);
 
   const handleOpen = () => {
