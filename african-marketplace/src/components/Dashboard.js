@@ -100,15 +100,33 @@ const Dashboard = (props) => {
     });
   };
   const handleProductSubmit = (e) => {
+    console.log("newProduct222222", newProduct);
     e.preventDefault();
     dispatch(postProductData(newProduct));
-    setNewProduct(initialItem);
+    // setNewProduct(initialItem);
+    setNewProduct({
+      ...newProduct,
+      user_id: Number(window.localStorage.getItem("userID")),
+      category_id: 0,
+      product_name: "",
+      price: "",
+      description: "",
+      location_id: 0,
+    });
     setOpen(false);
   };
-
-  const deleteProduct = (productId) => {
-    dispatch(deleteProductData(productId, state.products));
+  const cancelNewPost = (e) => {
+    e.preventDefault();
+    setNewProduct(initialItem);
+    setNewProduct({
+      ...newProduct,
+      user_id: Number(window.localStorage.getItem("userID")),
+    });
   };
+
+  // const deleteProduct = (productId) => {
+  //   dispatch(deleteProductData(productId, state.products));
+  // };
   //------------Category handlers-----------------
   useEffect(() => {
     dispatch(getCategoriesData());

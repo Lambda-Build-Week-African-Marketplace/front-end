@@ -126,28 +126,14 @@ export const postProductData = (product) => (dispatch) => {
   axiosWithAuth()
     .post("/products", product)
     .then((res) => {
-      getProductsData();
-      console.log("post data", res.data);
+      //getProductsData();
+      console.log("post data.id11111", res.data[0].id);
       dispatch({
         type: POST_PRODUCTS_SUCCESS,
-        payload: [res.data.id, product],
+        payload: [res.data[0].id, product],
       });
     })
-    // .post("/products", product)
-    // .then((res) => {
-    //   getProductsData();
-    //   console.log("post data", res.data);
-    //   dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
-    // })
-    //---------------------------------------------
-    // .post("/products", product)
-    // .then((res) => {
-    //   getProductsData();
-    // })
-    // .then((res) => {
-    //   console.log("post data", res.data);
-    //   dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
-    // })
+
     .catch((err) => {
       console.error("post data error: ", err);
       dispatch({
@@ -225,7 +211,7 @@ export const deleteProductData = (delId, products) => (dispatch) => {
   axiosWithAuth()
     .delete(`/products/${delId}`)
     .then((res) => {
-      console.log("delete data", res);
+      console.log("delete product data", res);
 
       const newProducts = products.filter((item) => item.id !== delId);
 
