@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 //import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-//import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 //import { postCategoryData, getCategoriesData } from "../actions/index";
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) =>
 //const initialCategory = "";
 const ProductModal = (props) => {
   const classes = useStyles();
+  const state = useSelector((state) => state);
   //const [catToggle, setCatToggle] = useState(false);
   //const [newCategory, setNewCategory] = useState(initialCategory);
   // const dispatch = useDispatch();
@@ -132,21 +133,13 @@ const ProductModal = (props) => {
                   {/*  <option value={props.select}>{props.select}</option>*/}
                   <option value="0">Select category:</option>
 
-                  {props.categories.map((category) => (
+                  {state.categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.category_name}
                     </option>
                   ))}
                 </select>
-                <p>
-                  Don't find a category?{" "}
-                  <span
-                    onClick={props.handleCatToggle}
-                    className="span-category"
-                  >
-                    Add a new one
-                  </span>{" "}
-                </p>
+
                 {props.catToggle ? (
                   <div>
                     <input
@@ -176,7 +169,17 @@ const ProductModal = (props) => {
                       Cancel
                     </button>
                   </div>
-                ) : null}
+                ) : (
+                  <p>
+                    Don't find a category?{" "}
+                    <span
+                      onClick={props.handleCatToggle}
+                      className="span-category"
+                    >
+                      Add a new one
+                    </span>{" "}
+                  </p>
+                )}
 
                 <button className="md-button form-button">Add New Item</button>
                 <button

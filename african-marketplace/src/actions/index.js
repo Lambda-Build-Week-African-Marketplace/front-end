@@ -117,8 +117,8 @@ export const postProductData = (product) => (dispatch) => {
     .post("/products", product)
     .then((res) => {
       getProductsData();
-      // console.log("post data", res.data.id);
-      // dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
+      console.log("post data", res.data);
+      dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
       console.error("post data error: ", err);

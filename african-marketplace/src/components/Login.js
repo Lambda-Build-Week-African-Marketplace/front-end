@@ -14,8 +14,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { authMenuBar } from "../actions/index";
+import { Spinner } from "reactstrap";
 const Login = (props) => {
   const classes = useStyles();
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     username: "",
@@ -103,6 +105,23 @@ const Login = (props) => {
             >
               Submit
             </Button>
+            {state.isLoading ? (
+              <div style={{ margin: "0 auto" }}>
+                <Spinner
+                  color="primary"
+                  style={{
+                    width: "3rem",
+                    height: "3rem",
+                    position: "absolute",
+                    top: "67%",
+                    left: "80%",
+                    marginLeft: "-50px",
+                    marginTop: "-50px",
+                  }}
+                />{" "}
+              </div>
+            ) : null}
+            {state.error && <Fail />}
             <ToSignup />
             <Box mt={5}>
               <Copyright />
@@ -125,6 +144,21 @@ function Copyright() {
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
+    </Typography>
+  );
+}
+
+function Fail() {
+  return (
+    <Typography
+      style={{ marginTop: "2rem", marginBottom: "1rem" }}
+      variant="body2"
+      color="textSecondary"
+      align="center"
+    >
+      <Link style={{ color: "red" }} to="/signup">
+        Something wrong, try it again.
+      </Link>
     </Typography>
   );
 }
