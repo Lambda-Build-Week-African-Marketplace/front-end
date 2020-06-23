@@ -81,12 +81,13 @@ export const marketReducer = (state = initialState, action) => {
           ...state.products,
           {
             id: action.payload[0],
-            category_id: action.payload[1].category_id,
-            description: action.payload[1].description,
-            location_id: action.payload[1].location_id,
-            price: action.payload[1].price,
             product_name: action.payload[1].product_name,
+            description: action.payload[1].description,
             user_id: action.payload[1].user_id,
+            category_id: Number(action.payload[1].category_id),
+
+            location_id: Number(action.payload[1].location_id),
+            price: action.payload[1].price,
           },
         ],
 
