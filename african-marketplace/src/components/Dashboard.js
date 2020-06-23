@@ -15,11 +15,8 @@ import {
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-//import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-//import Fade from "@material-ui/core/Fade";
-// import { useLocalStorage } from "../hooks/useLocalStorage";
-// import { useForm } from "../hooks/useForm";
+
 const initialItem = {
   user_id: 0,
   category_id: 0,
@@ -31,29 +28,16 @@ const initialItem = {
 const initialCategory = {
   category_name: "",
 };
-// const initialUser = {
-//   //user_id: "0",
-//   firstname: "",
-//   lastname: "",
-//   email: "",
-//   username: "",
-// };
 
 const Dashboard = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [catToggle, setCatToggle] = useState(false);
   const state = useSelector((state) => state);
-
   const [newProduct, setNewProduct] = useState(initialItem);
   const [newCategory, setNewCategory] = useState(initialCategory);
-  //const [newUser, setNewUser] = useState(initialUser);
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getUsersData());
-  // }, [newUser]);
 
   useEffect(() => {
     const selectedUserId = Number(props.match.params.id);

@@ -106,7 +106,7 @@
 }
 form {
   margin: 0 auto;
-  width: 300px;
+  width: 500px;
 }
 
 input {
@@ -119,7 +119,7 @@ input {
   background-color: #fff;
   font-size: 21px;
   height: 50px;
-  width: 300px;
+  width: 500px;
   padding: 0 8px;
   color: #1c5d76;
 }

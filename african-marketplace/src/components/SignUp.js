@@ -38,21 +38,14 @@ const SignUp = (props) => {
     setValues,
   ] = useForm("SignUp-form", initialUser);
 
-  // const handleChange = (e) => {
-  //   //console.log("e.target.value", e.target.value);
-  //   setNewCredentials({
-  //     ...newCredentials,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
   const sign = (e) => {
     e.preventDefault();
 
     dispatch(postUserData(newCredentials));
     // setNewCredentials(initialUser);
-    //clearForm();
+    clearForm();
     setShowSuccessMessage(true);
-    props.history.push("/login");
+    //props.history.push("/login");
   };
   const handleClearForm = (e) => {
     e.preventDefault();
@@ -153,9 +146,11 @@ const SignUp = (props) => {
             >
               Submit
             </Button>
+            {!state.error && <Success />}
+            {state.error && <Fail />}
             <ToLogin />
             <Box mt={5}>
-              <Copyright />
+              <ToMarketplace />
             </Box>
           </form>
         </div>
@@ -166,7 +161,7 @@ const SignUp = (props) => {
 
 export default SignUp;
 
-function Copyright() {
+function ToMarketplace() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
@@ -183,6 +178,25 @@ function ToLogin() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       <Link to="/login">Have an account? Go to Login.</Link>
+    </Typography>
+  );
+}
+
+function Success() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      <Link style={{ color: "green" }} to="/login">
+        You have registered successfully! Go to Login.
+      </Link>
+    </Typography>
+  );
+}
+function Fail() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      <Link style={{ color: "red" }} to="/signup">
+        Something wrong, try it again.
+      </Link>
     </Typography>
   );
 }

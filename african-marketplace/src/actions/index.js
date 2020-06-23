@@ -77,23 +77,18 @@ export const postUserData = (user) => (dispatch) => {
   axiosWithAuth()
     .post("/register", user)
     .then((res) => {
-      console.log("post data", res.data.user);
-      // console.log(
-      //   "JSON.parse('res.config.data')",
-      //   JSON.parse(`${res.config.data}`)
-      // );
-      //JSON.parse('res.config.data');
+      console.log("post data", res.data);
       dispatch({
         type: DATA_USERS_SUCCESS,
         // payload: JSON.parse(`${res.config.data}`),
-        payload: res.data.user,
+        payload: res.data,
       });
     })
     .catch((err) => {
       console.error("post data error: ", err);
       dispatch({
         type: DATA_FAILURE,
-        payload: err.response,
+        payload: err,
       });
     });
 };
@@ -154,17 +149,17 @@ export const postLocationData = (location) => (dispatch) => {
 
 //---------------DELETE DATA----------------------------
 
-export const deleteUserData = (delId, users) => (dispatch) => {
+export const deleteUserData = (delId) => (dispatch) => {
   dispatch({ type: DATA_START });
 
   axiosWithAuth()
     .delete(`/users/${delId}`)
     .then((res) => {
-      console.log("delete data", res);
+      console.log("delete user data", res);
 
-      const newUsers = users.filter((item) => item.id !== delId);
+      // const newUsers = users.filter((item) => item.id !== delId);
 
-      dispatch({ type: DATA_USERS_SUCCESS, payload: newUsers });
+      // dispatch({ type: DATA_USERS_SUCCESS, payload: newUsers });
     })
     .catch((err) => {
       console.error("delete data error: ", err);
