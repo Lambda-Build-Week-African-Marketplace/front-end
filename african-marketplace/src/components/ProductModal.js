@@ -68,7 +68,7 @@ const ProductModal = (props) => {
           <div className={classes.paper}>
             <div>
               <h2>Add New Item</h2>
-              <form onSubmit={props.handleSubmit}>
+              <form onSubmit={props.handleProductSubmit}>
                 <input
                   type="text"
                   name="product_name"

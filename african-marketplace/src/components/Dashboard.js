@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER_STATE } from "../actions/index";
-
+import { Container, Row } from "reactstrap";
 import {
   getProductsData,
   getCategoriesData,
@@ -16,6 +16,7 @@ import {
 import ProductModal from "./ProductModal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
+import ProductCard from "./ProductCard";
 
 const initialItem = {
   user_id: 0,
@@ -98,7 +99,7 @@ const Dashboard = (props) => {
       [ev.target.name]: value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleProductSubmit = (e) => {
     e.preventDefault();
     dispatch(postProductData(newProduct));
     setNewProduct(initialItem);
@@ -156,61 +157,62 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      {/** 
-      <h2>
-        {" "}
-        User {state.user.firstname} {state.user.lastname} list of products:
-      </h2>
-*/}
-      {/** */}
+      <Container style={{ marginTop: "1rem" }}>
+        {state.users
+          .filter(
+            (user) =>
+              Number(user.id) === Number(window.localStorage.getItem("userID"))
+          )
+          .map((el) => (
+            <p key={el.id}>
+              User First Name: {el.firstname} User Last Name: {el.lastname}
+            </p>
+          ))}
 
-      {state.users
-        .filter(
-          (user) =>
-            Number(user.id) === Number(window.localStorage.getItem("userID"))
-        )
-        .map((el) => (
-          <p key={el.id}>
-            User First Name: {el.firstname} User Last Name: {el.lastname}
-          </p>
-        ))}
+        <button
+          type="button"
+          onClick={handleOpen}
+          className="md-button form-button"
+        >
+          Add Product
+        </button>
+        <ProductModal
+          open={open}
+          Backdrop={Backdrop}
+          close={handleClose}
+          handleProductSubmit={handleProductSubmit}
+          changeHandler={changeHandler}
+          newProduct={newProduct}
+          setNewProduct={setNewProduct}
+          changeCategoryHandler={changeCategoryHandler}
+          handleCategorySubmit={handleCategorySubmit}
+          newCategory={newCategory}
+          //setCatToggle={setCatToggle}
+          catToggle={catToggle}
+          handleCatToggle={handleCatToggle}
+        />
 
-      <button
-        type="button"
-        onClick={handleOpen}
-        className="md-button form-button"
-      >
-        Add Product
-      </button>
-      <ProductModal
-        open={open}
-        Backdrop={Backdrop}
-        close={handleClose}
-        handleSubmit={handleSubmit}
-        changeHandler={changeHandler}
-        newProduct={newProduct}
-        setNewProduct={setNewProduct}
-        changeCategoryHandler={changeCategoryHandler}
-        handleCategorySubmit={handleCategorySubmit}
-        newCategory={newCategory}
-        //setCatToggle={setCatToggle}
-        catToggle={catToggle}
-        handleCatToggle={handleCatToggle}
-      />
-
-      <h2> My products:</h2>
-      {state.products
-        .filter(
-          (product) =>
-            Number(product.user_id) ===
-            Number(window.localStorage.getItem("userID"))
-        )
-        .map((el) => (
-          <p key={el.id}>
-            Product Name: {el.product_name} Product Description:{" "}
-            {el.description}
-          </p>
-        ))}
+        <h2> My products:</h2>
+        <Row>
+          {state.products
+            .filter(
+              (product) =>
+                Number(product.user_id) ===
+                Number(window.localStorage.getItem("userID"))
+            )
+            .map((el) => (
+              <ProductCard
+                key={el.id}
+                category_id={el.category_id}
+                product_name={el.product_name}
+                price={el.price}
+                description={el.description}
+                location_id={el.location_id}
+                user_id={el.user_id}
+              />
+            ))}
+        </Row>
+      </Container>
     </div>
   );
 };

@@ -10,7 +10,8 @@ import {
   USER_PRODUCTS_STATE,
   USER_STATE,
   SET_INITIAL_USER,
-  // POST_PRODUCTS_SUCCESS,
+  POST_PRODUCTS_SUCCESS,
+  POST_CATEGORIES_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -72,17 +73,45 @@ export const marketReducer = (state = initialState, action) => {
         isLoading: false,
         error: "",
       };
-    // case POST_PRODUCTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     products: action.payload,
-    //     isLoading: false,
-    //     error: "",
-    //   };
+    //------------------------
+    case POST_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        products: [
+          ...state.products,
+          {
+            id: action.payload[0],
+            category_id: action.payload[1].category_id,
+            description: action.payload[1].description,
+            location_id: action.payload[1].location_id,
+            price: action.payload[1].price,
+            product_name: action.payload[1].product_name,
+            user_id: action.payload[1].user_id,
+          },
+        ],
+
+        isLoading: false,
+        error: "",
+      };
+    //-------------------------
     case DATA_CATEGORIES_SUCCESS:
       return {
         ...state,
         categories: action.payload,
+        isLoading: false,
+        error: "",
+      };
+    case POST_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        categories: [
+          ...state.categories,
+          {
+            id: action.payload[0],
+            category_name: action.payload[1].category_name,
+          },
+        ],
+
         isLoading: false,
         error: "",
       };

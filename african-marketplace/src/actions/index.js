@@ -11,9 +11,10 @@ export const AUTH_STATE = "AUTH_STATE";
 export const USER_PRODUCTS_STATE = "USER_PRODUCTS_STATE";
 export const USER_STATE = "USER_STATE";
 export const SET_INITIAL_USER = "SET_INITIAL_USER";
-//export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS",
+export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS";
+export const POST_CATEGORIES_SUCCESS = "POST_CATEGORIES_SUCCESS";
 
-//---------------GET DATA----------------------------
+//---------------GET USER DATA----------------------------
 export const getUsersData = () => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -28,6 +29,7 @@ export const getUsersData = () => (dispatch) => {
       dispatch({ type: DATA_FAILURE, payload: err });
     });
 };
+//---------------GET CATEGORY DATA----------------------------
 export const getCategoriesData = () => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -42,6 +44,7 @@ export const getCategoriesData = () => (dispatch) => {
       dispatch({ type: DATA_FAILURE, payload: err });
     });
 };
+//---------------GET PRODUCT DATA----------------------------
 export const getProductsData = () => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -56,6 +59,7 @@ export const getProductsData = () => (dispatch) => {
       dispatch({ type: DATA_FAILURE, payload: err });
     });
 };
+//---------------GET LOCATION DATA----------------------------
 export const getLocationsData = () => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -71,6 +75,7 @@ export const getLocationsData = () => (dispatch) => {
     });
 };
 //---------------POST DATA----------------------------
+//---------------POST USER DATA----------------------------
 export const postUserData = (user) => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -92,6 +97,7 @@ export const postUserData = (user) => (dispatch) => {
       });
     });
 };
+//---------------POST CATEGORY DATA----------------------------
 export const postCategoryData = (category) => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -100,7 +106,10 @@ export const postCategoryData = (category) => (dispatch) => {
     .then((res) => {
       // getCategoriesData();
       console.log("post category data", res.data);
-      dispatch({ type: DATA_CATEGORIES_SUCCESS, payload: res.data });
+      dispatch({
+        type: POST_CATEGORIES_SUCCESS,
+        payload: [res.data.id, category],
+      });
     })
     .catch((err) => {
       console.error("post data error: ", err);
@@ -110,6 +119,7 @@ export const postCategoryData = (category) => (dispatch) => {
       });
     });
 };
+//---------------POST PRODUCT DATA----------------------------
 export const postProductData = (product) => (dispatch) => {
   dispatch({ type: DATA_START });
 
@@ -118,8 +128,26 @@ export const postProductData = (product) => (dispatch) => {
     .then((res) => {
       getProductsData();
       console.log("post data", res.data);
-      dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
+      dispatch({
+        type: POST_PRODUCTS_SUCCESS,
+        payload: [res.data.id, product],
+      });
     })
+    // .post("/products", product)
+    // .then((res) => {
+    //   getProductsData();
+    //   console.log("post data", res.data);
+    //   dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
+    // })
+    //---------------------------------------------
+    // .post("/products", product)
+    // .then((res) => {
+    //   getProductsData();
+    // })
+    // .then((res) => {
+    //   console.log("post data", res.data);
+    //   dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
+    // })
     .catch((err) => {
       console.error("post data error: ", err);
       dispatch({
@@ -128,7 +156,7 @@ export const postProductData = (product) => (dispatch) => {
       });
     });
 };
-
+//---------------POST LOCATION DATA----------------------------
 export const postLocationData = (location) => (dispatch) => {
   dispatch({ type: DATA_START });
 
