@@ -46,21 +46,21 @@ const Dashboard = (props) => {
   const [newProduct, setNewProduct] = useState(initialItem);
   const [newCategory, setNewCategory] = useState(initialCategory);
   const [newUser, setNewUser] = useState(initialUser);
-  const [
-    localUser,
-    handleChanges,
-    clearForm,
-    handleSubmit1,
-    handleSetObj,
-  ] = useForm("locUser", initialUser);
+  // const [
+  //   localUser,
+  //   handleChanges,
+  //   clearForm,
+  //   handleSubmit1,
+  //   handleSetObj,
+  // ] = useForm("locUser", initialUser);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUsersData());
-    dispatch(getProductsData());
-    dispatch(getCategoriesData());
-    dispatch(getLocationsData());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUsersData());
+  //   dispatch(getProductsData());
+  //   dispatch(getCategoriesData());
+  //   dispatch(getLocationsData());
+  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(getUsersData());
@@ -75,8 +75,6 @@ const Dashboard = (props) => {
     );
     setNewUser(selectedUser);
     console.log("selectedUser", selectedUser);
-    handleSetObj(selectedUser);
-    // console.log("localUser", localUser);
 
     const user_products = state.products.filter(
       (product) => product.user_id === selectedUserId
@@ -182,10 +180,13 @@ const Dashboard = (props) => {
 
   return (
     <div>
+      {/** 
       <h2>
+
         {" "}
         User {newUser.firstname} {newUser.lastname} list of products:
       </h2>
+    */}
 
       <button
         type="button"
