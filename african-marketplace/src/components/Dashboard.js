@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { USER_STATE } from "../actions/index";
 
 import {
   getProductsData,
@@ -14,11 +15,11 @@ import {
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
+//import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useForm } from "../hooks/useForm";
+//import Fade from "@material-ui/core/Fade";
+// import { useLocalStorage } from "../hooks/useLocalStorage";
+// import { useForm } from "../hooks/useForm";
 const initialItem = {
   user_id: 0,
   category_id: 0,
@@ -30,41 +31,29 @@ const initialItem = {
 const initialCategory = {
   category_name: "",
 };
-const initialUser = {
-  //user_id: "0",
-  firstname: "",
-  lastname: "",
-  email: "",
-  username: "",
-};
+// const initialUser = {
+//   //user_id: "0",
+//   firstname: "",
+//   lastname: "",
+//   email: "",
+//   username: "",
+// };
 
 const Dashboard = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [catToggle, setCatToggle] = useState(false);
   const state = useSelector((state) => state);
+
   const [newProduct, setNewProduct] = useState(initialItem);
   const [newCategory, setNewCategory] = useState(initialCategory);
-  const [newUser, setNewUser] = useState(initialUser);
-  // const [
-  //   localUser,
-  //   handleChanges,
-  //   clearForm,
-  //   handleSubmit1,
-  //   handleSetObj,
-  // ] = useForm("locUser", initialUser);
+  //const [newUser, setNewUser] = useState(initialUser);
 
   const dispatch = useDispatch();
+
   // useEffect(() => {
   //   dispatch(getUsersData());
-  //   dispatch(getProductsData());
-  //   dispatch(getCategoriesData());
-  //   dispatch(getLocationsData());
-  // }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getUsersData());
-  }, [newUser]);
+  // }, [newUser]);
 
   useEffect(() => {
     const selectedUserId = Number(props.match.params.id);
@@ -73,7 +62,8 @@ const Dashboard = (props) => {
     const selectedUser = state.users.find(
       (el) => el.id === Number(selectedUserId)
     );
-    setNewUser(selectedUser);
+    dispatch({ type: USER_STATE, payload: selectedUser });
+    // setNewUser(selectedUser);
     console.log("selectedUser", selectedUser);
 
     const user_products = state.products.filter(
@@ -84,12 +74,7 @@ const Dashboard = (props) => {
       ...newProduct,
       user_id: Number(window.localStorage.getItem("userID")),
     });
-  }, [
-    dispatch,
-    props.match.params.id,
-    window.localStorage.getItem("userID"),
-    newUser,
-  ]);
+  }, [dispatch, props.match.params.id, window.localStorage.getItem("userID")]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -180,13 +165,10 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      {/** 
       <h2>
-
         {" "}
-        User {newUser.firstname} {newUser.lastname} list of products:
+        User {state.user.firstname} {state.user.lastname} list of products:
       </h2>
-    */}
 
       <button
         type="button"

@@ -8,6 +8,7 @@ import InputBase from "@material-ui/core/InputBase";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
 import { authMenuBar, setUserProducts, setUser } from "../actions/index";
+import { SET_INITIAL_USER } from "../actions/index";
 import {
   createStyles,
   fade,
@@ -30,7 +31,8 @@ const MenuBar = (props) => {
     window.localStorage.removeItem("SignUp-form");
     dispatch(authMenuBar(false));
     dispatch(setUserProducts([]));
-    dispatch(setUser({}));
+    //dispatch(setUser({}));
+    dispatch({ type: SET_INITIAL_USER });
   };
 
   const toUserAccount = () => {
