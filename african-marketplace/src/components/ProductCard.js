@@ -159,35 +159,33 @@ const ProductCard = (props) => {
           >{`Price: ${props.price}`}</CardSubtitle>
           <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
 
-          {props.dashboard_flag ? (
-            <CardActions style={{ marginLeft: "center" }}>
-              <Button onClick={handleOpenEdit} size="small" color="primary">
-                Edit
-              </Button>
-              <ProductModal
-                open={openEdit}
-                Backdrop={Backdrop}
-                close={handleCloseEdit}
-                handleProductSubmit={handleProductSubmit}
-                changeHandler={changeHandler}
-                newProduct={props.product}
-                setNewProduct={setNewEditProduct}
-                changeCategoryHandler={changeCategoryHandler}
-                handleCategorySubmit={handleCategorySubmit}
-                newCategory={newEditCategory}
-                changeLocationHandler={changeLocationHandler}
-                handleLocationSubmit={handleLocationSubmit}
-                catToggle={catEditToggle}
-                locationToggle={locationEditToggle}
-                handleCatToggle={handleCatEditToggle}
-                handleLocationToggle={handleEditLocationToggle}
-                newLocation={newEditLocation}
-              />
-              <Button onClick={deleteProduct} size="small" color="primary">
-                Delete
-              </Button>
-            </CardActions>
-          ) : null}
+          <CardActions style={{ marginLeft: "center" }}>
+            <Button onClick={handleOpenEdit} size="small" color="primary">
+              Edit
+            </Button>
+            <ProductModal
+              open={openEdit}
+              Backdrop={Backdrop}
+              close={handleCloseEdit}
+              handleProductSubmit={handleProductSubmit}
+              changeHandler={changeHandler}
+              newProduct={props.product}
+              setNewProduct={setNewEditProduct}
+              changeCategoryHandler={changeCategoryHandler}
+              handleCategorySubmit={handleCategorySubmit}
+              newCategory={newEditCategory}
+              changeLocationHandler={changeLocationHandler}
+              handleLocationSubmit={handleLocationSubmit}
+              catToggle={catEditToggle}
+              locationToggle={locationEditToggle}
+              handleCatToggle={handleCatEditToggle}
+              handleLocationToggle={handleEditLocationToggle}
+              newLocation={newEditLocation}
+            />
+            <Button onClick={deleteProduct} size="small" color="primary">
+              Delete
+            </Button>
+          </CardActions>
         </CardBody>
       </Card>
     </Col>

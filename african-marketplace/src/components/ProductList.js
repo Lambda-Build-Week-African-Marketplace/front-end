@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ProductCard from "./ProductCard";
+import HomeProductCard from "./HomeProductCard";
 import { Container, Row } from "reactstrap";
 import {
   getUsersData,
@@ -10,6 +10,8 @@ import {
 } from "../actions/index";
 const ProductList = (props) => {
   const state = useSelector((state) => state);
+  // const [locationName, setLocationName] = useState("");
+  // const [categoryName, setCategoryName] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,31 +21,28 @@ const ProductList = (props) => {
     dispatch(getLocationsData());
   }, [dispatch]);
 
+  // const getLocationName = (locId) => {
+  //   const lName = state.locations.find((l) => Number(l.id) === Number(locId));
+  //    setLocationName(lName.location);
+  // };
+  // const getCategoryName = (catId) => {
+  //   const cName = state.categories.find((c) => Number(c.id) === Number(catId));
+  //   console.log("cName", cName.category_name);
+  //   setCategoryName(cName.category_name);
+  // };
+
   return (
     <div>
       <Container style={{ marginTop: "1rem" }}>
-        {/**
-        <div>
-          <h2> Our Locations:</h2>
-          {state.locations.map((location) => (
-            <p key={location.id}> Location:{location.location}</p>
-          ))}
-        </div>
-
-        <div>
-          <h2> Our Categories:</h2>
-          {state.categories.map((category) => (
-            <p key={category.id}> Categories:{category.category_name}</p>
-          ))}
-        </div>
-
-         */}
         <div>
           <h2> Our Products:</h2>
           <Row>
             {state.products.map((el) => {
+              // const locFunction = () => getLocationName(el.location_id);
+              // const catFunction = () => getCategoryName(el.category_id);
+
               return (
-                <ProductCard
+                <HomeProductCard
                   key={el.id}
                   category_id={el.category_id}
                   product_name={el.product_name}
@@ -51,7 +50,11 @@ const ProductList = (props) => {
                   description={el.description}
                   location_id={el.location_id}
                   user_id={el.user_id}
-                  dashboard_flag={false}
+                  product={el}
+                  // locFunction={locFunction}
+                  // catFunction={catFunction}
+                  // locationName={locationName}
+                  // categoryName={categoryName}
                 />
               );
             })}
@@ -62,8 +65,3 @@ const ProductList = (props) => {
   );
 };
 export default ProductList;
-// {state.products.map((product) => (
-//     <p key={product.id}> Product Name:{product.product_name}</p>
-//     <p key={product.id}> Product Name:{product.price}</p>
-
-//   ))}
