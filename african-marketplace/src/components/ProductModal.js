@@ -24,31 +24,7 @@ const useStyles = makeStyles((theme) =>
 const ProductModal = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
-  //const [catToggle, setCatToggle] = useState(false);
-  //const [newCategory, setNewCategory] = useState(initialCategory);
-  // const dispatch = useDispatch();
-  //   const handleCategoryClose = (e) => {
-  //     e.preventDefault();
-  //     setCatToggle(false);
-  //     setNewCategory(initialCategory);
-  //   };
 
-  //   const changeCategoryHandler = (ev) => {
-  //     ev.persist();
-
-  //     setNewCategory({
-  //       ...newCategory,
-  //       [ev.target.name]: ev.target.value,
-  //     });
-  //   };
-  //   const handleCategorySubmit = (e) => {
-  //     console.log("newCategory", newCategory);
-
-  //     e.preventDefault();
-  //     dispatch(postCategoryData(newCategory));
-  //     setNewCategory(initialCategory);
-  //     setCatToggle(false);
-  //   };
   console.log("props.newProduct.location_id", props.newProduct.location_id);
   return (
     <div>
@@ -67,13 +43,11 @@ const ProductModal = (props) => {
         <Fade in={props.open}>
           <div className={classes.paper}>
             <div>
-              {props.newProduct.product_name ? (
+              {!props.newProduct.product_name ? (
                 <h2>Add New Item</h2>
               ) : (
                 <h2>Edit Item</h2>
               )}
-
-              <h2>Add New Item</h2>
 
               <form onSubmit={props.handleProductSubmit}>
                 <input
@@ -116,6 +90,7 @@ const ProductModal = (props) => {
                     color: "#1c5d76",
                   }}
                 >
+                  <option value="0">Select location:</option>
                   {state.locations.map((location) => {
                     if (location.id === props.newProduct.location_id) {
                       return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER_STATE } from "../actions/index";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import {
   getProductsData,
   getCategoriesData,
@@ -175,50 +175,35 @@ const Dashboard = (props) => {
     setLocationToggle(!locationToggle);
     setNewLocation(initialLocation);
   };
-  //-----------------Location handlers-------------------
-  // useEffect(() => {
-  //   let userProducts = state.products.filter(
-  //     (product) => Number(product.user_id) === Number(localUser.id)
-  //   );
-  //   console.log("useProducts", userProducts);
-  //   let userLocations = [];
-  //   userProducts.forEach((el) =>
-  //     userLocations.push(
-  //       state.locations.filter(
-  //         (loc) => Number(loc.id) === Number(el.location_id)
-  //       )
-  //     )
-  //   );
-
-  //   const uniqueLocationsSet = [
-  //     ...new Set(userLocations.map((item) => item.id)),
-  //   ];
-
-  //   console.log("userLocations", userLocations);
-  //   console.log("uniqueLocationsSet", uniqueLocationsSet);
-  // }, [newProduct]);
 
   return (
     <div>
       <Container style={{ marginTop: "1rem" }}>
-        {state.users
-          .filter(
-            (user) =>
-              Number(user.id) === Number(window.localStorage.getItem("userID"))
-          )
-          .map((el) => (
-            <p key={el.id}>
-              User First Name: {el.firstname} User Last Name: {el.lastname}
-            </p>
-          ))}
+        <Row>
+          <Col xs="12" md="6" xl="6">
+            {state.users
+              .filter(
+                (user) =>
+                  Number(user.id) ===
+                  Number(window.localStorage.getItem("userID"))
+              )
+              .map((el) => (
+                <h3 key={el.id}>
+                  First Name: {el.firstname} Last Name: {el.lastname}
+                </h3>
+              ))}
+          </Col>
+          <Col xs="12" md="6" xl="6">
+            <button
+              type="button"
+              onClick={handleOpen}
+              className="md-button form-button"
+            >
+              Add Product
+            </button>
+          </Col>
+        </Row>
 
-        <button
-          type="button"
-          onClick={handleOpen}
-          className="md-button form-button"
-        >
-          Add Product
-        </button>
         <ProductModal
           open={open}
           Backdrop={Backdrop}

@@ -13,6 +13,7 @@ export const USER_STATE = "USER_STATE";
 export const SET_INITIAL_USER = "SET_INITIAL_USER";
 export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS";
 export const POST_CATEGORIES_SUCCESS = "POST_CATEGORIES_SUCCESS";
+export const POST_LOCATIONS_SUCCESS = "POST_LOCATIONS_SUCCESS";
 
 //---------------GET USER DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -66,7 +67,7 @@ export const getLocationsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/locations")
     .then((res) => {
-      // console.log("get data", res);
+      console.log("get locations data", res);
       dispatch({ type: DATA_LOCATIONS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -151,8 +152,8 @@ export const postLocationData = (location) => (dispatch) => {
     .then((res) => {
       console.log("post LOCATION data", res);
       dispatch({
-        type: DATA_LOCATIONS_SUCCESS,
-        payload: [res.data[0].id, location],
+        type: POST_LOCATIONS_SUCCESS,
+        payload: [res.data.id, location],
       });
     })
     .catch((err) => {
@@ -283,7 +284,7 @@ export const updateCategoryData = (category, categories) => (dispatch) => {
   axiosWithAuth()
     .put(`/categories/${category.id}`, category)
     .then((res) => {
-      console.log("update data", res);
+      console.log("update category data", res);
 
       const newCategories = categories.map((el) => {
         if (el.id === category.id) {
@@ -319,6 +320,7 @@ export const updateProductData = (product, products) => (dispatch) => {
       });
 
       dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: newProducts });
+      dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
       console.error("update data error: ", err);
@@ -335,7 +337,7 @@ export const updateLocationData = (location, locations) => (dispatch) => {
   axiosWithAuth()
     .put(`/locations/${location.id}`, location)
     .then((res) => {
-      console.log("update data", res);
+      console.log("update location data", res);
 
       const newLocations = locations.map((el) => {
         if (el.id === location.id) {

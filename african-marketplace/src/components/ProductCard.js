@@ -52,6 +52,7 @@ const ProductCard = (props) => {
     setEditOpen(false);
     setNewEditProduct(initialItem);
   };
+  //------------Product handlers-----------------
   const changeHandler = (ev) => {
     ev.persist();
     let value = ev.target.value;
@@ -116,7 +117,7 @@ const ProductCard = (props) => {
   };
   const handleLocationSubmit = (e) => {
     e.preventDefault();
-    dispatch(postLocationData(newEditCategory));
+    dispatch(postLocationData(newEditLocation));
     setNewEditLocation(initialLocation);
     setLocationEditToggle(false);
   };
