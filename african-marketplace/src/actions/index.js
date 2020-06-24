@@ -320,7 +320,6 @@ export const updateProductData = (product, products) => (dispatch) => {
       });
 
       dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: newProducts });
-      dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
       console.error("update data error: ", err);
