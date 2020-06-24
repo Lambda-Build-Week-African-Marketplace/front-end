@@ -5,13 +5,14 @@ import { Container, Row } from "reactstrap";
 import {
   getProductsData,
   getCategoriesData,
-  getLocationsData,
   setUserProducts,
   setUser,
   getUsersData,
   postProductData,
   postCategoryData,
   deleteProductData,
+  getLocationsData,
+  postLocationData,
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
@@ -29,6 +30,9 @@ const initialItem = {
 const initialCategory = {
   category_name: "",
 };
+const initialLocation = {
+  location: "",
+};
 const initialUser = {
   // id: 0,
   firstname: "",
@@ -41,10 +45,12 @@ const Dashboard = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [catToggle, setCatToggle] = useState(false);
+  const [locationToggle, setLocationToggle] = useState(false);
   const state = useSelector((state) => state);
   const [newProduct, setNewProduct] = useState(initialItem);
   const [newUser, setNewUser] = useState(initialUser);
   const [newCategory, setNewCategory] = useState(initialCategory);
+  const [newLocation, setNewLocation] = useState(initialLocation);
 
   const dispatch = useDispatch();
 
@@ -54,7 +60,6 @@ const Dashboard = (props) => {
     const selectedUser = state.users.find(
       (el) => el.id === Number(selectedUserId)
     );
-    //dispatch({ type: USER_STATE, payload: selectedUser });
 
     dispatch(setUser(selectedUser));
 
@@ -68,7 +73,7 @@ const Dashboard = (props) => {
       user_id: Number(window.localStorage.getItem("userID")),
     });
   }, [dispatch, window.localStorage.getItem("userID")]);
-  //props.match.params.id,
+
   useEffect(() => {
     dispatch(getUsersData());
   }, [newUser]);
@@ -100,10 +105,9 @@ const Dashboard = (props) => {
     });
   };
   const handleProductSubmit = (e) => {
-    console.log("newProduct222222", newProduct);
     e.preventDefault();
     dispatch(postProductData(newProduct));
-    // setNewProduct(initialItem);
+
     setNewProduct({
       ...newProduct,
       user_id: Number(window.localStorage.getItem("userID")),
@@ -124,9 +128,6 @@ const Dashboard = (props) => {
     });
   };
 
-  // const deleteProduct = (productId) => {
-  //   dispatch(deleteProductData(productId, state.products));
-  // };
   //------------Category handlers-----------------
   useEffect(() => {
     dispatch(getCategoriesData());
@@ -149,6 +150,30 @@ const Dashboard = (props) => {
     e.preventDefault();
     setCatToggle(!catToggle);
     setNewCategory(initialCategory);
+  };
+
+  //------------Location handlers-----------------
+  useEffect(() => {
+    dispatch(getLocationsData());
+  }, [newLocation]);
+
+  const changeLocationHandler = (ev) => {
+    ev.persist();
+    setNewLocation({
+      ...newLocation,
+      [ev.target.name]: ev.target.value,
+    });
+  };
+  const handleLocationSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postLocationData(newLocation));
+    setNewLocation(initialLocation);
+    setLocationToggle(false);
+  };
+  const handleLocationToggle = (e) => {
+    e.preventDefault();
+    setLocationToggle(!locationToggle);
+    setNewLocation(initialLocation);
   };
   //-----------------Location handlers-------------------
   // useEffect(() => {
@@ -205,9 +230,13 @@ const Dashboard = (props) => {
           changeCategoryHandler={changeCategoryHandler}
           handleCategorySubmit={handleCategorySubmit}
           newCategory={newCategory}
-          //setCatToggle={setCatToggle}
-          catToggle={catToggle}
           handleCatToggle={handleCatToggle}
+          catToggle={catToggle}
+          locationToggle={locationToggle}
+          changeLocationHandler={changeLocationHandler}
+          handleLocationSubmit={handleLocationSubmit}
+          newLocation={newLocation}
+          handleLocationToggle={handleLocationToggle}
         />
 
         <h2> My products:</h2>
@@ -221,6 +250,7 @@ const Dashboard = (props) => {
             .map((el) => (
               <ProductCard
                 key={el.id}
+                product={el}
                 category_id={el.category_id}
                 product_name={el.product_name}
                 price={el.price}
