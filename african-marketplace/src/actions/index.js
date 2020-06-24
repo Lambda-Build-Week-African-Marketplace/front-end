@@ -105,7 +105,7 @@ export const postCategoryData = (category) => (dispatch) => {
     .post("/category", category)
     .then((res) => {
       // getCategoriesData();
-      console.log("post category data", res.data);
+      // console.log("post category data", res.data);
       dispatch({
         type: POST_CATEGORIES_SUCCESS,
         payload: [res.data.id, category],
@@ -149,8 +149,11 @@ export const postLocationData = (location) => (dispatch) => {
   axiosWithAuth()
     .post("/locations", location)
     .then((res) => {
-      console.log("post data", res);
-      dispatch({ type: DATA_LOCATIONS_SUCCESS, payload: res.data });
+      console.log("post LOCATION data", res);
+      dispatch({
+        type: DATA_LOCATIONS_SUCCESS,
+        payload: [res.data[0].id, location],
+      });
     })
     .catch((err) => {
       console.error("post data error: ", err);
@@ -306,7 +309,7 @@ export const updateProductData = (product, products) => (dispatch) => {
   axiosWithAuth()
     .put(`/products/${product.id}`, product)
     .then((res) => {
-      console.log("update data", res);
+      console.log("update product data", res);
 
       const newProducts = products.map((el) => {
         if (el.id === product.id) {

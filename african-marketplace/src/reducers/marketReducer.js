@@ -119,7 +119,14 @@ export const marketReducer = (state = initialState, action) => {
     case DATA_LOCATIONS_SUCCESS:
       return {
         ...state,
-        locations: action.payload,
+        locations: [
+          ...state.locations,
+          {
+            id: action.payload[0],
+            location: action.payload[1].location,
+          },
+        ],
+
         isLoading: false,
         error: "",
       };
