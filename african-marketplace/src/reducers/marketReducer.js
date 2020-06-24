@@ -12,6 +12,7 @@ import {
   SET_INITIAL_USER,
   POST_PRODUCTS_SUCCESS,
   POST_CATEGORIES_SUCCESS,
+  POST_LOCATIONS_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -116,7 +117,16 @@ export const marketReducer = (state = initialState, action) => {
         isLoading: false,
         error: "",
       };
+
     case DATA_LOCATIONS_SUCCESS:
+      return {
+        ...state,
+        locations: action.payload,
+
+        isLoading: false,
+        error: "",
+      };
+    case POST_LOCATIONS_SUCCESS:
       return {
         ...state,
         locations: [
