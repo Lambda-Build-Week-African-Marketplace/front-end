@@ -13,6 +13,7 @@ import MenuBar from "./components/MenuBar";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import "./App.css";
+import UserUpdateForm from "./components/UserUpdateForm";
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 function App() {
@@ -29,6 +30,11 @@ function App() {
             exact
             path="/users/:id/account"
             component={UserAccount}
+          />
+          <PrivateRoute
+            exact
+            path="/users/:id/account/update"
+            component={UserUpdateForm}
           />
           <Route exact path="/" component={ProductList} />
         </Switch>

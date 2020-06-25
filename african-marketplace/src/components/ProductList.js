@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HomeProductCard from "./HomeProductCard";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import {
   getUsersData,
   getProductsData,
@@ -20,27 +20,32 @@ const ProductList = (props) => {
   }, [dispatch]);
 
   return (
-    <div>
-      <Container style={{ marginTop: "1rem" }}>
-        <div>
-          <h2> Our Products:</h2>
-          <Row>
-            {state.products.map((el) => {
-              return (
-                <HomeProductCard
-                  key={el.id}
-                  category_id={el.category_id}
-                  product_name={el.product_name}
-                  price={el.price}
-                  description={el.description}
-                  location_id={el.location_id}
-                  user_id={el.user_id}
-                  product={el}
-                />
-              );
-            })}
-          </Row>
-        </div>
+    <div className="home-bg">
+      <Container>
+        <Row>
+          <Col xs="12" md="12" xl="12">
+            <h2 className="username" style={{ fontSize: "3rem" }}>
+              {" "}
+              Products of African Marketplace
+            </h2>
+          </Col>
+        </Row>
+        <Row>
+          {state.products.map((el) => {
+            return (
+              <HomeProductCard
+                key={el.id}
+                category_id={el.category_id}
+                product_name={el.product_name}
+                price={el.price}
+                description={el.description}
+                location_id={el.location_id}
+                user_id={el.user_id}
+                product={el}
+              />
+            );
+          })}
+        </Row>
       </Container>
     </div>
   );
