@@ -148,8 +148,6 @@ export const postProductData = (product) => (dispatch) => {
   axiosWithAuth()
     .post("/products", product)
     .then((res) => {
-      //getProductsData();
-      console.log("post data.id11111", res.data[0].id);
       dispatch({
         type: POST_PRODUCTS_SUCCESS,
         payload: [res.data[0].id, product],
@@ -157,10 +155,10 @@ export const postProductData = (product) => (dispatch) => {
     })
 
     .catch((err) => {
-      console.error("post data error: ", err);
+      console.error("post data error: ", err.response.data.message);
       dispatch({
         type: DATA_FAILURE,
-        payload: err.response,
+        payload: err.response.data.message,
       });
     });
 };

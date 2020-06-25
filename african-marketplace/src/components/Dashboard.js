@@ -128,6 +128,32 @@ const Dashboard = (props) => {
     });
   };
 
+  //-----------------------------------------
+  // const handleProductSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     newProduct.category_id &&
+  //     newProduct.product_name &&
+  //     newProduct.price &&
+  //     newProduct.description &&
+  //     newProduct.location_id
+  //   ) {
+  //     dispatch(postProductData(newProduct));
+  //     setNewProduct({
+  //       ...newProduct,
+  //       user_id: Number(window.localStorage.getItem("userID")),
+  //       category_id: 0,
+  //       product_name: "",
+  //       price: "",
+  //       description: "",
+  //       location_id: 0,
+  //     });
+  //     setOpen(false);
+  //   } else {
+  //     alert("All fields must be filled");
+  //   }
+  // };
+
   //------------Category handlers-----------------
   useEffect(() => {
     dispatch(getCategoriesData());
@@ -142,9 +168,20 @@ const Dashboard = (props) => {
   };
   const handleCategorySubmit = (e) => {
     e.preventDefault();
-    dispatch(postCategoryData(newCategory));
-    setNewCategory(initialCategory);
-    setCatToggle(false);
+
+    if (
+      state.categories.find((itemName) => {
+        return itemName.category_name
+          .toLowerCase()
+          .includes(newCategory.category_name.toLowerCase());
+      })
+    ) {
+      alert(`"${newCategory.category_name}" category has already been added`);
+    } else {
+      dispatch(postCategoryData(newCategory));
+      setNewCategory(initialCategory);
+      setCatToggle(false);
+    }
   };
   const handleCatToggle = (e) => {
     e.preventDefault();
@@ -166,9 +203,20 @@ const Dashboard = (props) => {
   };
   const handleLocationSubmit = (e) => {
     e.preventDefault();
-    dispatch(postLocationData(newLocation));
-    setNewLocation(initialLocation);
-    setLocationToggle(false);
+
+    if (
+      state.locations.find((itemName) => {
+        return itemName.location
+          .toLowerCase()
+          .includes(newLocation.location.toLowerCase());
+      })
+    ) {
+      alert(`"${newLocation.location}" location has already been added`);
+    } else {
+      dispatch(postLocationData(newLocation));
+      setNewLocation(initialLocation);
+      setLocationToggle(false);
+    }
   };
   const handleLocationToggle = (e) => {
     e.preventDefault();

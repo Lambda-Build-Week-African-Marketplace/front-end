@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import React from "react";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-//import Backdrop from "@material-ui/core/Backdrop";
+
 import Fade from "@material-ui/core/Fade";
-import { useSelector, useDispatch } from "react-redux";
-//import { postCategoryData, getCategoriesData } from "../actions/index";
+import { useSelector } from "react-redux";
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     modal: {
@@ -20,12 +20,11 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-//const initialCategory = "";
+
 const ProductModal = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
 
-  console.log("props.newProduct.location_id", props.newProduct.location_id);
   return (
     <div>
       <Modal
@@ -91,24 +90,30 @@ const ProductModal = (props) => {
                   }}
                 >
                   <option value="0">Select location:</option>
-                  {state.locations.map((location) => {
-                    if (location.id === props.newProduct.location_id) {
-                      return (
-                        <option
-                          key={location.id}
-                          defaultValue={location.id}
-                          selected="selected"
-                        >
-                          {location.location}
-                        </option>
-                      );
-                    } else
-                      return (
-                        <option key={location.id} value={location.id}>
-                          {location.location}
-                        </option>
-                      );
-                  })}
+                  {state.locations
+                    .sort((a, b) =>
+                      a.location.toLowerCase() > b.location.toLowerCase()
+                        ? 1
+                        : -1
+                    )
+                    .map((location) => {
+                      if (location.id === props.newProduct.location_id) {
+                        return (
+                          <option
+                            key={location.id}
+                            defaultValue={location.id}
+                            selected="selected"
+                          >
+                            {location.location}
+                          </option>
+                        );
+                      } else
+                        return (
+                          <option key={location.id} value={location.id}>
+                            {location.location}
+                          </option>
+                        );
+                    })}
                 </select>
 
                 {props.locationToggle ? (
@@ -152,14 +157,6 @@ const ProductModal = (props) => {
                   </p>
                 )}
 
-                {/*
-                  <option value="0">Select location:</option>
-                  <option value="1">North</option>
-                  <option value="2">South</option>
-                  <option value="3">East</option>
-                  <option value="4">West</option>
-                </select>
-*/}
                 {/**--------------------category----------------------------------- */}
                 <select
                   id="category_id"
@@ -174,27 +171,33 @@ const ProductModal = (props) => {
                     color: "#1c5d76",
                   }}
                 >
-                  {/*  <option value={props.select}>{props.select}</option>*/}
                   <option value="0">Select category:</option>
 
-                  {state.categories.map((category) => {
-                    if (category.id === props.newProduct.category_id) {
-                      return (
-                        <option
-                          key={category.id}
-                          defaultValue={category.id}
-                          selected="selected"
-                        >
-                          {category.category_name}
-                        </option>
-                      );
-                    } else
-                      return (
-                        <option key={category.id} value={category.id}>
-                          {category.category_name}
-                        </option>
-                      );
-                  })}
+                  {state.categories
+                    .sort((a, b) =>
+                      a.category_name.toLowerCase() >
+                      b.category_name.toLowerCase()
+                        ? 1
+                        : -1
+                    )
+                    .map((category) => {
+                      if (category.id === props.newProduct.category_id) {
+                        return (
+                          <option
+                            key={category.id}
+                            defaultValue={category.id}
+                            selected="selected"
+                          >
+                            {category.category_name}
+                          </option>
+                        );
+                      } else
+                        return (
+                          <option key={category.id} value={category.id}>
+                            {category.category_name}
+                          </option>
+                        );
+                    })}
                 </select>
 
                 {props.catToggle ? (
