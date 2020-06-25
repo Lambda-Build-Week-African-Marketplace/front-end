@@ -177,7 +177,7 @@ const Dashboard = (props) => {
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{ marginTop: "4rem" }}>
       <Container style={{ marginTop: "1rem" }}>
         <Row>
           <Col xs="12" md="6" xl="6">
