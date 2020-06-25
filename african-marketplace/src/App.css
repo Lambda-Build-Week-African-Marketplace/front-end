@@ -247,3 +247,6 @@ input:focus + .baseline:before {
 .dash-button {
   background-color: #ee3f73;
 }
+.error {
+  color: red;
+}

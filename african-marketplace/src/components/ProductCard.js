@@ -68,6 +68,29 @@ const ProductCard = (props) => {
   };
   const handleProductSubmit = (e) => {
     e.preventDefault();
+    // if (
+    //   newEditProduct.category_id &&
+    //   newEditProduct.product_name &&
+    //   newEditProduct.price &&
+    //   newEditProduct.description &&
+    //   newEditProduct.location_id
+    // ) {
+    //   dispatch(updateProductData(newEditProduct, state.products));
+    //   setNewEditProduct({
+    //     ...newEditProduct,
+    //     user_id: Number(window.localStorage.getItem("userID")),
+    //     category_id: 0,
+    //     product_name: "",
+    //     price: "",
+    //     description: "",
+    //     location_id: 0,
+    //   });
+    //   setEditOpen(false);
+    // } else {
+    //   alert("All fields must be filled");
+    //   console.log("newEditProduct", newEditProduct);
+    // }
+    //--------------------------------------
     dispatch(updateProductData(newEditProduct, state.products));
 
     setNewEditProduct({
@@ -95,9 +118,22 @@ const ProductCard = (props) => {
   };
   const handleCategorySubmit = (e) => {
     e.preventDefault();
-    dispatch(postCategoryData(newEditCategory));
-    setNewEditCategory(initialCategory);
-    setCatEditToggle(false);
+
+    if (
+      state.categories.find((itemName) => {
+        return itemName.category_name
+          .toLowerCase()
+          .includes(newEditCategory.category_name.toLowerCase());
+      })
+    ) {
+      alert(
+        `"${newEditCategory.category_name}" category has already been added`
+      );
+    } else {
+      dispatch(postCategoryData(newEditCategory));
+      setNewEditCategory(initialCategory);
+      setCatEditToggle(false);
+    }
   };
   const handleCatEditToggle = (e) => {
     e.preventDefault();
@@ -118,9 +154,20 @@ const ProductCard = (props) => {
   };
   const handleLocationSubmit = (e) => {
     e.preventDefault();
-    dispatch(postLocationData(newEditLocation));
-    setNewEditLocation(initialLocation);
-    setLocationEditToggle(false);
+
+    if (
+      state.locations.find((itemName) => {
+        return itemName.location
+          .toLowerCase()
+          .includes(newEditLocation.location.toLowerCase());
+      })
+    ) {
+      alert(`"${newEditLocation.location}" location has already been added`);
+    } else {
+      dispatch(postLocationData(newEditLocation));
+      setNewEditLocation(initialLocation);
+      setLocationEditToggle(false);
+    }
   };
   const handleEditLocationToggle = (e) => {
     e.preventDefault();
