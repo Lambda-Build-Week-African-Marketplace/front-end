@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "../hooks/useForm";
 import { Spinner } from "reactstrap";
 import { updateUserData, setUser } from "../actions/index";
+import userUpdateAcc from "../assets/user-update-acc.jpg";
 const initialUser = {
   username: "",
   firstname: "",
@@ -243,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: `url(${signupPhoto})`,
+    backgroundImage: `url(${userUpdateAcc})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
