@@ -20,7 +20,7 @@ const ProductList = (props) => {
   }, [dispatch]);
 
   return (
-    <div className="home-bg">
+    <div className="home-bg" style={{ marginTop: "4rem" }}>
       <Container>
         <Row>
           <Col xs="12" md="12" xl="12">

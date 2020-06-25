@@ -7,6 +7,21 @@
 .menu-bar {
   font-family: sans-serif;
   text-align: center;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+}
+.menu-bar-fixed {
+  font-family: sans-serif;
+  text-align: center;
+
+  overflow: hidden;
+
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
 }
 .dashboard {
   background: url("./assets/dashboard-bg.jpg") no-repeat center center fixed;
