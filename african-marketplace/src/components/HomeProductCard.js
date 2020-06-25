@@ -34,7 +34,8 @@ const HomeProductCard = (props) => {
           height: "auto",
           // height: "38rem",
           // overflowY: "scroll",
-          background: "#F4F4F4",
+          background: "rgb(174, 238, 144)",
+          opacity: "0.9",
         }}
       >
         <CardBody>

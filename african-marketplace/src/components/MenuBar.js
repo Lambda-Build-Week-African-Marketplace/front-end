@@ -41,10 +41,11 @@ const MenuBar = (props) => {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          {/** 
+    <div className="menu-bar">
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            {/** 
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -54,98 +55,99 @@ const MenuBar = (props) => {
             Logo
           </IconButton>
           */}
-          <Typography
-            className={classes.title}
-            variant="h6"
-            noWrap
-            style={{
-              fontSize: "2rem",
-              color: "white",
-              textDecoration: "none",
-              marginLeft: "2rem",
-            }}
-          >
-            African MarketPlace
-          </Typography>
-
-          <div className={classes.search} style={{ marginRight: "3rem" }}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-
-          <Link
-            style={{
-              color: "white",
-              textDecoration: "none",
-              marginRight: "2rem",
-            }}
-            to={"/"}
-          >
-            <h2>Products</h2>
-          </Link>
-
-          {!state.auth && !window.localStorage.getItem("userID") && (
-            <Link
+            <Typography
+              className={classes.title}
+              variant="h6"
+              noWrap
               style={{
+                fontSize: "2rem",
                 color: "white",
                 textDecoration: "none",
-                marginRight: "2rem",
-              }}
-              to={"/login"}
-            >
-              <h2>Login</h2>
-            </Link>
-          )}
-
-          {(state.auth || window.localStorage.getItem("userID")) && (
-            <Link
-              style={{
-                color: "white",
-                textDecoration: "none",
-                marginRight: "2rem",
-              }}
-              to={`/dashboard/${window.localStorage.getItem("userID")}`}
-            >
-              <h2>Dashboard</h2>
-            </Link>
-          )}
-          {(state.auth || window.localStorage.getItem("userID")) && (
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={toUserAccount}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          )}
-
-          {(state.auth || window.localStorage.getItem("userID")) && (
-            <Link
-              onClick={logout}
-              style={{
-                color: "white",
-                textDecoration: "none",
-                marginRight: "2rem",
                 marginLeft: "2rem",
+              }}
+            >
+              African MarketPlace
+            </Typography>
+
+            <div className={classes.search} style={{ marginRight: "3rem" }}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div>
+
+            <Link
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "2rem",
               }}
               to={"/"}
             >
-              <h2>Logout</h2>
+              <h2>Products</h2>
             </Link>
-          )}
-        </Toolbar>
-      </AppBar>
+
+            {!state.auth && !window.localStorage.getItem("userID") && (
+              <Link
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  marginRight: "2rem",
+                }}
+                to={"/login"}
+              >
+                <h2>Login</h2>
+              </Link>
+            )}
+
+            {(state.auth || window.localStorage.getItem("userID")) && (
+              <Link
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  marginRight: "2rem",
+                }}
+                to={`/dashboard/${window.localStorage.getItem("userID")}`}
+              >
+                <h2>Dashboard</h2>
+              </Link>
+            )}
+            {(state.auth || window.localStorage.getItem("userID")) && (
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={toUserAccount}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
+
+            {(state.auth || window.localStorage.getItem("userID")) && (
+              <Link
+                onClick={logout}
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  marginRight: "2rem",
+                  marginLeft: "2rem",
+                }}
+                to={"/"}
+              >
+                <h2>Logout</h2>
+              </Link>
+            )}
+          </Toolbar>
+        </AppBar>
+      </div>
     </div>
   );
 };

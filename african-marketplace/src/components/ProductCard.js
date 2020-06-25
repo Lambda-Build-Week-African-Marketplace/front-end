@@ -158,7 +158,8 @@ const ProductCard = (props) => {
           height: "auto",
           // height: "38rem",
           // overflowY: "scroll",
-          background: "#F4F4F4",
+          background: "rgb(236, 236, 51)",
+          opacity: "0.9",
         }}
       >
         <CardBody>
@@ -166,7 +167,7 @@ const ProductCard = (props) => {
             style={{
               fontSize: "1.5rem",
               borderBottom: "1px solid grey",
-              color: "#4154B3",
+              color: "rgb(236, 22, 22)",
             }}
           >
             {`${props.product_name}`}

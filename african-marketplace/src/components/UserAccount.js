@@ -53,10 +53,14 @@ const UserAccount = (props) => {
     dispatch(getUsersData());
   }, [newUser]);
 
-  const deleteAccount = () => {
-    dispatch(deleteUserData(props.match.params.id));
-    props.history.push("/");
-    dispatch({ type: SET_INITIAL_USER });
+  // const deleteAccount = () => {
+  //   dispatch(deleteUserData(props.match.params.id));
+  //   props.history.push("/");
+  //   dispatch({ type: SET_INITIAL_USER });
+  // };
+  const toUpdateUserAccount = () => {
+    const userId = window.localStorage.getItem("userID");
+    props.history.push(`/users/${userId}/account/update`);
   };
 
   {
@@ -116,15 +120,12 @@ const UserAccount = (props) => {
                     </CardContent>
                   </CardActionArea>
                   <CardActions style={{ marginLeft: "center" }}>
-                    <Button size="small" color="primary">
-                      Edit Account
-                    </Button>
                     <Button
-                      onClick={deleteAccount}
+                      onClick={toUpdateUserAccount}
                       size="small"
                       color="primary"
                     >
-                      Delete Account
+                      Edit Account
                     </Button>
                   </CardActions>
                 </Card>

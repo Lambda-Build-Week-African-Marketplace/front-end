@@ -279,7 +279,7 @@ export const updateUserData = (user, users) => (dispatch) => {
   axiosWithAuth()
     .put(`/users/${user.id}`, user)
     .then((res) => {
-      console.log("update data", res);
+      console.log("update user data", res);
 
       const newUsers = users.map((el) => {
         if (el.id === user.id) {

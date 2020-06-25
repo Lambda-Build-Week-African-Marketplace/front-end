@@ -177,7 +177,7 @@ const Dashboard = (props) => {
   };
 
   return (
-    <div>
+    <div className="dashboard">
       <Container style={{ marginTop: "1rem" }}>
         <Row>
           <Col xs="12" md="6" xl="6">
@@ -188,8 +188,8 @@ const Dashboard = (props) => {
                   Number(window.localStorage.getItem("userID"))
               )
               .map((el) => (
-                <h3 key={el.id}>
-                  First Name: {el.firstname} Last Name: {el.lastname}
+                <h3 key={el.id} className="username">
+                  Products of {el.firstname} {el.lastname}
                 </h3>
               ))}
           </Col>
@@ -197,7 +197,7 @@ const Dashboard = (props) => {
             <button
               type="button"
               onClick={handleOpen}
-              className="md-button form-button"
+              className="md-button form-button dash-button"
             >
               Add Product
             </button>
@@ -224,7 +224,6 @@ const Dashboard = (props) => {
           handleLocationToggle={handleLocationToggle}
         />
 
-        <h2> My products:</h2>
         <Row>
           {state.products
             .filter(
