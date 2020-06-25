@@ -35,10 +35,10 @@ const Login = (props) => {
   // const login = (e) => {
   //   e.preventDefault();
   //   dispatch(postLoginData(credentials));
-  //   dispatch(authMenuBar(true));
+
   //   const userId = window.localStorage.getItem("userID");
   //   props.history.push(`/dashboard/${userId}`);
-
+  //   dispatch(authMenuBar(true));
   // };
 
   const login = (e) => {

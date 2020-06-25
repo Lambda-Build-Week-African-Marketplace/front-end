@@ -10,8 +10,6 @@ import {
 } from "../actions/index";
 const ProductList = (props) => {
   const state = useSelector((state) => state);
-  // const [locationName, setLocationName] = useState("");
-  // const [categoryName, setCategoryName] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,16 +19,6 @@ const ProductList = (props) => {
     dispatch(getLocationsData());
   }, [dispatch]);
 
-  // const getLocationName = (locId) => {
-  //   const lName = state.locations.find((l) => Number(l.id) === Number(locId));
-  //    setLocationName(lName.location);
-  // };
-  // const getCategoryName = (catId) => {
-  //   const cName = state.categories.find((c) => Number(c.id) === Number(catId));
-  //   console.log("cName", cName.category_name);
-  //   setCategoryName(cName.category_name);
-  // };
-
   return (
     <div>
       <Container style={{ marginTop: "1rem" }}>
@@ -38,9 +26,6 @@ const ProductList = (props) => {
           <h2> Our Products:</h2>
           <Row>
             {state.products.map((el) => {
-              // const locFunction = () => getLocationName(el.location_id);
-              // const catFunction = () => getCategoryName(el.category_id);
-
               return (
                 <HomeProductCard
                   key={el.id}
@@ -51,10 +36,6 @@ const ProductList = (props) => {
                   location_id={el.location_id}
                   user_id={el.user_id}
                   product={el}
-                  // locFunction={locFunction}
-                  // catFunction={catFunction}
-                  // locationName={locationName}
-                  // categoryName={categoryName}
                 />
               );
             })}
