@@ -3,6 +3,7 @@ import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -56,20 +57,14 @@ const MenuBar = (props) => {
           </IconButton>
           */}
             <Typography
-              className={classes.title}
               variant="h6"
-              noWrap
-              style={{
-                fontSize: "2rem",
-                color: "white",
-                textDecoration: "none",
-                marginLeft: "2rem",
-              }}
+              className={classes.title}
+              style={{ fontSize: "1.5rem" }}
             >
               African MarketPlace
             </Typography>
 
-            <div className={classes.search} style={{ marginRight: "3rem" }}>
+            <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -91,7 +86,12 @@ const MenuBar = (props) => {
               }}
               to={"/"}
             >
-              <h2>Products</h2>
+              <Button
+                color="inherit"
+                style={{ fontSize: "1rem", marginLeft: "1rem" }}
+              >
+                Products
+              </Button>
             </Link>
 
             {!state.auth && !window.localStorage.getItem("userID") && (
@@ -103,7 +103,9 @@ const MenuBar = (props) => {
                 }}
                 to={"/login"}
               >
-                <h2>Login</h2>
+                <Button color="inherit" style={{ fontSize: "1rem" }}>
+                  Login
+                </Button>
               </Link>
             )}
 
@@ -116,7 +118,9 @@ const MenuBar = (props) => {
                 }}
                 to={`/dashboard/${window.localStorage.getItem("userID")}`}
               >
-                <h2>Dashboard</h2>
+                <Button color="inherit" style={{ fontSize: "1rem" }}>
+                  Dashboard
+                </Button>
               </Link>
             )}
             {(state.auth || window.localStorage.getItem("userID")) && (
@@ -142,7 +146,9 @@ const MenuBar = (props) => {
                 }}
                 to={"/"}
               >
-                <h2>Logout</h2>
+                <Button color="inherit" style={{ fontSize: "1rem" }}>
+                  Logout
+                </Button>
               </Link>
             )}
           </Toolbar>
