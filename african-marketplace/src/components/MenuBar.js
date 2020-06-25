@@ -113,9 +113,7 @@ const MenuBar = (props) => {
                 textDecoration: "none",
                 marginRight: "2rem",
               }}
-              to={`/dashboard/${window.localStorage
-                .getItem("userID")
-                .toString()}`}
+              to={`/dashboard/${window.localStorage.getItem("userID")}`}
             >
               <h2>Dashboard</h2>
             </Link>

@@ -11,22 +11,21 @@ const HomeProductCard = (props) => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   getLocationName();
-  // }, []);
-  // useEffect(() => {
-  //   getCategoryName();
-  // }, []);
-
   const getLocationName = () => {
-    const lName = state.locations.find((l) => l.id === props.location_id);
-    setLocationName(lName.location);
+    const lName = state?.locations?.find((l) => l.id === props.location_id);
+    setLocationName(lName?.location);
   };
   const getCategoryName = () => {
-    const cName = state.categories.find((c) => c.id === props.category_id);
-    setCategoryName(cName.category_name);
+    const cName = state?.categories?.find((c) => c.id === props.category_id);
+    setCategoryName(cName?.category_name);
   };
+  let locationCheck = state?.locations.length === 0;
+  useEffect(() => {
+    getLocationName();
+    getCategoryName();
+  }, [locationCheck]);
 
+  console.log("state.locations", state.locations);
   return (
     <Col xs="12" md="6" xl="4">
       <Card

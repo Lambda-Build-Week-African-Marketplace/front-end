@@ -41,6 +41,8 @@ const ProductCard = (props) => {
   const [newEditProduct, setNewEditProduct] = useState(props.product);
   const [newEditCategory, setNewEditCategory] = useState(initialCategory);
   const [newEditLocation, setNewEditLocation] = useState(initialLocation);
+  const [locationName, setLocationName] = useState("");
+  const [categoryName, setCategoryName] = useState("");
   const dispatch = useDispatch();
 
   const handleOpenEdit = () => {
@@ -65,10 +67,9 @@ const ProductCard = (props) => {
     });
   };
   const handleProductSubmit = (e) => {
-    console.log("newEditProduct222222", newEditProduct);
     e.preventDefault();
     dispatch(updateProductData(newEditProduct, state.products));
-    // setNewProduct(initialItem);
+
     setNewEditProduct({
       ...newEditProduct,
       user_id: Number(window.localStorage.getItem("userID")),
@@ -132,6 +133,22 @@ const ProductCard = (props) => {
     e.preventDefault();
     dispatch(deleteProductData(props.product_id, state.products));
   };
+  //-------------------categories and locations handlers----------
+
+  const getLocationName = () => {
+    const lName = state?.locations?.find((l) => l.id === props.location_id);
+    setLocationName(lName?.location);
+  };
+  const getCategoryName = () => {
+    const cName = state?.categories?.find((c) => c.id === props.category_id);
+    setCategoryName(cName?.category_name);
+  };
+  let locationCheck = state?.locations.length === 0;
+
+  useEffect(() => {
+    getLocationName();
+    getCategoryName();
+  }, [locationCheck]);
 
   return (
     <Col xs="12" md="6" xl="4">
@@ -158,6 +175,9 @@ const ProductCard = (props) => {
             style={{ marginBottom: "0.5rem" }}
           >{`Price: ${props.price}`}</CardSubtitle>
           <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
+          {/** */}
+          <CardSubtitle>Location: {locationName}</CardSubtitle>
+          <CardSubtitle>Category: {categoryName}</CardSubtitle>
 
           <CardActions style={{ marginLeft: "center" }}>
             <Button onClick={handleOpenEdit} size="small" color="primary">
