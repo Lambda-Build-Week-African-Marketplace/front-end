@@ -83,7 +83,12 @@ const UserUpdateForm = (props) => {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid
+      container
+      component="main"
+      className={classes.root}
+      style={{ marginTop: "4rem" }}
+    >
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
 

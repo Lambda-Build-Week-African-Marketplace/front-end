@@ -39,12 +39,10 @@ const UserAccount = (props) => {
 
   useEffect(() => {
     const selectedUserId = Number(props.match.params.id);
-    //const selectedUserId = window.localStorage.getItem("userID");
-
     const selectedUser = state.users.find(
       (el) => el.id === Number(selectedUserId)
     );
-    // dispatch({ type: USER_STATE, payload: selectedUser });
+
     dispatch(setUser(selectedUser));
     setNewUser(selectedUser);
   }, [dispatch, props.match.params.id, window.localStorage.getItem("userID")]);
@@ -53,35 +51,30 @@ const UserAccount = (props) => {
     dispatch(getUsersData());
   }, [newUser]);
 
-  // const deleteAccount = () => {
-  //   dispatch(deleteUserData(props.match.params.id));
-  //   props.history.push("/");
-  //   dispatch({ type: SET_INITIAL_USER });
-  // };
   const toUpdateUserAccount = () => {
     const userId = window.localStorage.getItem("userID");
     props.history.push(`/users/${userId}/account/update`);
   };
 
-  {
-    state.users
-      .filter(
-        (user) =>
-          Number(user.id) === Number(window.localStorage.getItem("userID"))
-      )
-      .map((el) => {
-        return (
-          <div>
-            <p key={el.id}>
-              User First Name: {el.firstname} User Last Name: {el.lastname}
-            </p>
-            <p key={el.id}>
-              User First Name: {el.firstname} User Last Name: {el.lastname}
-            </p>
-          </div>
-        );
-      });
-  }
+  // {
+  //   state.users
+  //     .filter(
+  //       (user) =>
+  //         Number(user.id) === Number(window.localStorage.getItem("userID"))
+  //     )
+  //     .map((el) => {
+  //       return (
+  //         <div>
+  //           <p key={el.id}>
+  //             User First Name: {el.firstname} User Last Name: {el.lastname}
+  //           </p>
+  //           <p key={el.id}>
+  //             User First Name: {el.firstname} User Last Name: {el.lastname}
+  //           </p>
+  //         </div>
+  //       );
+  //     });
+  // }
 
   return (
     <div>
@@ -94,7 +87,7 @@ const UserAccount = (props) => {
           return (
             <React.Fragment>
               <CssBaseline />
-              <Container maxWidth="sm" style={{ marginTop: "2rem" }}>
+              <Container maxWidth="sm" style={{ marginTop: "6rem" }}>
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia
