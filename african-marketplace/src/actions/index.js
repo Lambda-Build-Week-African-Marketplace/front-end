@@ -14,6 +14,7 @@ export const SET_INITIAL_USER = "SET_INITIAL_USER";
 export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS";
 export const POST_CATEGORIES_SUCCESS = "POST_CATEGORIES_SUCCESS";
 export const POST_LOCATIONS_SUCCESS = "POST_LOCATIONS_SUCCESS";
+export const DATA_LOGIN_SUCCESS = "DATA_LOGIN_SUCCESS";
 
 //---------------GET USER DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -86,8 +87,28 @@ export const postUserData = (user) => (dispatch) => {
       console.log("post data", res.data);
       dispatch({
         type: DATA_USERS_SUCCESS,
-        // payload: JSON.parse(`${res.config.data}`),
         payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.error("post data error: ", err);
+      dispatch({
+        type: DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+//----------------POST LOGIN DATA------------------------------
+export const postLoginData = (credentials) => (dispatch) => {
+  dispatch({ type: DATA_START });
+
+  axiosWithAuth()
+    .post("/login", credentials)
+    .then((res) => {
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userID", res.data.user_id);
+      dispatch({
+        type: DATA_LOGIN_SUCCESS,
       });
     })
     .catch((err) => {
