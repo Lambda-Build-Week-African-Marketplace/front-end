@@ -11,12 +11,12 @@ const HomeProductCard = (props) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    getLocationName();
-  }, []);
-  useEffect(() => {
-    getCategoryName();
-  }, []);
+  // useEffect(() => {
+  //   getLocationName();
+  // }, []);
+  // useEffect(() => {
+  //   getCategoryName();
+  // }, []);
 
   const getLocationName = () => {
     const lName = state.locations.find((l) => l.id === props.location_id);

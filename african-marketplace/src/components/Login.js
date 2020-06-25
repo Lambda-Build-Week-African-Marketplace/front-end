@@ -15,6 +15,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { authMenuBar } from "../actions/index";
 import { Spinner } from "reactstrap";
+import { postLoginData } from "../actions/index";
 const Login = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
@@ -31,6 +32,15 @@ const Login = (props) => {
       [e.target.name]: e.target.value,
     });
   };
+  // const login = (e) => {
+  //   e.preventDefault();
+  //   dispatch(postLoginData(credentials));
+  //   dispatch(authMenuBar(true));
+  //   const userId = window.localStorage.getItem("userID");
+  //   props.history.push(`/dashboard/${userId}`);
+
+  // };
+
   const login = (e) => {
     e.preventDefault();
     axiosWithAuth()

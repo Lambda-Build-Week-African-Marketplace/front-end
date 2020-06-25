@@ -13,6 +13,7 @@ import {
   POST_PRODUCTS_SUCCESS,
   POST_CATEGORIES_SUCCESS,
   POST_LOCATIONS_SUCCESS,
+  DATA_LOGIN_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -64,6 +65,12 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
+        isLoading: false,
+        error: "",
+      };
+    case DATA_LOGIN_SUCCESS:
+      return {
+        ...state,
         isLoading: false,
         error: "",
       };
