@@ -31,20 +31,26 @@ const ProductList = (props) => {
           </Col>
         </Row>
         <Row>
-          {state.products.map((el) => {
-            return (
-              <HomeProductCard
-                key={el.id}
-                category_id={el.category_id}
-                product_name={el.product_name}
-                price={el.price}
-                description={el.description}
-                location_id={el.location_id}
-                user_id={el.user_id}
-                product={el}
-              />
-            );
-          })}
+          {state.products
+            .filter((prod) => {
+              return prod.product_name
+                .toLowerCase()
+                .includes(state.searchTerm.toLowerCase());
+            })
+            .map((el) => {
+              return (
+                <HomeProductCard
+                  key={el.id}
+                  category_id={el.category_id}
+                  product_name={el.product_name}
+                  price={el.price}
+                  description={el.description}
+                  location_id={el.location_id}
+                  user_id={el.user_id}
+                  product={el}
+                />
+              );
+            })}
         </Row>
       </Container>
     </div>

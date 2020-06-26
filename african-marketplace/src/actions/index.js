@@ -15,6 +15,7 @@ export const POST_PRODUCTS_SUCCESS = "POST_PRODUCTS_SUCCESS";
 export const POST_CATEGORIES_SUCCESS = "POST_CATEGORIES_SUCCESS";
 export const POST_LOCATIONS_SUCCESS = "POST_LOCATIONS_SUCCESS";
 export const DATA_LOGIN_SUCCESS = "DATA_LOGIN_SUCCESS";
+export const SEARCH_STATE = "SEARCH_STATE";
 
 //---------------GET USER DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -389,3 +390,8 @@ export const authMenuBar = (togg) => (dispatch) => {
 export const setUser = (user) => (dispatch) => {
   dispatch({ type: USER_STATE, payload: user });
 };
+//---------------SEARCH_STATE--------------
+
+// export const searchInMenuBar = (searchString) => (dispatch) => {
+//   dispatch({ type: SEARCH_STATE, payload: searchString });
+// };

@@ -9,7 +9,7 @@ import InputBase from "@material-ui/core/InputBase";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
 import { authMenuBar, setUserProducts, setUser } from "../actions/index";
-import { SET_INITIAL_USER } from "../actions/index";
+import { SET_INITIAL_USER, SEARCH_STATE } from "../actions/index";
 import {
   createStyles,
   fade,
@@ -41,6 +41,14 @@ const MenuBar = (props) => {
     push(`/users/${userId}/account`);
   };
 
+  const handleChange = (e) => {
+    dispatch({
+      type: SEARCH_STATE,
+
+      value: e.target.value,
+    });
+  };
+
   return (
     <div className="menu-bar">
       <div className={classes.root}>
@@ -69,7 +77,8 @@ const MenuBar = (props) => {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                onChange={handleChange}
+                placeholder="Search by product"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,

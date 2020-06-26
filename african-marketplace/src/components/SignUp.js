@@ -81,6 +81,7 @@ const SignUp = (props) => {
       username: "",
       password: "",
     });
+    props.history.push("/login");
   };
   const inputChange = (e) => {
     e.persist();
