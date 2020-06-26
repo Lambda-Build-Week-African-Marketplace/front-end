@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { USER_STATE } from "../actions/index";
+import { USER_STATE, SEARCH_STATE } from "../actions/index";
 import { Container, Row, Col } from "reactstrap";
 import * as yup from "yup";
 import {
@@ -280,6 +280,11 @@ const Dashboard = (props) => {
                 Number(product.user_id) ===
                 Number(window.localStorage.getItem("userID"))
             )
+            .filter((prod) => {
+              return prod.product_name
+                .toLowerCase()
+                .includes(state.searchTerm.toLowerCase());
+            })
             .map((el) => (
               <ProductCard
                 key={el.id}
