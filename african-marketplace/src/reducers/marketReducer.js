@@ -14,6 +14,7 @@ import {
   POST_CATEGORIES_SUCCESS,
   POST_LOCATIONS_SUCCESS,
   DATA_LOGIN_SUCCESS,
+  SEARCH_STATE,
 } from "../actions";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   error: "",
   auth: false,
   editing: false,
+  searchTerm: "",
   user: {
     id: 0,
     firstname: "",
@@ -185,6 +187,12 @@ export const marketReducer = (state = initialState, action) => {
           email: "",
           username: "",
         },
+      };
+
+    case SEARCH_STATE:
+      return {
+        ...state,
+        searchTerm: action.value,
       };
 
     default:
