@@ -49,7 +49,7 @@ const HomeProductCard = (props) => {
           </CardTitle>
           <CardSubtitle
             style={{ marginBottom: "0.5rem" }}
-          >{`Price: ${props.price}`}</CardSubtitle>
+          >{`Price: $${props.price}`}</CardSubtitle>
           <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
 
           <CardSubtitle>Location: {locationName}</CardSubtitle>

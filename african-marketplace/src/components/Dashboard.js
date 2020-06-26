@@ -98,7 +98,8 @@ const Dashboard = (props) => {
     ev.persist();
     let value = ev.target.value;
     if (ev.target.name === "price") {
-      value = parseInt(value, 10);
+      //value = parseInt(value, 10);
+      value = parseFloat(value).toFixed(2);
     }
     setNewProduct({
       ...newProduct,
