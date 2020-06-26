@@ -25,7 +25,6 @@ const HomeProductCard = (props) => {
     getCategoryName();
   }, [locationCheck]);
 
-  console.log("state.locations", state.locations);
   return (
     <Col xs="12" md="6" xl="4">
       <Card

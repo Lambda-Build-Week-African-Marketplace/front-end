@@ -15,6 +15,7 @@ import {
   getLocationsData,
   postLocationData,
   updateProductData,
+  getProductsData,
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 
@@ -41,13 +42,16 @@ const ProductCard = (props) => {
   const [newEditProduct, setNewEditProduct] = useState(props.product);
   const [newEditCategory, setNewEditCategory] = useState(initialCategory);
   const [newEditLocation, setNewEditLocation] = useState(initialLocation);
-  const [locationName, setLocationName] = useState("");
-  const [categoryName, setCategoryName] = useState("");
+  const [locationName1, setLocationName1] = useState("");
+  const [categoryName1, setCategoryName1] = useState("");
   const dispatch = useDispatch();
 
   const handleOpenEdit = () => {
     setEditOpen(true);
   };
+  useEffect(() => {
+    setNewEditProduct(props.product);
+  }, [props.product]);
 
   const handleCloseEdit = (e) => {
     e.preventDefault();
@@ -55,6 +59,21 @@ const ProductCard = (props) => {
     setNewEditProduct(initialItem);
   };
   //------------Product handlers-----------------
+
+  //   useEffect(() => {
+  //     dispatch(getProductsData());
+  //   }, [props.newProduct]);
+  //   const changeHandler = (ev) => {
+  //     ev.persist();
+  //     let value = ev.target.value;
+  //     if (ev.target.name === "price") {
+  //       value = parseInt(value, 10);
+  //     }
+  //     setNewEditProduct({
+  //       ...newEditProduct,
+  //       [ev.target.name]: value,
+  //     });
+  //   };
   const changeHandler = (ev) => {
     ev.persist();
     let value = ev.target.value;
@@ -66,33 +85,13 @@ const ProductCard = (props) => {
       [ev.target.name]: value,
     });
   };
-  const handleProductSubmit = (e) => {
-    e.preventDefault();
-    // if (
-    //   newEditProduct.category_id &&
-    //   newEditProduct.product_name &&
-    //   newEditProduct.price &&
-    //   newEditProduct.description &&
-    //   newEditProduct.location_id
-    // ) {
-    //   dispatch(updateProductData(newEditProduct, state.products));
-    //   setNewEditProduct({
-    //     ...newEditProduct,
-    //     user_id: Number(window.localStorage.getItem("userID")),
-    //     category_id: 0,
-    //     product_name: "",
-    //     price: "",
-    //     description: "",
-    //     location_id: 0,
-    //   });
-    //   setEditOpen(false);
-    // } else {
-    //   alert("All fields must be filled");
-    //   console.log("newEditProduct", newEditProduct);
-    // }
-    //--------------------------------------
-    dispatch(updateProductData(newEditProduct, state.products));
 
+  const handleProductSubmit = (e) => {
+    //  console.log("newEditProduct222222", newEditProduct);
+    // console.log("props.product", props.product);
+    e.preventDefault();
+    dispatch(updateProductData(newEditProduct, state.products));
+    // setNewProduct(initialItem);
     setNewEditProduct({
       ...newEditProduct,
       user_id: Number(window.localStorage.getItem("userID")),
@@ -104,6 +103,23 @@ const ProductCard = (props) => {
     });
     setEditOpen(false);
   };
+  //   const handleProductSubmit = (e) => {
+  //     e.preventDefault();
+
+  //     //--------------------------------------
+  //     dispatch(updateProductData(newEditProduct, state.products));
+
+  //     setNewEditProduct({
+  //       ...newEditProduct,
+  //       user_id: Number(window.localStorage.getItem("userID")),
+  //       category_id: 0,
+  //       product_name: "",
+  //       price: "",
+  //       description: "",
+  //       location_id: 0,
+  //     });
+  //     setEditOpen(false);
+  //   };
   //------------Category handlers-----------------
   useEffect(() => {
     dispatch(getCategoriesData());
@@ -184,11 +200,11 @@ const ProductCard = (props) => {
 
   const getLocationName = () => {
     const lName = state?.locations?.find((l) => l.id === props.location_id);
-    setLocationName(lName?.location);
+    setLocationName1(lName?.location);
   };
   const getCategoryName = () => {
     const cName = state?.categories?.find((c) => c.id === props.category_id);
-    setCategoryName(cName?.category_name);
+    setCategoryName1(cName?.category_name);
   };
   let locationCheck = state?.locations.length === 0;
 
@@ -196,7 +212,7 @@ const ProductCard = (props) => {
     getLocationName();
     getCategoryName();
   }, [locationCheck]);
-
+  console.log("props.product in product Card", props.product);
   return (
     <Col xs="12" md="6" xl="4">
       <Card
@@ -224,8 +240,8 @@ const ProductCard = (props) => {
           >{`Price: ${props.price}`}</CardSubtitle>
           <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
           {/** */}
-          <CardSubtitle>Location: {locationName}</CardSubtitle>
-          <CardSubtitle>Category: {categoryName}</CardSubtitle>
+          <CardSubtitle>Location: {locationName1}</CardSubtitle>
+          <CardSubtitle>Category: {categoryName1}</CardSubtitle>
 
           <CardActions style={{ marginLeft: "center" }}>
             <Button onClick={handleOpenEdit} size="small" color="primary">

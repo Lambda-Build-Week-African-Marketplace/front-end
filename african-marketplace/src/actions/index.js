@@ -155,10 +155,10 @@ export const postProductData = (product) => (dispatch) => {
     })
 
     .catch((err) => {
-      console.error("post data error: ", err.response.data.message);
+      console.error("post data error: ", err);
       dispatch({
         type: DATA_FAILURE,
-        payload: err.response.data.message,
+        payload: err,
       });
     });
 };
@@ -329,11 +329,11 @@ export const updateProductData = (product, products) => (dispatch) => {
   axiosWithAuth()
     .put(`/products/${product.id}`, product)
     .then((res) => {
-      console.log("update product data", res);
+      console.log("update product data", res.data[0]);
 
       const newProducts = products.map((el) => {
         if (el.id === product.id) {
-          return product;
+          return res.data[0];
         }
         return el;
       });
