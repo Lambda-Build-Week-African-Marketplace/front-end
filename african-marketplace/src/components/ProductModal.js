@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) =>
 const ProductModal = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
-
+  console.log("props.product in product Modal", props.newProduct);
   return (
     <div>
       <Modal
@@ -53,9 +53,10 @@ const ProductModal = (props) => {
                   type="text"
                   name="product_name"
                   onChange={props.changeHandler}
-                  placeholder="name"
+                  placeholder="product name"
                   defaultValue={props.newProduct.product_name}
                 />
+
                 <div className="baseline" />
 
                 <input
@@ -65,8 +66,9 @@ const ProductModal = (props) => {
                   placeholder="Price"
                   defaultValue={props.newProduct.price}
                 />
-                <div className="baseline" />
 
+                <div className="baseline" />
+                {/**--------------Description -------------------------- */}
                 <input
                   type="text"
                   name="description"
@@ -74,9 +76,11 @@ const ProductModal = (props) => {
                   placeholder="Description"
                   defaultValue={props.newProduct.description}
                 />
+
                 <div className="baseline" />
                 {/**--------------------location----------------------------------- */}
                 <select
+                  required
                   id="location_id"
                   name="location_id"
                   onChange={props.changeHandler}
@@ -89,7 +93,7 @@ const ProductModal = (props) => {
                     color: "#1c5d76",
                   }}
                 >
-                  <option value="0">Select location:</option>
+                  <option value="">Select location:</option>
                   {state.locations
                     .sort((a, b) =>
                       a.location.toLowerCase() > b.location.toLowerCase()
@@ -159,6 +163,7 @@ const ProductModal = (props) => {
 
                 {/**--------------------category----------------------------------- */}
                 <select
+                  required
                   id="category_id"
                   name="category_id"
                   onChange={props.changeHandler}
@@ -171,7 +176,7 @@ const ProductModal = (props) => {
                     color: "#1c5d76",
                   }}
                 >
-                  <option value="0">Select category:</option>
+                  <option value="">Select category:</option>
 
                   {state.categories
                     .sort((a, b) =>
@@ -258,3 +263,9 @@ const ProductModal = (props) => {
   );
 };
 export default ProductModal;
+
+// {props.errors.product_name.length > 0 ? (
+//   <p className="error" id="nameError">
+//     {props.errors.product_name}
+//   </p>
+// ) : null}
