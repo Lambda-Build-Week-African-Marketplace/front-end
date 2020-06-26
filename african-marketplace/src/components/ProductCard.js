@@ -78,7 +78,8 @@ const ProductCard = (props) => {
     ev.persist();
     let value = ev.target.value;
     if (ev.target.name === "price") {
-      value = parseInt(value, 10);
+      //value = parseInt(value, 10);
+      value = parseFloat(value).toFixed(2);
     }
     setNewEditProduct({
       ...newEditProduct,
@@ -237,7 +238,7 @@ const ProductCard = (props) => {
           </CardTitle>
           <CardSubtitle
             style={{ marginBottom: "0.5rem" }}
-          >{`Price: ${props.price}`}</CardSubtitle>
+          >{`Price: $${props.price}`}</CardSubtitle>
           <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
           {/** */}
           <CardSubtitle>Location: {locationName1}</CardSubtitle>

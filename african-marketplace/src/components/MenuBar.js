@@ -91,7 +91,6 @@ const MenuBar = (props) => {
               style={{
                 color: "white",
                 textDecoration: "none",
-                marginRight: "2rem",
               }}
               to={"/"}
             >
@@ -108,7 +107,7 @@ const MenuBar = (props) => {
                 style={{
                   color: "white",
                   textDecoration: "none",
-                  marginRight: "2rem",
+                  marginLeft: "1rem",
                 }}
                 to={"/login"}
               >
@@ -123,7 +122,6 @@ const MenuBar = (props) => {
                 style={{
                   color: "white",
                   textDecoration: "none",
-                  marginRight: "2rem",
                 }}
                 to={`/dashboard/${window.localStorage.getItem("userID")}`}
               >
@@ -216,9 +214,9 @@ const useStyles = makeStyles((theme) =>
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("sm")]: {
-        width: "12ch",
+        width: "18ch",
         "&:focus": {
-          width: "20ch",
+          width: "26ch",
         },
       },
     },

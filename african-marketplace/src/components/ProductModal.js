@@ -50,6 +50,7 @@ const ProductModal = (props) => {
 
               <form onSubmit={props.handleProductSubmit}>
                 <input
+                  required
                   type="text"
                   name="product_name"
                   onChange={props.changeHandler}
@@ -60,7 +61,10 @@ const ProductModal = (props) => {
                 <div className="baseline" />
 
                 <input
+                  required
                   type="number"
+                  min="0.01"
+                  step="0.01"
                   name="price"
                   onChange={props.changeHandler}
                   placeholder="Price"
@@ -70,6 +74,7 @@ const ProductModal = (props) => {
                 <div className="baseline" />
                 {/**--------------Description -------------------------- */}
                 <input
+                  required
                   type="text"
                   name="description"
                   onChange={props.changeHandler}
@@ -123,6 +128,7 @@ const ProductModal = (props) => {
                 {props.locationToggle ? (
                   <div>
                     <input
+                      required
                       type="text"
                       name="location"
                       onChange={props.changeLocationHandler}
@@ -208,6 +214,7 @@ const ProductModal = (props) => {
                 {props.catToggle ? (
                   <div>
                     <input
+                      required
                       type="text"
                       name="category_name"
                       onChange={props.changeCategoryHandler}
