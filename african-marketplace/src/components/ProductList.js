@@ -28,7 +28,7 @@ const ProductList = (props) => {
   }, [dispatch]);
 
   return (
-    <div className="home-bg" style={{ marginTop: "1rem" }}>
+    <div className="home-bg" style={{ marginTop: "4rem" }}>
       {/***************Search by CAtegtory*************************** */}
       {(state.searchTerm && state.selectedSearchBtn === 2) || state.toggleSearch
         ? state.categories
