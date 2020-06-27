@@ -16,6 +16,12 @@ export const POST_CATEGORIES_SUCCESS = "POST_CATEGORIES_SUCCESS";
 export const POST_LOCATIONS_SUCCESS = "POST_LOCATIONS_SUCCESS";
 export const DATA_LOGIN_SUCCESS = "DATA_LOGIN_SUCCESS";
 export const SEARCH_STATE = "SEARCH_STATE";
+export const SELECT_LOCATION_STATE = "SELECT_LOCATION_STATE";
+export const SEARCH_LOCATION_STATE = "SEARCH_LOCATION_STATE";
+export const SELECTED_ID_STATE = "SELECTED_ID_STATE";
+export const SELECTED_SEARCH_BTN = "SELECTED_SEARCH_BTN";
+export const TOGGLE_SEARCH_STATE = "TOGGLE_SEARCH_STATE";
+export const TOGGLE_LOCATION_SEARCH_STATE = "TOGGLE_LOCATION_SEARCH_STATE";
 
 //---------------GET USER DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -390,8 +396,3 @@ export const authMenuBar = (togg) => (dispatch) => {
 export const setUser = (user) => (dispatch) => {
   dispatch({ type: USER_STATE, payload: user });
 };
-//---------------SEARCH_STATE--------------
-
-// export const searchInMenuBar = (searchString) => (dispatch) => {
-//   dispatch({ type: SEARCH_STATE, payload: searchString });
-// };

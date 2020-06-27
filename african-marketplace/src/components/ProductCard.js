@@ -7,6 +7,7 @@ import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
+import { SELECT_LOCATION_STATE } from "../actions/index";
 import {
   deleteProductData,
   postProductData,
@@ -184,12 +185,14 @@ const ProductCard = (props) => {
       dispatch(postLocationData(newEditLocation));
       setNewEditLocation(initialLocation);
       setLocationEditToggle(false);
+      dispatch({ type: SELECT_LOCATION_STATE, payload: "selected" });
     }
   };
   const handleEditLocationToggle = (e) => {
     e.preventDefault();
     setLocationEditToggle(!locationEditToggle);
     setNewEditLocation(initialLocation);
+    dispatch({ type: SELECT_LOCATION_STATE, payload: "" });
   };
 
   //--------------delete product ----------------------
@@ -213,7 +216,7 @@ const ProductCard = (props) => {
     getLocationName();
     getCategoryName();
   }, [locationCheck]);
-  console.log("props.product in product Card", props.product);
+
   return (
     <Col xs="12" md="6" xl="4">
       <Card
