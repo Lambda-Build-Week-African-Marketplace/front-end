@@ -21,6 +21,8 @@ import {
   SELECTED_SEARCH_BTN,
   TOGGLE_SEARCH_STATE,
   TOGGLE_LOCATION_SEARCH_STATE,
+  SELECT_LOCATION_OPTION,
+  SELECT_CATEGORY_OPTION,
 } from "../actions";
 
 const initialState = {
@@ -33,6 +35,8 @@ const initialState = {
   auth: false,
   editing: false,
   searchTerm: "",
+  selectLocationOption: "",
+  selectCategoryOption: "",
   selectedLocation: [],
   selectedId: 0,
   selectedSearchBtn: 0,
@@ -236,6 +240,18 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         toggleLocationSearch: action.payload,
+      };
+    //for option selected in adding new location
+    case SELECT_LOCATION_OPTION:
+      return {
+        ...state,
+        selectedLocationOption: action.payload,
+      };
+    //for option selected in adding new category
+    case SELECT_CATEGORY_OPTION:
+      return {
+        ...state,
+        selectedCategoryOption: action.payload,
       };
 
     default:
