@@ -22,7 +22,7 @@ const HomeProductCard = (props) => {
   useEffect(() => {
     getLocationName();
     getCategoryName();
-  }, [locationCheck]);
+  }, [locationCheck, props.location_id, props.category_id]);
 
   return (
     <Col xs="12" md="6" xl="4">

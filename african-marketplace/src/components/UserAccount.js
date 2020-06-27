@@ -50,30 +50,11 @@ const UserAccount = (props) => {
     dispatch(getUsersData());
   }, [newUser]);
 
-  const toUpdateUserAccount = () => {
+  const toUpdateUserAccount = (e) => {
+    e.preventDefault();
     const userId = window.localStorage.getItem("userID");
     props.history.push(`/users/${userId}/account/update`);
   };
-
-  // {
-  //   state.users
-  //     .filter(
-  //       (user) =>
-  //         Number(user.id) === Number(window.localStorage.getItem("userID"))
-  //     )
-  //     .map((el) => {
-  //       return (
-  //         <div>
-  //           <p key={el.id}>
-  //             User First Name: {el.firstname} User Last Name: {el.lastname}
-  //           </p>
-  //           <p key={el.id}>
-  //             User First Name: {el.firstname} User Last Name: {el.lastname}
-  //           </p>
-  //         </div>
-  //       );
-  //     });
-  // }
 
   return (
     <div>
@@ -98,7 +79,7 @@ const UserAccount = (props) => {
                     />
                     <CardContent style={{ textAlign: "center" }}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        UserAccount
+                        User Name: {el.username}
                       </Typography>
                       <Typography gutterBottom variant="h5" component="h3">
                         First Name: {el.firstname}
@@ -107,7 +88,7 @@ const UserAccount = (props) => {
                         Last Name: {el.lastname}
                       </Typography>
                       <Typography gutterBottom variant="h5" component="h3">
-                        Email: {el.firstname}
+                        Email: {el.email}
                       </Typography>
                     </CardContent>
                   </CardActionArea>

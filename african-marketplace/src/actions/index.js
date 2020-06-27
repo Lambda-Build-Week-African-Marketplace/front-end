@@ -22,6 +22,8 @@ export const SELECTED_ID_STATE = "SELECTED_ID_STATE";
 export const SELECTED_SEARCH_BTN = "SELECTED_SEARCH_BTN";
 export const TOGGLE_SEARCH_STATE = "TOGGLE_SEARCH_STATE";
 export const TOGGLE_LOCATION_SEARCH_STATE = "TOGGLE_LOCATION_SEARCH_STATE";
+export const SELECT_LOCATION_OPTION = "SELECT_LOCATION_OPTION";
+export const SELECT_CATEGORY_OPTION = "SELECT_LOCATION_OPTION";
 
 //---------------GET USER DATA----------------------------
 export const getUsersData = () => (dispatch) => {
@@ -335,7 +337,7 @@ export const updateProductData = (product, products) => (dispatch) => {
   axiosWithAuth()
     .put(`/products/${product.id}`, product)
     .then((res) => {
-      // console.log("update product data", res.data[0]);
+      console.log("update product data", res.data[0]);
 
       const newProducts = products.map((el) => {
         if (el.id === product.id) {

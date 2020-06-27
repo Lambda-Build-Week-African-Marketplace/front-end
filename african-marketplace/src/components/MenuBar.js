@@ -27,7 +27,7 @@ const MenuBar = (props) => {
   const { push } = useHistory();
   const classes = useStyles();
 
-  const logout = () => {
+  const logout = (e) => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userID");
     window.localStorage.removeItem("locUser");
@@ -37,12 +37,14 @@ const MenuBar = (props) => {
     dispatch({ type: SET_INITIAL_USER });
   };
 
-  const toUserAccount = () => {
+  const toUserAccount = (e) => {
+    e.preventDefault();
     const userId = window.localStorage.getItem("userID").toString();
     push(`/users/${userId}/account`);
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
     dispatch({
       type: SEARCH_STATE,
       value: e.target.value,
@@ -59,6 +61,7 @@ const MenuBar = (props) => {
 
   //-------------Handle Search-----------
   const setSearchLocation = (e) => {
+    e.preventDefault();
     dispatch({
       type: SELECTED_SEARCH_BTN,
       payload: 3,
@@ -77,7 +80,27 @@ const MenuBar = (props) => {
     });
     setSearchBy("Search by Location");
   };
+  const setProductsPage = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: SELECTED_SEARCH_BTN,
+      payload: 1,
+    });
+    dispatch({
+      type: TOGGLE_LOCATION_SEARCH_STATE,
+      payload: false,
+    });
+    dispatch({
+      type: TOGGLE_SEARCH_STATE,
+      payload: false,
+    });
+    dispatch({
+      type: SELECTED_ID_STATE,
+      payload: 0,
+    });
+  };
   const setSearchCategory = (e) => {
+    e.preventDefault();
     dispatch({
       type: SELECTED_SEARCH_BTN,
       payload: 2,
@@ -102,14 +125,15 @@ const MenuBar = (props) => {
     setSearchBy("Search by Category");
   };
   const setSearchProduct = (e) => {
+    e.preventDefault();
     dispatch({
       type: SELECTED_SEARCH_BTN,
       payload: 1,
     });
-    dispatch({
-      type: SEARCH_STATE,
-      value: "",
-    });
+    // dispatch({
+    //   type: SEARCH_STATE,
+    //   value: "",
+    // });
     dispatch({
       type: SELECTED_ID_STATE,
       payload: 0,

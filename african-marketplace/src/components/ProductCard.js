@@ -5,7 +5,11 @@ import CardActions from "@material-ui/core/CardActions";
 import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
-import { SELECT_LOCATION_STATE } from "../actions/index";
+import {
+  SELECT_LOCATION_STATE,
+  SELECT_CATEGORY_OPTION,
+  SELECT_LOCATION_OPTION,
+} from "../actions/index";
 import {
   deleteProductData,
   getCategoriesData,
@@ -49,7 +53,7 @@ const ProductCard = (props) => {
   useEffect(() => {
     setNewEditProduct(props.product);
   }, [props.product]);
-
+  console.log("props.product", props.product);
   const handleCloseEdit = (e) => {
     e.preventDefault();
     setEditOpen(false);
@@ -95,29 +99,50 @@ const ProductCard = (props) => {
       [ev.target.name]: ev.target.value,
     });
   };
+  // const handleCategorySubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (
+  //     state.categories.find((itemName) => {
+  //       return itemName.category_name
+  //         .toLowerCase()
+  //         .includes(newEditCategory.category_name.toLowerCase());
+  //     })
+  //   ) {
+  //     alert(
+  //       `"${newEditCategory.category_name}" category has already been added`
+  //     );
+  //   } else {
+  //     dispatch(postCategoryData(newEditCategory));
+  //     setNewEditCategory(initialCategory);
+  //     setCatEditToggle(false);
+  //   }
+  // };
   const handleCategorySubmit = (e) => {
     e.preventDefault();
 
-    if (
-      state.categories.find((itemName) => {
-        return itemName.category_name
-          .toLowerCase()
-          .includes(newEditCategory.category_name.toLowerCase());
-      })
-    ) {
-      alert(
-        `"${newEditCategory.category_name}" category has already been added`
-      );
-    } else {
-      dispatch(postCategoryData(newEditCategory));
-      setNewEditCategory(initialCategory);
-      setCatEditToggle(false);
-    }
+    // if (
+    //   state.categories.find((itemName) => {
+    //     return itemName.category_name
+    //       .toLowerCase()
+    //       .includes(newEditCategory.category_name.toLowerCase());
+    //   })
+    // ) {
+    //   alert(
+    //     `"${newEditCategory.category_name}" category has already been added`
+    //   );
+    // } else {
+    dispatch(postCategoryData(newEditCategory));
+    setNewEditCategory(initialCategory);
+    setCatEditToggle(false);
+    dispatch({ type: SELECT_CATEGORY_OPTION, payload: "selected" });
+    // }
   };
   const handleCatEditToggle = (e) => {
     e.preventDefault();
     setCatEditToggle(!catEditToggle);
     setNewEditCategory(initialCategory);
+    dispatch({ type: SELECT_CATEGORY_OPTION, payload: "" });
   };
   //------------Location handlers-----------------
   useEffect(() => {
@@ -131,29 +156,47 @@ const ProductCard = (props) => {
       [ev.target.name]: ev.target.value,
     });
   };
+  // const handleLocationSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (
+  //     state.locations.find((itemName) => {
+  //       return itemName.location
+  //         .toLowerCase()
+  //         .includes(newEditLocation.location.toLowerCase());
+  //     })
+  //   ) {
+  //     alert(`"${newEditLocation.location}" location has already been added`);
+  //   } else {
+  //     dispatch(postLocationData(newEditLocation));
+  //     setNewEditLocation(initialLocation);
+  //     setLocationEditToggle(false);
+  //     dispatch({ type: SELECT_LOCATION_STATE, payload: "selected" });
+  //   }
+  // };
   const handleLocationSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      state.locations.find((itemName) => {
-        return itemName.location
-          .toLowerCase()
-          .includes(newEditLocation.location.toLowerCase());
-      })
-    ) {
-      alert(`"${newEditLocation.location}" location has already been added`);
-    } else {
-      dispatch(postLocationData(newEditLocation));
-      setNewEditLocation(initialLocation);
-      setLocationEditToggle(false);
-      dispatch({ type: SELECT_LOCATION_STATE, payload: "selected" });
-    }
+    // if (
+    //   state.locations.find((itemName) => {
+    //     return itemName.location
+    //       .toLowerCase()
+    //       .includes(newEditLocation.location.toLowerCase());
+    //   })
+    // ) {
+    //   alert(`"${newEditLocation.location}" location has already been added`);
+    // } else {
+    dispatch(postLocationData(newEditLocation));
+    setNewEditLocation(initialLocation);
+    setLocationEditToggle(false);
+    dispatch({ type: SELECT_LOCATION_OPTION, payload: "selected" });
+    // }
   };
   const handleEditLocationToggle = (e) => {
     e.preventDefault();
     setLocationEditToggle(!locationEditToggle);
     setNewEditLocation(initialLocation);
-    dispatch({ type: SELECT_LOCATION_STATE, payload: "" });
+    dispatch({ type: SELECT_LOCATION_OPTION, payload: "" });
   };
 
   //--------------delete product ----------------------
@@ -176,7 +219,7 @@ const ProductCard = (props) => {
   useEffect(() => {
     getLocationName();
     getCategoryName();
-  }, [locationCheck]);
+  }, [locationCheck, props.location_id, props.category_id]);
 
   return (
     <Col xs="12" md="6" xl="4">
