@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { USER_STATE, SET_INITIAL_USER } from "../actions/index";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -14,7 +13,7 @@ import userAccountPhoto from "../assets/user-account.jpg";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { deleteUserData, setUser, getUsersData } from "../actions/index";
+import { setUser, getUsersData } from "../actions/index";
 const useStyles = makeStyles({
   root: {
     maxWidth: 600,

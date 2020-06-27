@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import signupPhoto from "../assets/signup1.jpg";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "../hooks/useForm";
 import { Spinner } from "reactstrap";
-import { updateUserData, setUser } from "../actions/index";
+import { updateUserData } from "../actions/index";
 import userUpdateAcc from "../assets/user-update-acc.jpg";
 import * as yup from "yup";
 const initialUser = {
@@ -33,7 +31,6 @@ const UserUpdateForm = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  //const [updateCredentials, setUpdateCredentials] = useState(initialUser);
   const [formState, setFormState] = useState({
     firstname: "",
     lastname: "",
@@ -46,22 +43,9 @@ const UserUpdateForm = (props) => {
   useEffect(() => {
     const userId = props.match.params.id;
     selectedUser = state?.users?.find((u) => Number(u.id) === Number(userId));
-    //console.log("selectedUser", selectedUser);
-    //setUpdateCredentials(selectedUser);
     setFormState(selectedUser);
   }, []);
 
-  //const [updateCredentials, setUpdateCredentials] = useState(selectedUser);
-  const [updateCredentials, setUpdateCredentials] = useState({
-    firstname: selectedUser.firstname,
-    lastname: selectedUser.lastname,
-    email: selectedUser.email,
-    username: selectedUser.username,
-  });
-
-  //console.log("updateCredentials", updateCredentials);
-  //console.log("setFormState(selectedUser);", formState);
-  //const [formState, setFormState] = useState(selectedUser);
   const [errors, setErrors] = useState({
     firstname: "",
     lastname: "",
@@ -93,7 +77,6 @@ const UserUpdateForm = (props) => {
       });
   };
 
-  //console.log("updateCredentials", updateCredentials);
   const update = (e) => {
     e.preventDefault();
     dispatch(updateUserData(formState, state.users));
@@ -262,43 +245,6 @@ function ToMarketplace() {
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
-    </Typography>
-  );
-}
-
-function ToLogin() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      <Link to="/login">Have an account? Go to Login.</Link>
-    </Typography>
-  );
-}
-
-function Success() {
-  return (
-    <Typography
-      style={{ marginTop: "2rem", marginBottom: "1rem" }}
-      variant="body2"
-      color="textSecondary"
-      align="center"
-    >
-      <Link style={{ color: "green" }} to="/login">
-        You have registered successfully! Go to Login.
-      </Link>
-    </Typography>
-  );
-}
-function Fail() {
-  return (
-    <Typography
-      style={{ marginTop: "2rem", marginBottom: "1rem" }}
-      variant="body2"
-      color="textSecondary"
-      align="center"
-    >
-      <Link style={{ color: "red" }} to="/signup">
-        Something wrong, try it again.
-      </Link>
     </Typography>
   );
 }

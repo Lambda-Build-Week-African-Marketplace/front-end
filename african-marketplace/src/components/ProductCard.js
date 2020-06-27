@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Col, CardImg } from "reactstrap";
+import { Col } from "reactstrap";
 import Button from "@material-ui/core/Button";
 import CardActions from "@material-ui/core/CardActions";
 import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
 import { SELECT_LOCATION_STATE } from "../actions/index";
 import {
   deleteProductData,
-  postProductData,
   getCategoriesData,
   postCategoryData,
   getLocationsData,
   postLocationData,
   updateProductData,
-  getProductsData,
 } from "../actions/index";
 import ProductModal from "./ProductModal";
 
@@ -59,27 +55,11 @@ const ProductCard = (props) => {
     setEditOpen(false);
     setNewEditProduct(initialItem);
   };
-  //------------Product handlers-----------------
 
-  //   useEffect(() => {
-  //     dispatch(getProductsData());
-  //   }, [props.newProduct]);
-  //   const changeHandler = (ev) => {
-  //     ev.persist();
-  //     let value = ev.target.value;
-  //     if (ev.target.name === "price") {
-  //       value = parseInt(value, 10);
-  //     }
-  //     setNewEditProduct({
-  //       ...newEditProduct,
-  //       [ev.target.name]: value,
-  //     });
-  //   };
   const changeHandler = (ev) => {
     ev.persist();
     let value = ev.target.value;
     if (ev.target.name === "price") {
-      //value = parseInt(value, 10);
       value = parseFloat(value).toFixed(2);
     }
     setNewEditProduct({
@@ -89,11 +69,8 @@ const ProductCard = (props) => {
   };
 
   const handleProductSubmit = (e) => {
-    //  console.log("newEditProduct222222", newEditProduct);
-    // console.log("props.product", props.product);
     e.preventDefault();
     dispatch(updateProductData(newEditProduct, state.products));
-    // setNewProduct(initialItem);
     setNewEditProduct({
       ...newEditProduct,
       user_id: Number(window.localStorage.getItem("userID")),
@@ -105,23 +82,7 @@ const ProductCard = (props) => {
     });
     setEditOpen(false);
   };
-  //   const handleProductSubmit = (e) => {
-  //     e.preventDefault();
 
-  //     //--------------------------------------
-  //     dispatch(updateProductData(newEditProduct, state.products));
-
-  //     setNewEditProduct({
-  //       ...newEditProduct,
-  //       user_id: Number(window.localStorage.getItem("userID")),
-  //       category_id: 0,
-  //       product_name: "",
-  //       price: "",
-  //       description: "",
-  //       location_id: 0,
-  //     });
-  //     setEditOpen(false);
-  //   };
   //------------Category handlers-----------------
   useEffect(() => {
     dispatch(getCategoriesData());
@@ -223,8 +184,6 @@ const ProductCard = (props) => {
         style={{
           margin: "0.5rem",
           height: "auto",
-          // height: "38rem",
-          // overflowY: "scroll",
           background: "rgb(236, 236, 51)",
           opacity: "0.9",
         }}

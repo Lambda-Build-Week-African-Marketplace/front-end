@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HomeProductCard from "./HomeProductCard";
 import { Container, Row, Col } from "reactstrap";
 import {
-  SEARCH_LOCATION_STATE,
-  SELECT_LOCATION_STATE,
   SELECTED_ID_STATE,
   SEARCH_STATE,
   TOGGLE_SEARCH_STATE,
@@ -146,16 +144,6 @@ const ProductList = (props) => {
               } else {
                 return prod.category_id === state.selectedId;
               }
-
-              //return prod.location_id === state.selectedLocation;
-              // return prod.location_id === state.selectedId;
-
-              // if (state.searchLocation) {
-              //   console.log("prod.locatioin_id", prod.location_id);
-              //   return prod.location_id === state.selectedLocation;
-              // } else {
-              //   return prod;
-              // }
             })
             .map((el) => {
               return (

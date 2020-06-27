@@ -12,11 +12,10 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { authMenuBar } from "../actions/index";
 import { Spinner } from "reactstrap";
-import { postLoginData } from "../actions/index";
 
 const formSchema = yup.object().shape({
   username: yup.string().required("Username  is a required field"),
@@ -27,7 +26,7 @@ const Login = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  // const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const [credentials, setCredentials] = useState({
     username: "",
