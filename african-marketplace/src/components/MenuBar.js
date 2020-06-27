@@ -151,13 +151,31 @@ const MenuBar = (props) => {
             <div>
               <SearchIcon />
             </div>
-            <Button onClick={setSearchLocation} color="inherit">
+            <Button
+              onClick={setSearchLocation}
+              color="inherit"
+              style={{ fontSize: "0.75rem" }}
+            >
               location
             </Button>
-            <Button onClick={setSearchCategory} color="inherit">
+            <div>
+              <SearchIcon />
+            </div>
+            <Button
+              onClick={setSearchCategory}
+              color="inherit"
+              style={{ fontSize: "0.75rem" }}
+            >
               category
             </Button>
-            <Button onClick={setSearchProduct} color="inherit">
+            <div>
+              <SearchIcon />
+            </div>
+            <Button
+              onClick={setSearchProduct}
+              color="inherit"
+              style={{ fontSize: "0.75rem" }}
+            >
               product
             </Button>
 
@@ -188,7 +206,7 @@ const MenuBar = (props) => {
             >
               <Button
                 color="inherit"
-                style={{ fontSize: "1rem", marginLeft: "1rem" }}
+                style={{ fontSize: "1.3rem", marginLeft: "3rem" }}
               >
                 Products
               </Button>
@@ -203,7 +221,7 @@ const MenuBar = (props) => {
                 }}
                 to={"/login"}
               >
-                <Button color="inherit" style={{ fontSize: "1rem" }}>
+                <Button color="inherit" style={{ fontSize: "1.3rem" }}>
                   Login
                 </Button>
               </Link>
@@ -217,7 +235,7 @@ const MenuBar = (props) => {
                 }}
                 to={`/dashboard/${window.localStorage.getItem("userID")}`}
               >
-                <Button color="inherit" style={{ fontSize: "1rem" }}>
+                <Button color="inherit" style={{ fontSize: "1.3rem" }}>
                   Dashboard
                 </Button>
               </Link>
@@ -245,7 +263,7 @@ const MenuBar = (props) => {
                 }}
                 to={"/"}
               >
-                <Button color="inherit" style={{ fontSize: "1rem" }}>
+                <Button color="inherit" style={{ fontSize: "1.3rem" }}>
                   Logout
                 </Button>
               </Link>
