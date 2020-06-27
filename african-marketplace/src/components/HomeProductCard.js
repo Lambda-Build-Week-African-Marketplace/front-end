@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Col, CardImg } from "reactstrap";
+import { Col } from "reactstrap";
 import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategoriesData, getLocationsData } from "../actions/index";
 
 const HomeProductCard = (props) => {
   const state = useSelector((state) => state);
@@ -31,8 +30,6 @@ const HomeProductCard = (props) => {
         style={{
           margin: "0.5rem",
           height: "auto",
-          // height: "38rem",
-          // overflowY: "scroll",
           background: "rgb(174, 238, 144)",
           opacity: "0.9",
         }}

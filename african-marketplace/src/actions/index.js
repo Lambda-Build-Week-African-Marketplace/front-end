@@ -30,7 +30,7 @@ export const getUsersData = () => (dispatch) => {
   axiosWithAuth()
     .get("/users")
     .then((res) => {
-      console.log("get user data", res);
+      //console.log("get user data", res);
       dispatch({ type: DATA_USERS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -45,7 +45,7 @@ export const getCategoriesData = () => (dispatch) => {
   axiosWithAuth()
     .get("/category")
     .then((res) => {
-      console.log("get categories", res);
+      // console.log("get categories", res);
       dispatch({ type: DATA_CATEGORIES_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -60,7 +60,7 @@ export const getProductsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/products")
     .then((res) => {
-      console.log("get products", res);
+      //console.log("get products", res);
       dispatch({ type: DATA_PRODUCTS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -75,7 +75,7 @@ export const getLocationsData = () => (dispatch) => {
   axiosWithAuth()
     .get("/locations")
     .then((res) => {
-      console.log("get locations data", res);
+      // console.log("get locations data", res);
       dispatch({ type: DATA_LOCATIONS_SUCCESS, payload: res.data });
     })
     .catch((err) => {
@@ -91,7 +91,7 @@ export const postUserData = (user) => (dispatch) => {
   axiosWithAuth()
     .post("/register", user)
     .then((res) => {
-      console.log("post data", res.data);
+      // console.log("post data", res.data);
       dispatch({
         type: DATA_USERS_SUCCESS,
         payload: res.data,
@@ -133,7 +133,6 @@ export const postCategoryData = (category) => (dispatch) => {
   axiosWithAuth()
     .post("/category", category)
     .then((res) => {
-      // getCategoriesData();
       // console.log("post category data", res.data);
       dispatch({
         type: POST_CATEGORIES_SUCCESS,
@@ -176,7 +175,7 @@ export const postLocationData = (location) => (dispatch) => {
   axiosWithAuth()
     .post("/locations", location)
     .then((res) => {
-      console.log("post LOCATION data", res);
+      // console.log("post LOCATION data", res);
       dispatch({
         type: POST_LOCATIONS_SUCCESS,
         payload: [res.data.id, location],
@@ -241,7 +240,7 @@ export const deleteProductData = (delId, products) => (dispatch) => {
   axiosWithAuth()
     .delete(`/products/${delId}`)
     .then((res) => {
-      console.log("delete product data", res);
+      //console.log("delete product data", res);
 
       const newProducts = products.filter((item) => item.id !== delId);
 
@@ -262,7 +261,7 @@ export const deleteLocationData = (delId, locations) => (dispatch) => {
   axiosWithAuth()
     .delete(`/locations/${delId}`)
     .then((res) => {
-      console.log("delete data", res);
+      // console.log("delete data", res);
 
       const newLocations = locations.filter((item) => item.id !== delId);
 
@@ -284,7 +283,7 @@ export const updateUserData = (user, users) => (dispatch) => {
   axiosWithAuth()
     .put(`/users/${user.id}`, user)
     .then((res) => {
-      console.log("update user data", res);
+      // console.log("update user data", res);
 
       const newUsers = users.map((el) => {
         if (el.id === user.id) {
@@ -310,7 +309,7 @@ export const updateCategoryData = (category, categories) => (dispatch) => {
   axiosWithAuth()
     .put(`/categories/${category.id}`, category)
     .then((res) => {
-      console.log("update category data", res);
+      // console.log("update category data", res);
 
       const newCategories = categories.map((el) => {
         if (el.id === category.id) {
@@ -336,7 +335,7 @@ export const updateProductData = (product, products) => (dispatch) => {
   axiosWithAuth()
     .put(`/products/${product.id}`, product)
     .then((res) => {
-      console.log("update product data", res.data[0]);
+      // console.log("update product data", res.data[0]);
 
       const newProducts = products.map((el) => {
         if (el.id === product.id) {
@@ -362,7 +361,7 @@ export const updateLocationData = (location, locations) => (dispatch) => {
   axiosWithAuth()
     .put(`/locations/${location.id}`, location)
     .then((res) => {
-      console.log("update location data", res);
+      // console.log("update location data", res);
 
       const newLocations = locations.map((el) => {
         if (el.id === location.id) {
