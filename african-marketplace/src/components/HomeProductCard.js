@@ -11,18 +11,22 @@ const HomeProductCard = (props) => {
   const dispatch = useDispatch();
 
   const getLocationName = () => {
-    const lName = state?.locations?.find((l) => l.id === props.location_id);
+    const lName = state?.locations?.find(
+      (l) => l.id === props.product.location_id
+    );
     setLocationName(lName?.location);
   };
   const getCategoryName = () => {
-    const cName = state?.categories?.find((c) => c.id === props.category_id);
+    const cName = state?.categories?.find(
+      (c) => c.id === props.product.category_id
+    );
     setCategoryName(cName?.category_name);
   };
   let locationCheck = state?.locations.length === 0;
   useEffect(() => {
     getLocationName();
     getCategoryName();
-  }, [locationCheck, props.location_id, props.category_id]);
+  }, [locationCheck, props.product.location_id, props.product.category_id]);
 
   return (
     <Col xs="12" md="6" xl="4">
@@ -42,12 +46,12 @@ const HomeProductCard = (props) => {
               color: "#4154B3",
             }}
           >
-            {`${props.product_name}`}
+            {`${props.product.product_name}`}
           </CardTitle>
           <CardSubtitle
             style={{ marginBottom: "0.5rem" }}
-          >{`Price: $${props.price}`}</CardSubtitle>
-          <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
+          >{`Price: $${props.product.price}`}</CardSubtitle>
+          <CardSubtitle>{`Description: ${props.product.description}`}</CardSubtitle>
 
           <CardSubtitle>Location: {locationName}</CardSubtitle>
           <CardSubtitle>Category: {categoryName}</CardSubtitle>

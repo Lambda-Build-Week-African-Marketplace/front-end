@@ -5,6 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
+import { Spinner } from "reactstrap";
 import {
   SELECT_LOCATION_STATE,
   SELECT_CATEGORY_OPTION,
@@ -53,7 +54,7 @@ const ProductCard = (props) => {
   useEffect(() => {
     setNewEditProduct(props.product);
   }, [props.product]);
-  console.log("props.product", props.product);
+
   const handleCloseEdit = (e) => {
     e.preventDefault();
     setEditOpen(false);
@@ -202,16 +203,20 @@ const ProductCard = (props) => {
   //--------------delete product ----------------------
   const deleteProduct = (e) => {
     e.preventDefault();
-    dispatch(deleteProductData(props.product_id, state.products));
+    dispatch(deleteProductData(props.product.id, state.products));
   };
   //-------------------categories and locations handlers----------
 
   const getLocationName = () => {
-    const lName = state?.locations?.find((l) => l.id === props.location_id);
+    const lName = state?.locations?.find(
+      (l) => l.id === props.product.location_id
+    );
     setLocationName1(lName?.location);
   };
   const getCategoryName = () => {
-    const cName = state?.categories?.find((c) => c.id === props.category_id);
+    const cName = state?.categories?.find(
+      (c) => c.id === props.product.category_id
+    );
     setCategoryName1(cName?.category_name);
   };
   let locationCheck = state?.locations.length === 0;
@@ -219,10 +224,26 @@ const ProductCard = (props) => {
   useEffect(() => {
     getLocationName();
     getCategoryName();
-  }, [locationCheck, props.location_id, props.category_id]);
+  }, [locationCheck, props.product.location_id, props.product.category_id]);
 
   return (
     <Col xs="12" md="6" xl="4">
+      {state.isLoading && !props.product && (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "67%",
+              left: "80%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      )}
       <Card
         style={{
           margin: "0.5rem",
@@ -239,12 +260,12 @@ const ProductCard = (props) => {
               color: "rgb(236, 22, 22)",
             }}
           >
-            {`${props.product_name}`}
+            {`${props.product.product_name}`}
           </CardTitle>
           <CardSubtitle
             style={{ marginBottom: "0.5rem" }}
-          >{`Price: $${props.price}`}</CardSubtitle>
-          <CardSubtitle>{`Description: ${props.description}`}</CardSubtitle>
+          >{`Price: $${props.product.price}`}</CardSubtitle>
+          <CardSubtitle>{`Description: ${props.product.description}`}</CardSubtitle>
           {/** */}
           <CardSubtitle>Location: {locationName1}</CardSubtitle>
           <CardSubtitle>Category: {categoryName1}</CardSubtitle>

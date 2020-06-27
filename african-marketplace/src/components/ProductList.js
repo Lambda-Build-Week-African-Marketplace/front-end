@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HomeProductCard from "./HomeProductCard";
 import { Container, Row, Col } from "reactstrap";
+import { Spinner } from "reactstrap";
 import {
   SELECTED_ID_STATE,
   SEARCH_STATE,
@@ -27,6 +28,22 @@ const ProductList = (props) => {
 
   return (
     <div className="home-bg" style={{ marginTop: "4rem" }}>
+      {state.isLoading ? (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      ) : null}
       {/***************Search by CAtegtory*************************** */}
       {(state.searchTerm && state.selectedSearchBtn === 2) || state.toggleSearch
         ? state.categories
@@ -149,12 +166,12 @@ const ProductList = (props) => {
               return (
                 <HomeProductCard
                   key={el.id}
-                  category_id={el.category_id}
-                  product_name={el.product_name}
-                  price={el.price}
-                  description={el.description}
-                  location_id={el.location_id}
-                  user_id={el.user_id}
+                  // category_id={el.category_id}
+                  // product_name={el.product_name}
+                  // price={el.price}
+                  // description={el.description}
+                  // location_id={el.location_id}
+                  // user_id={el.user_id}
                   product={el}
                 />
               );

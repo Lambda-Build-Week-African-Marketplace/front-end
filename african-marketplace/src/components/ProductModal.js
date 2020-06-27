@@ -25,9 +25,12 @@ const useStyles = makeStyles((theme) =>
 const ProductModal = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
-  console.log("props.product in product Modal", props.newProduct);
+
   return (
     <div>
+      {!props.newProduct && !state.isLoading && (
+        <h2>Waiting on the product ... </h2>
+      )}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

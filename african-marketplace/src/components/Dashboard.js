@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER_STATE, SEARCH_STATE } from "../actions/index";
 import { Container, Row, Col } from "reactstrap";
+import { Spinner } from "reactstrap";
 import * as yup from "yup";
 import {
   getProductsData,
@@ -120,14 +121,14 @@ const Dashboard = (props) => {
     });
     setOpen(false);
   };
-  const cancelNewPost = (e) => {
-    e.preventDefault();
-    setNewProduct(initialItem);
-    setNewProduct({
-      ...newProduct,
-      user_id: Number(window.localStorage.getItem("userID")),
-    });
-  };
+  // const cancelNewPost = (e) => {
+  //   e.preventDefault();
+  //   setNewProduct(initialItem);
+  //   setNewProduct({
+  //     ...newProduct,
+  //     user_id: Number(window.localStorage.getItem("userID")),
+  //   });
+  // };
 
   //------------Category handlers-----------------
   useEffect(() => {
@@ -237,6 +238,22 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard" style={{ marginTop: "4rem" }}>
+      {state.isLoading ? (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      ) : null}
       <Container style={{ marginTop: "1rem" }}>
         <Row>
           <Col xs="12" md="6" xl="6">
@@ -299,13 +316,13 @@ const Dashboard = (props) => {
               <ProductCard
                 key={el.id}
                 product={el}
-                category_id={el.category_id}
-                product_name={el.product_name}
-                price={el.price}
-                description={el.description}
-                location_id={el.location_id}
-                user_id={el.user_id}
-                product_id={el.id}
+                // category_id={el.category_id}
+                // product_name={el.product_name}
+                // price={el.price}
+                // description={el.description}
+                // location_id={el.location_id}
+                // user_id={el.user_id}
+                // product_id={el.id}
               />
             ))}
         </Row>
