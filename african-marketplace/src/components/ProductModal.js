@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 
 import Fade from "@material-ui/core/Fade";
 import { useSelector } from "react-redux";
+import { SEARCH_STATE } from "../actions";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -270,9 +271,3 @@ const ProductModal = (props) => {
   );
 };
 export default ProductModal;
-
-// {props.errors.product_name.length > 0 ? (
-//   <p className="error" id="nameError">
-//     {props.errors.product_name}
-//   </p>
-// ) : null}

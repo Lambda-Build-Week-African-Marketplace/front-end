@@ -250,3 +250,19 @@ input:focus + .baseline:before {
 .error {
   color: red;
 }
+.search-p {
+  text-align: center;
+  margin: 0.3rem;
+  width: 60%;
+  background: rgb(29, 174, 53);
+  color: black;
+  opacity: 0.9;
+}
+.search-l {
+  text-align: center;
+  margin: 0.3rem;
+  width: 60%;
+  background: rgb(102, 145, 237);
+  color: black;
+  opacity: 0.9;
+}

@@ -15,6 +15,12 @@ import {
   POST_LOCATIONS_SUCCESS,
   DATA_LOGIN_SUCCESS,
   SEARCH_STATE,
+  SELECT_LOCATION_STATE,
+  SEARCH_LOCATION_STATE,
+  SELECTED_ID_STATE,
+  SELECTED_SEARCH_BTN,
+  TOGGLE_SEARCH_STATE,
+  TOGGLE_LOCATION_SEARCH_STATE,
 } from "../actions";
 
 const initialState = {
@@ -27,6 +33,12 @@ const initialState = {
   auth: false,
   editing: false,
   searchTerm: "",
+  selectedLocation: [],
+  selectedId: 0,
+  selectedSearchBtn: 0,
+  searchLocation: "",
+  toggleSearch: false,
+  toggleLocationSearch: false,
   user: {
     id: 0,
     firstname: "",
@@ -193,6 +205,37 @@ export const marketReducer = (state = initialState, action) => {
       return {
         ...state,
         searchTerm: action.value,
+      };
+    case SEARCH_LOCATION_STATE:
+      return {
+        ...state,
+        searchLocation: action.value,
+      };
+    case SELECT_LOCATION_STATE:
+      return {
+        ...state,
+        selectedLocation: action.payload,
+      };
+
+    case SELECTED_ID_STATE:
+      return {
+        ...state,
+        selectedId: action.payload,
+      };
+    case SELECTED_SEARCH_BTN:
+      return {
+        ...state,
+        selectedSearchBtn: action.payload,
+      };
+    case TOGGLE_SEARCH_STATE:
+      return {
+        ...state,
+        toggleSearch: action.payload,
+      };
+    case TOGGLE_LOCATION_SEARCH_STATE:
+      return {
+        ...state,
+        toggleLocationSearch: action.payload,
       };
 
     default:
