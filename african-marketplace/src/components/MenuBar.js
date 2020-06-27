@@ -147,25 +147,7 @@ const MenuBar = (props) => {
     <div className="menu-bar">
       <div className={classes.root}>
         <AppBar position="static">
-          <Toolbar>
-            {/** 
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            Logo
-          </IconButton>
-          
-            <Typography
-              variant="h6"
-              className={classes.title}
-              style={{ fontSize: "1.5rem" }}
-            >
-              African MarketPlace
-            </Typography>
-*/}
+          <Toolbar style={{ margin: "0 auto" }}>
             <div>
               <SearchIcon />
             </div>
@@ -183,27 +165,18 @@ const MenuBar = (props) => {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <form>
-                <InputBase
-                  type="text"
-                  onChange={handleChange}
-                  placeholder={searchBy}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  value={state.searchTerm}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </form>
-              {/**************************************************/}
-              {error ? (
-                <p style={{ color: "red" }}>
-                  We do not have this location, please, enter another one.
-                </p>
-              ) : null}
 
-              {/*************************************************** */}
+              <InputBase
+                type="text"
+                onChange={handleChange}
+                placeholder={searchBy}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                value={state.searchTerm}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
 
             <Link
@@ -333,9 +306,9 @@ const useStyles = makeStyles((theme) =>
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("sm")]: {
-        width: "12ch",
+        width: "22ch",
         "&:focus": {
-          width: "18ch",
+          width: "26ch",
         },
       },
     },
