@@ -107,6 +107,7 @@ const Dashboard = (props) => {
     });
   };
   const handleProductSubmit = (e) => {
+    console.log("newProdict handProductSubmit", newProduct);
     e.preventDefault();
     dispatch(postProductData(newProduct));
 
