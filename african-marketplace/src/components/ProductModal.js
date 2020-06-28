@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-
+import { Spinner } from "reactstrap";
 import Fade from "@material-ui/core/Fade";
 import { useSelector } from "react-redux";
 import { SEARCH_STATE } from "../actions";
@@ -88,6 +88,22 @@ const ProductModal = (props) => {
 
                 <div className="baseline" />
                 {/**--------------------location----------------------------------- */}
+                {state.isLoading ? (
+                  <div style={{ margin: "0 auto" }}>
+                    <Spinner
+                      color="primary"
+                      style={{
+                        width: "3rem",
+                        height: "3rem",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginLeft: "-50px",
+                        marginTop: "-50px",
+                      }}
+                    />{" "}
+                  </div>
+                ) : null}
                 <select
                   required
                   id="location_id"
@@ -172,6 +188,22 @@ const ProductModal = (props) => {
                 )}
 
                 {/**--------------------category----------------------------------- */}
+                {state.isLoading ? (
+                  <div style={{ margin: "0 auto" }}>
+                    <Spinner
+                      color="primary"
+                      style={{
+                        width: "3rem",
+                        height: "3rem",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginLeft: "-50px",
+                        marginTop: "-50px",
+                      }}
+                    />{" "}
+                  </div>
+                ) : null}
                 <select
                   required
                   id="category_id"
