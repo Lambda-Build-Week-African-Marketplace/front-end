@@ -28,11 +28,26 @@ const ProductModal = (props) => {
 
   return (
     <div>
-      {/** 
       {!props.newProduct && !state.isLoading && (
         <h2>Waiting on the product ... </h2>
       )}
-      */}
+      {state.isLoading && !props.newProduct && (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "67%",
+              left: "80%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      )}
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
