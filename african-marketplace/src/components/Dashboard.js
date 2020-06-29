@@ -272,7 +272,7 @@ const Dashboard = (props) => {
       </Container>
 */}
       {/****************************************** */}
-      {state.isLoading ? (
+      {state.isLoading && !state.users ? (
         <div style={{ margin: "0 auto" }}>
           <Spinner
             color="primary"
@@ -333,6 +333,23 @@ const Dashboard = (props) => {
           newLocation={newLocation}
           handleLocationToggle={handleLocationToggle}
         />
+
+        {state.isLoading && !state.products ? (
+          <div style={{ margin: "0 auto" }}>
+            <Spinner
+              color="primary"
+              style={{
+                width: "3rem",
+                height: "3rem",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                marginLeft: "-50px",
+                marginTop: "-50px",
+              }}
+            />{" "}
+          </div>
+        ) : null}
 
         <Row>
           {state.products
