@@ -130,10 +130,7 @@ const MenuBar = (props) => {
       type: SELECTED_SEARCH_BTN,
       payload: 1,
     });
-    // dispatch({
-    //   type: SEARCH_STATE,
-    //   value: "",
-    // });
+
     dispatch({
       type: SELECTED_ID_STATE,
       payload: 0,

@@ -81,9 +81,8 @@ const ProductList = (props) => {
                 });
               };
               return (
-                <div className="search-p">
+                <div className="search-p" key={index}>
                   <p
-                    key={index}
                     style={{
                       cursor: "pointer",
                       color: "white",
@@ -138,9 +137,8 @@ const ProductList = (props) => {
                 });
               };
               return (
-                <div className="search-l">
+                <div className="search-l" key={index}>
                   <p
-                    key={index}
                     style={{
                       cursor: "pointer",
                       color: "white",
@@ -186,18 +184,7 @@ const ProductList = (props) => {
               }
             })
             .map((el) => {
-              return (
-                <HomeProductCard
-                  key={el.id}
-                  // category_id={el.category_id}
-                  // product_name={el.product_name}
-                  // price={el.price}
-                  // description={el.description}
-                  // location_id={el.location_id}
-                  // user_id={el.user_id}
-                  product={el}
-                />
-              );
+              return <HomeProductCard key={el.id} product={el} />;
             })}
         </Row>
       </Container>

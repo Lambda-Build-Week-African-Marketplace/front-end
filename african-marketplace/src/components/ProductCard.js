@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
 import { Spinner } from "reactstrap";
 import {
-  SELECT_LOCATION_STATE,
   SELECT_CATEGORY_OPTION,
   SELECT_LOCATION_OPTION,
 } from "../actions/index";
@@ -100,25 +99,7 @@ const ProductCard = (props) => {
       [ev.target.name]: ev.target.value,
     });
   };
-  // const handleCategorySubmit = (e) => {
-  //   e.preventDefault();
 
-  //   if (
-  //     state.categories.find((itemName) => {
-  //       return itemName.category_name
-  //         .toLowerCase()
-  //         .includes(newEditCategory.category_name.toLowerCase());
-  //     })
-  //   ) {
-  //     alert(
-  //       `"${newEditCategory.category_name}" category has already been added`
-  //     );
-  //   } else {
-  //     dispatch(postCategoryData(newEditCategory));
-  //     setNewEditCategory(initialCategory);
-  //     setCatEditToggle(false);
-  //   }
-  // };
   const handleCategorySubmit = (e) => {
     e.preventDefault();
 
@@ -157,24 +138,7 @@ const ProductCard = (props) => {
       [ev.target.name]: ev.target.value,
     });
   };
-  // const handleLocationSubmit = (e) => {
-  //   e.preventDefault();
 
-  //   if (
-  //     state.locations.find((itemName) => {
-  //       return itemName.location
-  //         .toLowerCase()
-  //         .includes(newEditLocation.location.toLowerCase());
-  //     })
-  //   ) {
-  //     alert(`"${newEditLocation.location}" location has already been added`);
-  //   } else {
-  //     dispatch(postLocationData(newEditLocation));
-  //     setNewEditLocation(initialLocation);
-  //     setLocationEditToggle(false);
-  //     dispatch({ type: SELECT_LOCATION_STATE, payload: "selected" });
-  //   }
-  // };
   const handleLocationSubmit = (e) => {
     e.preventDefault();
 
@@ -228,8 +192,13 @@ const ProductCard = (props) => {
 
   return (
     <Col xs="12" md="6" xl="4">
-      {/** 
-      {state.isLoading ? (
+      {!props.product && !state.isLoading && (
+        <h2 style={{ color: "white" }}>Waiting on the product ... </h2>
+      )}
+      {(!state.isLoading ||
+        !props.product ||
+        !locationName1 ||
+        !categoryName1) && (
         <div style={{ margin: "0 auto" }}>
           <Spinner
             color="primary"
@@ -237,35 +206,14 @@ const ProductCard = (props) => {
               width: "3rem",
               height: "3rem",
               position: "absolute",
-              top: "50%",
-              left: "50%",
+              top: "67%",
+              left: "80%",
               marginLeft: "-50px",
               marginTop: "-50px",
             }}
           />{" "}
         </div>
-      ) : null}
-*/}
-      {/** */}
-      {!state.isLoading &&
-        !props.product &&
-        !locationName1 &&
-        !categoryName1(
-          <div style={{ margin: "0 auto" }}>
-            <Spinner
-              color="primary"
-              style={{
-                width: "3rem",
-                height: "3rem",
-                position: "absolute",
-                top: "67%",
-                left: "80%",
-                marginLeft: "-50px",
-                marginTop: "-50px",
-              }}
-            />{" "}
-          </div>
-        )}
+      )}
       {state.isLoading && !props.product && (
         <div style={{ margin: "0 auto" }}>
           <Spinner
