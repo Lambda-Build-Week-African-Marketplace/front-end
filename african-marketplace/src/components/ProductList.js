@@ -45,6 +45,18 @@ const ProductList = (props) => {
         </div>
       ) : null}
       {/***************Search by CAtegtory*************************** */}
+      {(state.searchTerm && state.selectedSearchBtn === 2) ||
+        (state.toggleSearch && (
+          <Row>
+            <Col xs="12" md="12" xl="12">
+              <h2 className="username" style={{ fontSize: "3rem" }}>
+                {" "}
+                Search by Category
+              </h2>
+            </Col>
+          </Row>
+        ))}
+
       {(state.searchTerm && state.selectedSearchBtn === 2) || state.toggleSearch
         ? state.categories
             .filter((cat) =>
@@ -90,6 +102,18 @@ const ProductList = (props) => {
       {/***************Search Location*************************** */}
 
       {(state.searchTerm && state.selectedSearchBtn === 3) ||
+        (state.toggleLocationSearch && (
+          <Row>
+            <Col xs="12" md="12" xl="12">
+              <h2 className="username" style={{ fontSize: "3rem" }}>
+                {" "}
+                Search by Location
+              </h2>
+            </Col>
+          </Row>
+        ))}
+
+      {(state.searchTerm && state.selectedSearchBtn === 3) ||
       state.toggleLocationSearch
         ? state.locations
             .filter((loc) =>
@@ -99,7 +123,6 @@ const ProductList = (props) => {
             )
             .map((item, index) => {
               const locationSubmit = () => {
-                //rememberLocation = item.id;
                 dispatch({
                   type: SELECTED_ID_STATE,
                   payload: item.id,
@@ -133,7 +156,7 @@ const ProductList = (props) => {
             })
         : null}
       {/***************************************************** */}
-      <Container>
+      <Container style={{ marginTop: "4rem" }}>
         <Row>
           <Col xs="12" md="12" xl="12">
             <h2 className="username" style={{ fontSize: "3rem" }}>

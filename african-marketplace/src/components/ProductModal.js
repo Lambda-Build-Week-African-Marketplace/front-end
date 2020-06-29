@@ -28,9 +28,11 @@ const ProductModal = (props) => {
 
   return (
     <div>
+      {/** 
       {!props.newProduct && !state.isLoading && (
         <h2>Waiting on the product ... </h2>
       )}
+      */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -53,6 +55,7 @@ const ProductModal = (props) => {
               )}
 
               <form onSubmit={props.handleProductSubmit}>
+                {/**--------------Product Name -------------------------- */}
                 <input
                   required
                   type="text"
@@ -63,7 +66,7 @@ const ProductModal = (props) => {
                 />
 
                 <div className="baseline" />
-
+                {/**--------------Price -------------------------- */}
                 <input
                   required
                   type="number"
@@ -88,7 +91,7 @@ const ProductModal = (props) => {
 
                 <div className="baseline" />
                 {/**--------------------location----------------------------------- */}
-                {state.isLoading ? (
+                {state.isLoading && !state.locations ? (
                   <div style={{ margin: "0 auto" }}>
                     <Spinner
                       color="primary"
@@ -188,7 +191,7 @@ const ProductModal = (props) => {
                 )}
 
                 {/**--------------------category----------------------------------- */}
-                {state.isLoading ? (
+                {state.isLoading && !state.categories ? (
                   <div style={{ margin: "0 auto" }}>
                     <Spinner
                       color="primary"
