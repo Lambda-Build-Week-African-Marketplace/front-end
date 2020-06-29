@@ -8,8 +8,6 @@ const HomeProductCard = (props) => {
   const [locationName, setLocationName] = useState("");
   const [categoryName, setCategoryName] = useState("");
 
-  const dispatch = useDispatch();
-
   const getLocationName = () => {
     const lName = state?.locations?.find(
       (l) => l.id === props.product.location_id

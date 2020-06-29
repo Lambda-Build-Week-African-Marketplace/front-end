@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { USER_STATE, SEARCH_STATE } from "../actions/index";
 import { Container, Row, Col } from "reactstrap";
 import { Spinner } from "reactstrap";
-import * as yup from "yup";
+
 import {
   getProductsData,
   getCategoriesData,
@@ -18,7 +18,7 @@ import {
   deleteLocationData,
 } from "../actions/index";
 import ProductModal from "./ProductModal";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import ProductCard from "./ProductCard";
 
@@ -108,7 +108,6 @@ const Dashboard = (props) => {
     });
   };
   const handleProductSubmit = (e) => {
-    console.log("newProdict handProductSubmit", newProduct);
     e.preventDefault();
     dispatch(postProductData(newProduct));
 
@@ -123,14 +122,6 @@ const Dashboard = (props) => {
     });
     setOpen(false);
   };
-  // const cancelNewPost = (e) => {
-  //   e.preventDefault();
-  //   setNewProduct(initialItem);
-  //   setNewProduct({
-  //     ...newProduct,
-  //     user_id: Number(window.localStorage.getItem("userID")),
-  //   });
-  // };
 
   //------------Category handlers-----------------
   useEffect(() => {
@@ -144,23 +135,7 @@ const Dashboard = (props) => {
       [ev.target.name]: ev.target.value,
     });
   };
-  // const handleCategorySubmit = (e) => {
-  //   e.preventDefault();
 
-  //   if (
-  //     state.categories.find((itemName) => {
-  //       return itemName.category_name
-  //         .toLowerCase()
-  //         .includes(newCategory.category_name.toLowerCase());
-  //     })
-  //   ) {
-  //     alert(`"${newCategory.category_name}" category has already been added`);
-  //   } else {
-  //     dispatch(postCategoryData(newCategory));
-  //     setNewCategory(initialCategory);
-  //     setCatToggle(false);
-  //   }
-  // };
   const handleCatToggle = (e) => {
     e.preventDefault();
     setCatToggle(!catToggle);
@@ -196,23 +171,6 @@ const Dashboard = (props) => {
       [ev.target.name]: ev.target.value,
     });
   };
-  // const handleLocationSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   if (
-  //     state.locations.find((itemName) => {
-  //       return itemName.location
-  //         .toLowerCase()
-  //         .includes(newLocation.location.toLowerCase());
-  //     })
-  //   ) {
-  //     alert(`"${newLocation.location}" location has already been added`);
-  //   } else {
-  //     dispatch(postLocationData(newLocation));
-  //     setNewLocation(initialLocation);
-  //     setLocationToggle(false);
-  //   }
-  // };
 
   const handleLocationSubmit = (e) => {
     e.preventDefault();

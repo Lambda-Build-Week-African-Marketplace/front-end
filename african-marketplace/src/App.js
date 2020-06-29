@@ -11,11 +11,11 @@ import Dashboard from "./components/Dashboard";
 import UserAccount from "./components/UserAccount";
 import MenuBar from "./components/MenuBar";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
+//import logger from "redux-logger";
 import "./App.css";
 import UserUpdateForm from "./components/UserUpdateForm";
-//const store = createStore(reducer, applyMiddleware(thunk));
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(thunk));
+//const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 function App() {
   return (

@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 });
 
 const initialUser = {
-  // id: 0,
   firstname: "",
   lastname: "",
   email: "",
@@ -32,8 +31,7 @@ const UserAccount = (props) => {
   const classes = useStyles();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
+
   const [newUser, setNewUser] = useState(initialUser);
 
   useEffect(() => {
