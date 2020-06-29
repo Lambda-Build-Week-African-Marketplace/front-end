@@ -43,6 +43,7 @@ const UserUpdateForm = (props) => {
   useEffect(() => {
     const userId = props.match.params.id;
     selectedUser = state?.users?.find((u) => Number(u.id) === Number(userId));
+    // console.log("selectedUser in userUpdateForm", selectedUser);
     setFormState(selectedUser);
   }, []);
 

@@ -129,6 +129,25 @@ const ProductModal = (props) => {
                         : -1
                     )
                     .map((location) => {
+                      if (state.isLoading && !location) {
+                        return (
+                          <div style={{ margin: "0 auto" }}>
+                            <Spinner
+                              color="primary"
+                              style={{
+                                width: "3rem",
+                                height: "3rem",
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                marginLeft: "-50px",
+                                marginTop: "-50px",
+                              }}
+                            />{" "}
+                          </div>
+                        );
+                      }
+
                       if (location.id === props.newProduct.location_id) {
                         return (
                           <option
@@ -231,6 +250,24 @@ const ProductModal = (props) => {
                         : -1
                     )
                     .map((category) => {
+                      if (state.isLoading && !category) {
+                        return (
+                          <div style={{ margin: "0 auto" }}>
+                            <Spinner
+                              color="primary"
+                              style={{
+                                width: "3rem",
+                                height: "3rem",
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                marginLeft: "-50px",
+                                marginTop: "-50px",
+                              }}
+                            />{" "}
+                          </div>
+                        );
+                      }
                       if (category.id === props.newProduct.category_id) {
                         return (
                           <option
