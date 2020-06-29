@@ -178,6 +178,7 @@ const MenuBar = (props) => {
             >
               category
             </Button>
+
             <div>
               <SearchIcon />
             </div>

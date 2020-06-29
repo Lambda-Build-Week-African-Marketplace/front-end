@@ -228,7 +228,26 @@ const ProductCard = (props) => {
 
   return (
     <Col xs="12" md="6" xl="4">
-      {state.isLoading && !props.product && (
+      {/** 
+      {state.isLoading ? (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      ) : null}
+*/}
+      {/** */}
+      {!state.isLoading && !props.product && !locationName1 && !categoryName1 && (
         <div style={{ margin: "0 auto" }}>
           <Spinner
             color="primary"
@@ -244,6 +263,7 @@ const ProductCard = (props) => {
           />{" "}
         </div>
       )}
+
       <Card
         style={{
           margin: "0.5rem",

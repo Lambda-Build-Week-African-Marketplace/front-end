@@ -263,14 +263,14 @@ export const deleteLocationData = (delId, locations) => (dispatch) => {
   axiosWithAuth()
     .delete(`/locations/${delId}`)
     .then((res) => {
-      // console.log("delete data", res);
+      console.log("delete data", res);
 
       const newLocations = locations.filter((item) => item.id !== delId);
 
       dispatch({ type: DATA_LOCATIONS_SUCCESS, payload: newLocations });
     })
     .catch((err) => {
-      console.error("delete data error: ", err);
+      console.error("delete location data error: ", err);
       dispatch({
         type: DATA_FAILURE,
         payload: err.response,

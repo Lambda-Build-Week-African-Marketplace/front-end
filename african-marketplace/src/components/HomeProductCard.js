@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Col } from "reactstrap";
 import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Spinner } from "reactstrap";
 const HomeProductCard = (props) => {
   const state = useSelector((state) => state);
   const [locationName, setLocationName] = useState("");
@@ -30,6 +30,22 @@ const HomeProductCard = (props) => {
 
   return (
     <Col xs="12" md="6" xl="4">
+      {state.isLoading && !props.product && (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "67%",
+              left: "80%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      )}
       <Card
         style={{
           margin: "0.5rem",
