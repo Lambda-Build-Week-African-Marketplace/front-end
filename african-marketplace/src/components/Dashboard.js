@@ -273,9 +273,20 @@ const Dashboard = (props) => {
                   Number(window.localStorage.getItem("userID"))
               )
               .map((el) => (
-                <h3 key={el.id} className="username">
-                  Products of {el.firstname} {el.lastname}
-                </h3>
+                <div key={el.id}>
+                  <h3 className="username">
+                    Products of {el.firstname} {el.lastname}
+                  </h3>
+                  <p
+                    style={{
+                      color: "#2C2C27",
+                      fontSize: "1.2rem",
+                      background: "rgb(236, 236, 51)",
+                    }}
+                  >
+                    Click on search by product for searching products
+                  </p>
+                </div>
               ))}
           </Col>
           <Col xs="12" md="6" xl="6">

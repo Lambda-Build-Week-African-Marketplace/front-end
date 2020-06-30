@@ -183,12 +183,16 @@ const ProductCard = (props) => {
     );
     setCategoryName1(cName?.category_name);
   };
-  let locationCheck = state?.locations.length === 0;
 
+  let locationCheck = state?.locations.length === 0;
   useEffect(() => {
     getLocationName();
+  }, [locationCheck, props.product.location_id]);
+
+  let categoryCheck = state?.categories.length === 0;
+  useEffect(() => {
     getCategoryName();
-  }, [locationCheck, props.product.location_id, props.product.category_id]);
+  }, [categoryCheck, props.product.category_id]);
 
   return (
     <Col xs="12" md="6" xl="4">

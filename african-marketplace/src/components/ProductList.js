@@ -28,6 +28,32 @@ const ProductList = (props) => {
 
   return (
     <div className="home-bg" style={{ marginTop: "4rem" }}>
+      <Row style={{ marginTop: "4rem" }}>
+        <Col xs="12" md="12" xl="12">
+          <h2 className="username" style={{ fontSize: "3rem" }}>
+            {" "}
+            Products of African Marketplace
+          </h2>
+        </Col>
+      </Row>
+      <Row
+        style={{
+          margin: "1rem",
+          background: "rgb(174, 238, 144)",
+          opacity: "0.9",
+        }}
+      >
+        <Col xs="12" md="12" xl="12">
+          <p
+            className="username"
+            style={{ fontSize: "1.2rem", color: "#2C2C27" }}
+          >
+            {" "}
+            Click on search by product, category, location for searching
+            products, categories, and locations
+          </p>
+        </Col>
+      </Row>
       {state.isLoading ? (
         <div style={{ margin: "0 auto" }}>
           <Spinner
@@ -154,15 +180,7 @@ const ProductList = (props) => {
             })
         : null}
       {/***************************************************** */}
-      <Container style={{ marginTop: "4rem" }}>
-        <Row>
-          <Col xs="12" md="12" xl="12">
-            <h2 className="username" style={{ fontSize: "3rem" }}>
-              {" "}
-              Products of African Marketplace
-            </h2>
-          </Col>
-        </Row>
+      <Container style={{ marginTop: "2rem" }}>
         <Row>
           {state.products
             .filter((prod) => {
