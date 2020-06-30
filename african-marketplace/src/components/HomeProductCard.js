@@ -23,11 +23,36 @@ const HomeProductCard = (props) => {
   let locationCheck = state?.locations.length === 0;
   useEffect(() => {
     getLocationName();
+  }, [locationCheck, props.product.location_id]);
+
+  let categoryCheck = state?.categories.length === 0;
+  useEffect(() => {
     getCategoryName();
-  }, [locationCheck, props.product.location_id, props.product.category_id]);
+  }, [categoryCheck, props.product.category_id]);
 
   return (
     <Col xs="12" md="6" xl="4">
+      {!props.product && !state.isLoading && (
+        <h2 style={{ color: "white" }}>Waiting on the product ... </h2>
+      )}
+      {((!state.isLoading && !props.product) ||
+        !locationName ||
+        !categoryName) && (
+        <div style={{ margin: "0 auto" }}>
+          <Spinner
+            color="primary"
+            style={{
+              width: "3rem",
+              height: "3rem",
+              position: "absolute",
+              top: "67%",
+              left: "80%",
+              marginLeft: "-50px",
+              marginTop: "-50px",
+            }}
+          />{" "}
+        </div>
+      )}
       {state.isLoading && !props.product && (
         <div style={{ margin: "0 auto" }}>
           <Spinner
