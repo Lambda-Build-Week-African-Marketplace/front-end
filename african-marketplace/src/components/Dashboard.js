@@ -230,7 +230,7 @@ const Dashboard = (props) => {
       </Container>
 */}
 
-      {(!props.users || !state.isLoading) && (
+      {!props.users && !state.isLoading && (
         <div style={{ margin: "0 auto" }}>
           <Spinner
             color="primary"
