@@ -195,8 +195,7 @@ const ProductCard = (props) => {
       {!props.product && !state.isLoading && (
         <h2 style={{ color: "white" }}>Waiting on the product ... </h2>
       )}
-      {(!state.isLoading ||
-        !props.product ||
+      {((!state.isLoading && !props.product) ||
         !locationName1 ||
         !categoryName1) && (
         <div style={{ margin: "0 auto" }}>

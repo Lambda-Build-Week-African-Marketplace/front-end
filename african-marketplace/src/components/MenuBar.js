@@ -84,7 +84,7 @@ const MenuBar = (props) => {
     e.preventDefault();
     dispatch({
       type: SELECTED_SEARCH_BTN,
-      payload: 1,
+      payload: 0,
     });
     dispatch({
       type: TOGGLE_LOCATION_SEARCH_STATE,
@@ -98,6 +98,7 @@ const MenuBar = (props) => {
       type: SELECTED_ID_STATE,
       payload: 0,
     });
+    setSearchBy("Search by Product");
   };
   const setSearchCategory = (e) => {
     e.preventDefault();
